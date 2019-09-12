@@ -72,7 +72,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
  hexo d
  git add --a
  git commit -a -m ''
- git push
+ git push --set-upstream origin lgh
 ```
 
 ### 四、[常见命令](https://hexo.io/zh-cn/docs/commands)
