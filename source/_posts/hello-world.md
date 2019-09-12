@@ -66,6 +66,25 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ```
 
 ### 三、 部署
+#### 3.1 建立远程分支 `lgh` 存放源码
+```
+rm -rf .git # 主题目录清除clone主题的git文件
+git init # 主目录
+git add --a
+git commit -a -m ''
+git branch lgh
+git checkout lgh
+git remote add origin https://github.com/LOUSANPANG/lousanpang.github.io.git # 建立连接
+git push origin test # 推送分支
+```
+#### 3.2 `master` 分支存放转化代码
+```
+deploy: # 主目录的_config.yml
+  type: git
+  repository: https://github.com/LOUSANPANG/lousanpang.github.io.git
+  branch: master
+```
+#### 3.3 日常提交代码
 ```
  git pull
  hexo g
@@ -79,10 +98,10 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ```
 hexo g == hexo generate # 生成静态文件
 hexo s == hexo server # 启动本地web服务
-hexo d == hexo deploy # 部署播客到远端
+hexo d == hexo deploy # 部署播客到远端 安装hexo-deployer-git依赖
 hexo clean # 清除缓存文件
-hexo n == hexo new "postName" # 新建文章
-hexo n == hexo new page "pageName" # 新建页面
+hexo new "postName" # 新建文章
+hexo new page "pageName" # 新建章节
 ```
 
 ### 五、详细文档
