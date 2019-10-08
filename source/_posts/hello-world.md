@@ -114,10 +114,27 @@ hexo new "postName" # 新建文章
 hexo new page "pageName" # 新建章节
 ```
 
-### 五、详细文档
+### 五丶 常见问题
+#### 5.1 Hexo 主题无法上传到GitHub
+```
+git ls-files --stage | grep 160000
+git rm --cached themes/Butterfly
+```
+原因如下：
+这是因为用到了git的子模块（git submodule）功能（你在你的git项目里clone的别人的项目）
+在你的主项目的git库里，子模块只是一个HEAD指针，指向子模块的commit
+所以你需要清除一下暂存区
+
+说一下这个功能的意义：
+在这里，如果你需要修改Butterfly主题（可能需要很多文件），又想保证能够随时更新最新版本，其实用子模块功能是很方便的。
+只需要clone下来新建一个branch，用来自己用，每次官方更新pull到另一个分支，merge一下就行。
+相当于把一个大项目分成多个小项目，尽可能减少项目之间的关联，方便调试和修改
+
+
+### 六、详细文档
 [Butterfly主题文档](https://jerryc.me/posts/21cfbf15/#%E5%BF%AB%E9%80%9F%E9%96%8B%E5%A7%8B)
 
-### 六、留言
+### 七、留言
 * 📝
 * [Give a ⭐️ if this project helped you!](https://github.com/LOUSANPANG)
 * [If you know me please follow me or leave me a message.](https://github.com/LOUSANPANG/lousanpang.github.io/issues)
