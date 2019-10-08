@@ -39,6 +39,15 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
     "hexo-server": "^0.3.3"
 ```
 
+#### 1.3 安装依赖
+```
+  cd lousanpang.github.io
+
+  git checkout lgh
+
+  npm install
+```
+
 ### 二、 编码
 #### 2.1 新建文档
 ```
@@ -87,6 +96,7 @@ deploy: # 主目录的_config.yml
 #### 3.3 日常提交代码
 ```
  git pull
+ hexo clean
  hexo g
  hexo d
  git add --a
