@@ -1,0 +1,13 @@
+section#rightside.rightside
+  if is_post() && page.comments !== false
+    a#to_comment(href="#post-comment")
+      i.scroll_to_comment.fa.fa-comments
+  if theme.readmode.enable && is_post()
+    i#readmode.fa.fa-book(title=_p('rightside.readmode_title')) 
+  i#font_plus.fa.fa-plus(title=_p('rightside.font_plus_title'))
+  i#font_minus.fa.fa-minus(title=_p('rightside.font_minus_title'))
+  if theme.translate && theme.translate.enable
+    a#translateLink.translate_chn_to_cht(href="javascript:translatePage();" title=_p('rightside.translate_title'))= theme.translate.default
+  if theme.nightshift.enable
+    - var display_mode = theme.display_mode == 'night'? 'fa fa-sun-o' : 'fa fa-moon-o'
+    i#nightshift.nightshift(class=display_mode title=_p('rightside.night_mode_title'))
