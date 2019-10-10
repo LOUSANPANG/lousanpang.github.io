@@ -144,3 +144,14 @@ object表示非原始类型，也就是除number，string，boolean，symbol，n
     let sValue: any = 'hi';
     let sLength: number = (sValue as string).length;
 ```
+<br>
+
+### 三、接口 interface 
+```ts
+    interface LabeledValue {
+        label: string;
+    }
+    let labeledObj: LabeledValue;
+
+    labeledObj.label = 'hi';
+```
