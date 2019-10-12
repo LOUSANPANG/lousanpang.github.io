@@ -14,9 +14,6 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-![pexels-photo-2294878.jpeg](https://s2.ax1x.com/2019/10/12/uLqqUK.png)
-<br>
-
 
 ### [Taro🔨] 封装 Taro.request、statusCodes 的请求工具。
 <br>
@@ -117,3 +114,6 @@ Taro的 `.catch` 中无法定位具体错误原因，但可以在 `.then` 中获
         })
     }
 ```
+<br>
+
+![](https://s2.ax1x.com/2019/10/12/uLqqUK.png)
