@@ -5,7 +5,7 @@ tags:
     - Taro
 categories: Taro
 keywords: [Taro]
-description: [Taro🔨] 封装 Taro.request、statusCodes 的请求工具。
+description: component-taro-request
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s2.ax1x.com/2019/10/12/uLqqUK.png # 缩略图

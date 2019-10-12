@@ -1,11 +1,11 @@
 ---
 title: component-taro-echarts
-date: 2019-10-13
+date: 2019-10-12
 tags: 
     - Taro
 categories: Taro
 keywords: [Taro]
-description: [Taro🔨] 为了兼容小程序 Canvas，将ECharts官方提供的小程序组件转化成Taro代码组件。
+description: component-taro-echarts
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://i.loli.net/2019/10/11/RFuNLECdtQo5bHw.png # 缩略图
