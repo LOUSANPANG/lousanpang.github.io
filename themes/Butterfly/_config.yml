@@ -49,7 +49,7 @@ favicon: /img/favicon.ico
 # ---------------
 highlight_theme: light
 highlight_copy: true #代碼複製按鈕
-highlight_lang: true #代碼語言顯示
+highlight_lang: false #代碼語言顯示
 highlight_shrink: false #代碼框不展開，需點擊 '>' 打開
 
 code_word_wrap: false
@@ -334,7 +334,7 @@ canvas_ribbon_piao:
 # canvas_nest
 # https://github.com/hustcc/canvas-nest.js
 canvas_nest:
-  enable: true
+  enable: false
   color: '25,118,210' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
   opacity: 0.6 # the opacity of line (0~1), default: 0.5.
   zIndex: -1 # z-index property of the background, default: -1.

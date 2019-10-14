@@ -155,3 +155,20 @@ object表示非原始类型，也就是除number，string，boolean，symbol，n
 
     labeledObj.label = 'hi';
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>

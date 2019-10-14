@@ -8,7 +8,7 @@ keywords: [Taro]
 description: taro-document
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
-cover: https://s2.ax1x.com/2019/10/14/uzGiPe.png # 缩略图
+cover: https://s2.ax1x.com/2019/10/14/KSPUxJ.png # 缩略图
 toc: # 章节目录 除非特定文章设置，可以不写
 toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
@@ -74,3 +74,107 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ReactNative
 [ReactNative 样式表](https://nervjs.github.io/taro/docs/before-dev-remind.html#properties-属性)
+<br>
+
+#### 1.3 特殊问题
+H5 模式下，tabBar 可能会挡住页面 fixed 元素问题
+```
+.fixed {
+  bottom: 0;
+  /* 在 H5 模式下将会编译成 margin-bottom: 50px，在小程序模式下则会忽略 */
+  margin-bottom: taro-tabbar-height;
+}
+```
+
+### 二、基础教程
+#### 2.1 书写顺序
+```
+static 静态方法
+constructor
+componentWillMount
+componentDidMount
+componentWillReceiveProps
+shouldComponentUpdate
+componentWillUpdate
+componentDidUpdate
+componentWillUnmount
+点击回调或者事件回调 比如 onClickSubmit() 或者 onChangeDescription()
+render
+```
+
+#### 2.2 通用约束与建议
+<table>
+    <tr><td height=50px bgcolor=#F5F5D5>尽量避免在 componentDidMount 中调用 this.setState</td></tr>
+    <tr><td height=50px bgcolor=#F5F5D5>因为在 componentDidMount 中调用 this.setState 会导致触发更新</td></tr>
+</table>
+<br>
+
+<table>
+    <tr><td height=50px bgcolor=#F5F5D5>不要在 componentWillUpdate/componentDidUpdate/render 中调用 this.setState</td></tr>
+</table>
+<br>
+
+**组件最好定义 defaultProps**
+```
+import Taro, { Component } from '@tarojs/taro'
+
+class MyComponent extends Component {
+  static defaultProps = {
+    isEnable: true
+  }
+  
+  render () {
+    const { isEnable } = this.props
+
+    return ()
+  }
+}
+```
+
+**值为 true 的属性可以省略书写值**
+```
+<Hello personal />
+<Hello personal={false} />
+```
+
+**JSX 属性或者表达式书写时需要注意空格**
+```
+<Hello name={firstname} />  // ✓ 正确 属性书写不带空格
+<Hello name={{ firstname: 'John', lastname: 'Doe' }} />  // ✓ 正确 属性是一个对象，则对象括号旁边需要带上空格
+```
+
+**子组件传入函数时属性名需要以 on 开头**
+```
+  render () {
+    const { myTime } = this.state
+
+    return (
+      <View className='test'>
+        <Tab onChange={this.clickHandler} />    // ✓ 正确
+        <Text className='test_text'>{myTime}</Text>
+      </View>
+    )
+  }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>

@@ -117,3 +117,12 @@ Taro的 `.catch` 中无法定位具体错误原因，但可以在 `.then` 中获
 <br>
 
 ![](https://s2.ax1x.com/2019/10/12/uLqqUK.png)
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
