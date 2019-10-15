@@ -265,6 +265,163 @@ class Parent extends Component {
 **this.$componentType 可能取值分别为 PAGE 和 COMPONENT, 来判断当前 Taro.Component 是页面还是组件**
 
 
+#### 2.5 设计稿
+目前 Taro 支持 750、 640 、 828 三种尺寸设计稿，他们的换算规则如下：
+```
+const DEVICE_RATIO = {
+  '640': 2.34 / 2,
+  '750': 1,
+  '828': 1.81 / 2
+}
+```
+
+如果是在 JS 中书写了行内样式，那么编译时就无法做替换了
+```
+Taro.pxTransform(10) // 小程序：rpx，H5：rem
+```
+
+#### 2.6 小程序样式中引用本地资源
+在小程序的样式中，默认不能直接引用本地资源，只能通过网络地址、Base64 的方式来进行资源引用, 为了方便开发，Taro 提供了直接在样式文件中引用本地资源的方式，其原理是通过 PostCSS 的 postcss-url 插件将样式中本地资源引用转换成 Base64 格式，从而能正常加载。
+
+Taro 默认会对 10kb 大小以下的资源进行转换，如果需要修改配置，可以在 config/index.js 中进行修改，配置位于 weapp.module.postcss。
+```
+// 小程序端样式引用本地资源内联
+url: {
+  enable: true,
+  config: {
+    limit: 10240 // 设定转换尺寸上限
+  }
+}
+```
+
+#### 2.7 组件的外部样式和全局样式
+除继承样式外， app.scss 中的样式、组件所在页面的样式，均对自定义组件无效。
+```
+#a { } /* 在组件中不能使用 */
+[a] { } /* 在组件中不能使用 */
+button { } /* 在组件中不能使用 */
+.a > .b { } /* 除非 .a 是 view 组件节点，否则不一定会生效 */
+
+/* 该自定义组件的默认样式 */
+:host {
+  color: yellow;
+}
+```
+
+利用 externalClasses 定义段定义若干个外部样式类。
+```
+/* CustomComp.js */
+export default class CustomComp extends Component {
+  static externalClasses = ['my-class']
+
+  render () {
+    return <View className="my-class">这段文本的颜色由组件外的 class 决定</View>
+  }
+}
+```
+```
+/* MyPage.js */
+export default class MyPage extends Component {
+  render () {
+    return <CustomComp my-class="red-text" />
+  }
+}
+```
+```
+/* MyPage.scss */
+.red-text {
+  color: red;
+}
+```
+
+使用外部样式类可以让组件使用指定的组件外样式类，如果希望组件外样式类能够完全影响组件内部，可以将组件构造器中的 options.addGlobalClass 字段置为 true。
+```
+/* CustomComp.js */
+export default class CustomComp extends Component {
+  static options = {
+    addGlobalClass: true
+  }
+
+  render () {
+    return <View className="red-text">这段文本的颜色由组件外的 class 决定</View>
+  }
+}
+```
+```
+/* 组件外的样式定义 */
+.red-text {
+  color: red;
+}
+```
+
+#### 2.8 组件 & props
+当 React 遇到的元素是用户自定义的组件，它会将 JSX 属性作为单个对象传递给该组件，这个对象称之为 props。
+```
+// welcome.js
+class Welcome extends Component {
+  render () {
+    return <View><Text>Hello, {this.props.name}</Text></View>
+  }
+}
+
+// app.js
+class App extends Component {
+  render () {
+    return <Welcome name="Wallace" />
+  }
+}
+```
+
+使用 PropTypes 检查类型
+```
+import PropTypes from 'prop-types';
+
+class Greeting extends Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+```
+
+#### 2.9 生命周期 & state
+Taro 可以将多个 setState() 调用合并成一个调用来提高性能。
+<table>
+    <tr><td height=50px bgcolor=#F5F5D5>对于 Taro 而言，setState 之后，你提供的对象会被加入一个数组，然后在执行下一个 eventloop 的时候合并它们。</td></tr>
+</table>
+state 更新会被合并
+```
+当你调用 setState()，Taro 将合并你提供的对象到当前的状态中。
+例如，你的状态可能包含几个独立的变量：
+constructor(props) {
+  super(props)
+  this.state = {
+    posts: [],
+    comments: []
+  }
+}
+
+然后通过调用独立的 setState() 调用分别更新它们:
+componentDidMount() {
+  fetchPosts().then(response => {
+    this.setState({
+      posts: response.posts
+    });
+  });
+
+  fetchComments().then(response => {
+    this.setState({
+      comments: response.comments
+    })
+  })
+}
+```
+
 
 
 
