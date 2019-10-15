@@ -157,8 +157,51 @@ class MyComponent extends Component {
   }
 ```
 
+#### 2.3 框架
+**页面文件中的config，在编译后将生成全局配置文件 app.json**
+<br>
 
+**页面生命周期**
 
+`componentWillMount()`
+页面加载时触发, 此时页面 DOM 尚未准备好，还不能和视图层进行交互
+
+`componentDidMount()`
+页面初次渲染完成时触发, 页面已经准备妥当，可以和视图层进行交互
+
+`shouldComponentUpdate(nextProps, nextState)`
+页面是否需要更新，返回 false 不继续更新，否则继续走更新流程
+
+`componentWillUpdate(nextProps, nextState)`
+页面即将更新
+
+`componentDidUpdate(nextProps, nextState)`
+页面更新完毕
+
+`componentWillUnmount`
+页面卸载时触发,如 redirectTo 或 navigateBack 到其他页面时
+
+`componentDidShow()`
+页面显示|切入前台时触发
+
+ `componentDidHide()`
+ 页面隐藏/切入后台时触发， 如 navigateTo 或底部 tab 切换到其他页面，小程序切入后台等
+
+ **页面事件处理函数**
+ <table>
+    <tr><td height=50px bgcolor=#F5F5D5>H5 暂时没有同步实现 onReachBottom 、 onPageScroll 这两个事件函数，可以通过给 window 绑定 scroll 事件来进行模拟，而 onPullDownRefresh 下拉刷新则暂时只能用 ScrollView 组件来代替了</td></tr>
+</table>
+
+**组件**
+当你在 Taro 组件中引用原生小程序组件代码时，则需要通过配置 config 来实现
+
+|属性|类型|描述|
+|-|-|-|
+|usingComponents|Object|组件自定义组件配置|
+
+**组件生命周期**
+`componentWillReceiveProps(nextProps)`
+已经装载的组件接收到新属性前调用
 
 
 

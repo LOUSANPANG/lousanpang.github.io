@@ -50,8 +50,12 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 </table>
 <br>
 
+### 二、配置项 app.jsx
+#### 2.1 [全局配置项列表](https://nervjs.github.io/taro/docs/tutorial.html#%E9%85%8D%E7%BD%AE%E9%A1%B9%E5%88%97%E8%A1%A8)
 
+#### 2.2 [页面配置项列表](https://nervjs.github.io/taro/docs/tutorial.html#%E9%85%8D%E7%BD%AE%E9%A1%B9%E5%88%97%E8%A1%A8-1)
 
+#### 2.3 [页面事件处理函数](https://nervjs.github.io/taro/docs/tutorial.html#%E9%A1%B5%E9%9D%A2%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0)
 
 
 
