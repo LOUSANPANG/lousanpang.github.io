@@ -204,6 +204,68 @@ class MyComponent extends Component {
 已经装载的组件接收到新属性前调用
 
 
+#### 2.4 最佳实践
+**Taro 的编译器也会对无法运行的代码进行警告，如果你需要在编译时禁用掉 ESLint 检查，可以在命令前加入 ESLINT=false 参数，例如：**
+```
+$ ESLINT=false taro build --type weapp --watch
+```
+[关于组件](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/component.html)
+**组件样式**
+微信小程序的自定义组件样式默认是不能受外部样式影响的，例如在页面中引用了一个自定义组件，在页面样式中直接写自定义组件元素的样式是无法生效的。这一点，在 Taro 中也是一样，而这也是与大家认知的传统 Web 开发不太一样。
+
+**给组件设置 defaultProps**
+自定义组件中，只有在 properties 中指定的属性，才能从父组件传入并接收。
+```
+Component({
+  properties: {
+    myProperty: { // 属性名
+      type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+      value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
+      observer: function (newVal, oldVal, changedPath) {
+         // 属性被改变时执行的函数（可选），也可以写成在 methods 段中定义的方法名字符串, 如：'_propertyChange'
+         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
+      }
+    },
+    myProperty2: String // 简化的定义方式
+  }
+  ...
+})
+```
+
+在接受props的属性时, defaultProps弥补编译时，可能会有某一属性没有使用而是直接传递给子组件的情况。
+```
+class CustomButton extends React.Component {
+  // ...
+}
+
+CustomButton.defaultProps = {
+  color: 'blue'
+}
+```
+
+**组件传递函数属性名以 on 开头**
+```
+// 在 Taro 中，父组件要往子组件传递函数，属性名必须以 on 开头
+// 调用 Custom 组件，传入 handleEvent 函数，属性名为 onTrigger
+class Parent extends Component {
+  handleEvent () {}
+
+  render () {
+    return (
+      <Custom onTrigger={this.handleEvent}></Custom>
+    )
+  }
+}
+```
+
+**不要在 state 与 props 上用同名的字段，因为这些字段在微信小程序中都会挂在 data 上**
+
+**环境变量使用 process.env.NODE_ENV**
+
+**this.$componentType 可能取值分别为 PAGE 和 COMPONENT, 来判断当前 Taro.Component 是页面还是组件**
+
+
+
 
 
 

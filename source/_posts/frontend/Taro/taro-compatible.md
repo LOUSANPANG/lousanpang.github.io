@@ -56,6 +56,12 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 #### 2.2 [页面配置项列表](https://nervjs.github.io/taro/docs/tutorial.html#%E9%85%8D%E7%BD%AE%E9%A1%B9%E5%88%97%E8%A1%A8-1)
 
 #### 2.3 [页面事件处理函数](https://nervjs.github.io/taro/docs/tutorial.html#%E9%A1%B5%E9%9D%A2%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0)
+<br>
+
+### 三、[项目配置](https://nervjs.github.io/taro/docs/project-config.html)
+**通过 Taro 模板创建的项目都会默认拥有 project.config.json 这一项目配置文件，这个文件 只能用于微信小程序，若要兼容到其他小程序平台，请按如下对应规则来增加相应平台的配置文件，其配置与各自小程序平台要求的一致**
+
+
 
 
 
