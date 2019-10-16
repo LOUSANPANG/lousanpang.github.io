@@ -355,6 +355,7 @@ export default class CustomComp extends Component {
 ```
 
 #### 2.8 组件 & props
+[React 也有一些内置的类型检查功能。要检查组件的属性，你需要配置特殊的 propTypes 属性](https://reactjs.org.cn/doc/typechecking-with-proptypes.html)
 当 React 遇到的元素是用户自定义的组件，它会将 JSX 属性作为单个对象传递给该组件，这个对象称之为 props。
 ```
 // welcome.js
@@ -421,6 +422,57 @@ componentDidMount() {
   })
 }
 ```
+
+#### 2.10 事件处理程序
+当你通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面。
+```
+class Popper extends Component {
+  constructor () {
+    super(...arguments)
+    this.state = { name:'Hello world!' }
+  }
+
+  // 你可以通过 bind 传入多个参数
+  preventPop (name, test, e) {    //事件对象 e 要放在最后
+    e.stopPropagation()
+  }
+
+  render () {
+    return <Button onClick={this.preventPop.bind(this, this.state.name, 'test')}></Button>
+  }
+}
+```
+<table>
+    <tr><td height=50px bgcolor=#F5F5D5>注意：在各小程序端，使用匿名函数，尤其是在 循环中 使用匿名函数，比使用 bind 进行事件传参占用更大的内存，速度也会更慢。</td></tr>
+</table>
+
+
+#### 2.11 列表渲染
+taroKey 适用于循环渲染原生小程序组件，赋予每个元素唯一确定标识，转换为小程序的 wx:key。
+```
+const numbers = [...Array(100).keys()] // [0, 1, 2, ..., 98, 99]
+const listItems = numbers.map((number) => {
+  return (
+    // native component
+    <g-list
+      taroKey={String(number)}
+      className='g-list'
+    >
+    我是第 {number + 1} 个数字
+    </g-list>
+  )
+})
+```
+
+#### 2.12 [函数式组件](https://nervjs.github.io/taro/docs/functional-component.html)
+
+#### 2.13 [Context](https://nervjs.github.io/taro/docs/context.html)
+
+#### 2.14 [Children 与组合](https://nervjs.github.io/taro/docs/children.html)
+
+#### 2.15 [Render Props](https://nervjs.github.io/taro/docs/render-props.html)
+
+#### 2.16 [Refs 引用](https://nervjs.github.io/taro/docs/ref.html)
 
 
 
