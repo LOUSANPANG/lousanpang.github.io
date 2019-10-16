@@ -61,6 +61,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ### 三、[项目配置](https://nervjs.github.io/taro/docs/project-config.html)
 **通过 Taro 模板创建的项目都会默认拥有 project.config.json 这一项目配置文件，这个文件 只能用于微信小程序，若要兼容到其他小程序平台，请按如下对应规则来增加相应平台的配置文件，其配置与各自小程序平台要求的一致**
 
+### 四、[多端开发](https://nervjs.github.io/taro/docs/envs.html)
+
 
 
 

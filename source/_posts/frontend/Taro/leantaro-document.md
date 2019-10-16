@@ -474,7 +474,83 @@ const listItems = numbers.map((number) => {
 
 #### 2.16 [Refs 引用](https://nervjs.github.io/taro/docs/ref.html)
 
+#### 2.17 [Debug 指南](https://nervjs.github.io/taro/docs/debug.html)
 
+### 三、进阶指南
+#### 3.1 [编译配置](https://nervjs.github.io/taro/docs/config.html)
+
+#### 3.2 [Hook](https://nervjs.github.io/taro/docs/hooks.html)
+
+#### 3.3 [多端UI库](https://nervjs.github.io/taro/docs/ui-lib.html)
+
+#### 3.4 [async](https://nervjs.github.io/taro/docs/async-await.html)
+
+#### 3.5 使用小程序原生第三方组件和插件
+```
+usingComponents 指定的小程序原生组件名字需要以小写开头。
+
+config = {
+  // 定义需要引入的第三方组件
+  usingComponents: {
+    'ec-canvas': '../../components/ec-canvas/ec-canvas' // 书写第三方组件的相对路径
+  }
+}
+```
+
+#### 3.6 性能优化实践
+* componentWillPreload 
+```
+Taro 提供了 componentWillPreload 钩子，它接收页面跳转的参数作为参数。可以把需要预加载的内容通过 return 返回，然后在页面触发 componentWillMount 后即可通过 this.$preloadData 获取到预加载的内容。
+
+注意：调用跳转方法时需要使用绝对路径，相对路径不会触发此钩子。
+```
+
+* 使用 this.$preload 函数进行页面跳转传参
+```
+// 传入单个参数
+
+// A 页面
+// 调用跳转方法前使用 this.$preload
+this.$preload('key', 'val')
+Taro.navigateTo({ url: '/pages/B/B' })
+
+// B 页面
+// 可以于 this.$router.preload 中访问到 this.$preload 传入的参数
+componentWillMount () {
+  console.log('preload: ', this.$router.preload.key)
+}
+```
+
+```
+// 传入多个参数
+
+// A 页面
+this.$preload({
+  x: 1,
+  y: 2
+})
+Taro.navigateTo({ url: '/pages/B/B' })
+
+// B 页面
+componentWillMount () {
+  console.log('preload: ', this.$router.preload)
+}
+```
+
+* shouldComponentUpdate
+```
+通过在 shouldComponentUpdate 钩子里返回 false 来跳过本次渲染流程
+
+shouldComponentUpdate (nextProps, nextState) {
+  if (this.props.color !== nextProps.color) {
+    return true
+  }
+  if (this.state.count !== nextState.count) {
+    return true
+  }
+  return false
+}
+```
 
 
 
