@@ -151,10 +151,60 @@ object表示非原始类型，也就是除number，string，boolean，symbol，n
     interface LabeledValue {
         label: string;
     }
-    let labeledObj: LabeledValue;
 
-    labeledObj.label = 'hi';
+    let labeledObj = {
+        bol: true,
+        label: 'hi'
+    };
+
+    labeledObj: LabeledValue; // true
 ```
+类型检查器不会去检查属性的顺序，只要相应的属性存在并且类型也是对的就可以。
+
+#### 3.1 可选属性 `?:`
+好处之一是可以对可能存在的属性进行预定义，好处之二是可以捕获引用了不存在的属性时的错误。 
+
+```
+interface SquareConfig {
+  color?: string;
+  width?: number;
+}
+
+config: SquareConfig
+config.clor // Error: Property 'clor' does not exist on type 'SquareConfig'
+```
+
+#### 3.2 只读属性 `readonly`
+你可以在属性名前用readonly来指定只读属性:
+
+```
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+```
+
+赋值后，x和y再也不能被改变了。
+```
+let p1: Point = { x: 10, y: 20 };
+p1.x = 5; // error!
+```
+
+TypeScript具有ReadonlyArray<T>类型,数组创建后再也不能被修改：
+```
+let a: number[] = [1, 2, 3, 4];
+let ro: ReadonlyArray<number> = a;
+ro[0] = 12; // error!
+ro.push(5); // error!
+ro.length = 100; // error!
+
+a = ro; // error!
+a = ro as number[]; // ok!
+```
+
+#### 3.3 额外的属性检查
+
+
 
 
 
