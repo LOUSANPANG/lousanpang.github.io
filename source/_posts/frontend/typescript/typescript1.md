@@ -202,6 +202,7 @@ a = ro; // error!
 a = ro as number[]; // ok!
 ```
 
+
 #### 3.3 额外的属性检查
 
 
