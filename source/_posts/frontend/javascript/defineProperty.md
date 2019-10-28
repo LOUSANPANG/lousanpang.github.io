@@ -37,6 +37,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 * 使用同步`async await`去解决异步、延时等问题（缺点：使用同步就必须在同一个生命周期中去等待，造成代码赘余，不方便在各个页面使用。）
 * 使用`Redux Mobx`数据管理工具（缺点：如果不是很多的跨组件数据监听，显的过于沉重。）
 * 使用`Object.defineProperty`去实时监听`state、globalState`对象中的属性的变化。
+
+
 #### 1.4 使用
 ```js
     // app.js
@@ -77,17 +79,17 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ### 二、 拓展defineProperty
 #### 2.1 语法
-* 语法
+语法
 `Object.defineProperty(obj, prop, descriptor)`
 
-* 参数说明：
+参数说明：
 ```
     obj：必需。目标对象
     prop：必需。需定义或修改的属性的名字
     descriptor：必需。目标属性所拥有的特性
 ```
 
-* descriptor 包含数据描述、存取器描述，6个属性
+descriptor 包含数据描述、存取器描述，6个属性
 ```
 数据描述
     value: 设置属性的值
@@ -102,10 +104,10 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
     set:function (value){} | undefined
 ```
 
-* 注意：当使用了getter或setter方法，不允许使用writable和value这两个属性
+注意：当使用了getter或setter方法，不允许使用writable和value这两个属性
 
 #### 2.2 使用
-* 数据描述
+数据描述
 ```js
     let obj = {}
     Object.defineProperty(obj, "name", {
@@ -128,7 +130,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
     console.log( obj.name ); // undefined
 ```
 
-* 存取器描述
+存取器描述
 ```js
     let obj = {
         name: ''
