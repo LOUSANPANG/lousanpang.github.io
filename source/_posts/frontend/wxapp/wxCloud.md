@@ -2,9 +2,9 @@
 title: 微信小程序云开发
 date: 2019-11-10
 tags: 
-    - 微信小程序
+    - 云开发
 categories: 微信小程序
-keywords: [微信小程序云开发]
+keywords: [小程序]
 description: 微信小程序云开发
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
