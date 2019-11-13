@@ -115,11 +115,74 @@ grid-template-areas: 'a a a'
 
 ```
 
+### 六、grid-auto-flow 容器元素顺序排列
+#### 6.1 默认 `row` 排列, 下边是纵向开始排列
+```
+grid-auto-flow: column;
+```
+
+#### 6.2 row dense / column dense 插缝，紧密填满
+先行后列
+```
+grid-auto-flow: row dense;
+```
+![MJ74HK.png](https://s2.ax1x.com/2019/11/13/MJ74HK.png)
+
+先列后行
+```
+grid-auto-flow: column dense;
+```
+![columndense.png](https://i.loli.net/2019/11/13/EHkeIhJDsjqpYUP.png)
 
 
+### 七、单元格内容位置
+```
+start：对齐单元格的起始边缘。
+end：对齐单元格的结束边缘。
+center：单元格内部居中。
+stretch：拉伸，占满单元格的整个宽度（默认值）。
+```
+#### 7.1 justify-items 单元格内容的水平位置
+```
+.container {
+  justify-items: start | end | center | stretch;
+}
+```
+![MJH5Mn.png](https://s2.ax1x.com/2019/11/13/MJH5Mn.png)
+
+#### 7.2 align-items 单元格内容的垂直位置
+```
+.container {
+  align-items: start | end | center | stretch;
+}
+```
+![MJHbIU.png](https://s2.ax1x.com/2019/11/13/MJHbIU.png)
 
 
+#### 7.3 place-items 合并 justify-items align-items
+```
+place-items: <align-items> <justify-items>;
 
+place-items: start end;
+```
+
+### 八、作用在项目上
+```
+space-around - 每个项目两侧的间隔相等。所以，项目之间的间隔比项目与容器边框的间隔大一倍。
+space-evenly - 项目与项目的间隔相等，项目与容器边框之间也是同样长度的间隔。
+```
+#### 8.1 justify-content align-content 项目在容器的水平、垂直位置
+```
+.container {
+  justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+  align-content: start | end | center | stretch | space-around | space-between | space-evenly;  
+}
+```
+
+#### 8.2 place-content 合并 
+```
+place-content: space-around space-evenly;
+```
 
 
 
