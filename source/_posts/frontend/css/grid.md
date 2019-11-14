@@ -24,6 +24,27 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 容器子元素（项目）的float、display: inline-block、display: table-cell、vertical-align和column-*等设置都将失效。
 ```
 
+------------------------------------
+总结： 
+|              名称            |            用法          |            介绍          |
+| ---------------------------- | ----------------------- | ----------------------- |
+|            grid-template-columns/grid-template-rows               |      grid-template-columns: 100px 100px 100px;        |      定义行列宽高        |
+|            repeat()               |      grid-template-columns: repeat(3, 33.33%)      |      重复        |
+|            auto-fill              |      grid-template-columns: repeat(auto-fill, 100px)     |      自动填充        |
+|            fr             |      grid-template-columns: 1fr 1fr;    |      比例关系        |
+|            minmax()           |      grid-template-columns: 1fr 1fr minmax(100px, 1fr);    |      长度范围        |
+|            auto           |      grid-template-columns: 100px auto 100px;    |      适应最大宽度        |
+|            grid-row-gap/grid-column-gap/grid-gap          |      grid-row-gap: 20px;    |      间距        |
+|            grid-template-areas          |      grid-template-areas:'a'    |      定义指定区域abcdefghi        |
+|            grid-auto-flow          |      grid-auto-flow: column;    |      规定排列顺序       |
+|            justify-items/align-items/place-items          |      justify-items: start | end | center | stretch;    |      单元格内容位置       |
+|            justify-self/align-self/place-self          |     justify-self: start | end | center | stretch;   |      单个单元格内容位置       |
+|            justify-content/align-content/place-content          |      justify-content: start | end | center | stretch | space-around | space-between | space-evenly;    |      整个内容区域的位置       |
+|            grid-auto-columns/grid-auto-rows          |      grid-auto-rows: 50px;     |      布局外多余的宽高       |
+|            grid-column-start/end（grid-column）  grid-row-start/end（grid-row）          |      grid-column-start: 2;      |      项目的指定位置       |
+|            grid-area          |      grid-area: e;     |      指定项目放在哪一个区域       |
+------------------------------------
+
 ### 三、指定行列
 ```
 .container {
