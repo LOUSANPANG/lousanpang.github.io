@@ -39,9 +39,9 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 |     grid-row-gap/-column-/grid-gap     |               xxx: 20px;               |                  间距                  |
 |           grid-template-areas          |                xxx:'a'                 |          定义指定区域abcdefghi          |
 |             grid-auto-flow             |              xxx: column;              |               规定排列顺序               |
-|       justify-items/align-/place-      |  xxx: start | end | center | stretch;  |              单元格内容位置              |
-|       justify-self/align-/place-       |  xxx: start | end | center | stretch;  |             单个单元格内容位置            |
-|       justify-content/align-/place-    |  xxx: start|end|center|stretch|space-around|space-between|space-evenly; |  整个内容区域的位置 |
+|       justify-items/align-/place-      |  xxx: start / end / center / stretch;  |              单元格内容位置              |
+|       justify-self/align-/place-       |  xxx: start / end / center / stretch;  |             单个单元格内容位置            |
+|       justify-content/align-/place-    |  xxx: start/end/center/stretch/space-around/space-between/space-evenly; |  整个内容区域的位置 |
 |       grid-auto-columns/-rows          |               xxx: 50px;               |             布局外多余的宽高             |
 | grid-column-start/end = grid-column grid-row-start/end = grid-row  |      xxx: 2;      |      项目的指定位置       |
 |               grid-area                |                xxx: e;                 |          指定项目放在哪一个区域           |
