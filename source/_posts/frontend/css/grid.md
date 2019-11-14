@@ -104,7 +104,7 @@ grid-template-columns: 100px auto 100px;
   display: grid;
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
-  grid-template-areas: 'a b c'
+  grid-template-areas: 'a b c'  // 各代表网格的index区域
                        'd e f'
                        'g h i';
 }
@@ -166,6 +166,21 @@ place-items: <align-items> <justify-items>;
 place-items: start end;
 ```
 
+#### 7.4 作用在单个项目上的内容位置
+```
+.item {
+  justify-self: start | end | center | stretch; // 单元格内容的水平位置（左中右）
+  align-self: start | end | center | stretch; // 单元格内容的垂直位置（上中下）
+}
+```
+place-self属性是align-self属性和justify-self属性的合并简写形式。
+```
+place-self: <align-self> <justify-self>;
+
+place-self: center center;
+```
+
+
 ### 八、作用在项目上
 ```
 space-around - 每个项目两侧的间隔相等。所以，项目之间的间隔比项目与容器边框的间隔大一倍。
@@ -181,9 +196,62 @@ space-evenly - 项目与项目的间隔相等，项目与容器边框之间也�
 
 #### 8.2 place-content 合并 
 ```
+place-content: <align-content> <justify-content>
+
 place-content: space-around space-evenly;
 ```
 
+### 九、台阶式布局
+#### 9.1 grid-auto-columns grid-auto-rows 样式外规定布局
+指定新增的行高统一为50px
+下边的意思是： 三行三列都为100px，以后再加的元素都为50px
+```
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-auto-rows: 50px; 
+  grid-auto-columns: 50px; 
+}
+```
+
+#### 9.2 指定项目在那个位置
+项目的位置是可以指定的，具体方法就是指定项目的四个边框，分别定位在哪根网格线。
+
+```
+grid-column-start属性：左边框所在的垂直网格线
+grid-column-end属性：右边框所在的垂直网格线
+grid-row-start属性：上边框所在的水平网格线
+grid-row-end属性：下边框所在的水平网格线
+```
+```
+grid-column属性是grid-column-start和grid-column-end的合并简写形式，
+grid-row属性是grid-row-start属性和grid-row-end的合并简写形式。
+
+.item-1 {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+```
+`grid-auto-flow` 配合使用，默认`row`排列，先行后列，也可以`column`先列后行
+
+#### 9.3 grid-area指定项目放在哪个区域
+```
+.item-1 {
+  grid-area: e;
+}
+```
+grid-area属性还可用作grid-row-start、grid-column-start、grid-row-end、grid-column-end的合并简写形式，直接指定项目的位置.
+```
+grid-area: <row-start> / <column-start> / <row-end> / <column-end>;
+
+.item-1 {
+  grid-area: 1 / 1 / 3 / 3;
+}
+```
+![grid-area](https://s2.ax1x.com/2019/11/14/MtFLZT.png)
+
+ 
 
 
 
