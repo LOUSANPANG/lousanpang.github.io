@@ -32,6 +32,11 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ```
 
 
+### [webpack & react](https://www.tslang.cn/docs/handbook/react-&-webpack.html)
+
+
+
+
 ### 基础类型
 
 |                    名称                    |                    用法                    |                    等价于                    |
@@ -93,6 +98,29 @@ mySearch = function(source: string, subString: string) {
   return result > -1;
 }
 ```
+
+### 类
+private 不能在声明它的类的外部访问
+```
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+new Animal("Cat").name; // 错误: 'name' 是私有的.
+```
+
+protected 不能在包含它的类外被实例化但是能被继承
+
+readonly 只读属性必须在声明时或构造函数里被初始化
+
+public 静态属性
+
+
+
+
+
+
 
 
 
