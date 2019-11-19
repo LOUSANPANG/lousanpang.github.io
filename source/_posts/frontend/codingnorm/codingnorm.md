@@ -30,7 +30,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 <table>
     <tr><td height=50px  bgcolor=#F5F5D5>普通 JS/TS 文件以小写字母命名，多个单词以下划线连接，例如 util.js、util_helper.js</td></tr>
-</table> 
+</table>
 <br>
 
 #### 1.2 `components`组件文件夹
@@ -51,7 +51,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 **字符串统一使用单引号**
 ```
   let string = "hi" // 错误
- 
+
   let string = 'hi' // 正确
 ```
 
@@ -64,9 +64,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 **函数声明时括号与函数名间加空格, 例如**
 ```
-  function name(arg) { ... } // 错误
-
-  function name (arg) { ... } // 正确
+  function name(arg) { ... } // 正确
 ```
 
 **模板字符串中变量前后不加空格，例如**
@@ -205,7 +203,7 @@ let score = val || 0          // ✓ 正确
 ### 三、注释
 **注释首尾留空格，例如**
 ```
-  // comment 
+  // comment
 
   /* comment */
 ```
