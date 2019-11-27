@@ -25,7 +25,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 <br>
 
 ### 一、文件命名规范
-
 #### 1.1 `utils`工具文件夹
 
 <table>
@@ -40,12 +39,12 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 </table>
 <br>
 
-### 二、JavaScript 书写规范
-**使用二个空格进行缩进**
-```
-    let num = 1 // 错误
 
-  let num = 1 // 正确
+### 二、JavaScript 书写规范
+#### 2.1 变量函数命名规范
+**const命名使用全大写**
+```
+const MAX_AGE = 20;
 ```
 
 **字符串统一使用单引号**
@@ -55,11 +54,35 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
   let string = 'hi' // 正确
 ```
 
-**关键字后面加空格, 例如 `if` 、`for`**
+**对于变量和函数名统一使用小驼峰命名法**
 ```
-  if() {} // 错误
+  let theimport = '' // 错误
 
-  if () {} // 正确
+  let theImport = '' // 正确
+```
+
+**类名要以大写字母开头**
+```
+class animal {}
+const dog = new animal()    // ✗ 错误
+
+class Animal {}
+const dog = new Animal()    // ✓ 正确
+```
+
+==================================================================================================
+
+#### 2.2 代码格式规范
+**使用二个空格进行缩进**
+```
+    let num = 1 // 错误
+
+  let num = 1 // 正确
+```
+
+**关键字允许不加空格, 例如 `if` 、`for`**
+```
+  if() {}
 ```
 
 **函数声明时括号与函数名间加空格, 例如**
@@ -83,13 +106,40 @@ const message = `Hello, ${name}` // 正确
     .log('hello') // 正确
 ```
 
-**对于变量和函数名统一使用小驼峰命名法**
+**if/else 关键字要与花括号保持在同一行**
 ```
-  let theimport = '' // 错误
+if (condition) { // ✓ 正确
+  // ...
+} else {
+  // ...
+}
 
-  let theImport = '' // 正确
+if (condition) // ✗ 错误
+{
+  // ...
+}
+else
+{
+  // ...
+}
 ```
 
+**对于三元运算符 ? 和 : 与他们所负责的代码处于同一行**
+```
+// ✓ 正确
+const location = env.development
+  ? 'localhost'
+  : 'www.api.com'
+
+// ✗ 错误
+const location = env.development ?
+  'localhost' :
+  'www.api.com'
+```
+
+==================================================================================================
+
+#### 2.3 代码语义规范
 **嵌套的代码块中禁止再定义函数，例如**
 ```
     if (authenticated) {
@@ -100,15 +150,6 @@ const message = `Hello, ${name}` // 正确
     if (authenticated) {
         this.setAuthUser()    // 正确
     }
-```
-
-**类名要以大写字母开头**
-```
-class animal {}
-const dog = new animal()    // ✗ 错误
-
-class Animal {}
-const dog = new Animal()    // ✓ 正确
 ```
 
 **子类的构造器中一定要调用 super**
@@ -147,37 +188,6 @@ const character = new Character()   // ✓ 正确
 function sum (a, b) {
   return result = a + b     // ✗ 错误
 }
-```
-
-**if/else 关键字要与花括号保持在同一行**
-```
-if (condition) { // ✓ 正确
-  // ...
-} else {
-  // ...
-}
-
-if (condition) // ✗ 错误
-{
-  // ...
-}
-else
-{
-  // ...
-}
-```
-
-**对于三元运算符 ? 和 : 与他们所负责的代码处于同一行**
-```
-// ✓ 正确
-const location = env.development
-  ? 'localhost'
-  : 'www.api.com'
-
-// ✗ 错误
-const location = env.development ?
-  'localhost' :
-  'www.api.com'
 ```
 
 **如果有更好的实现，尽量不要使用三元表达式**

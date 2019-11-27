@@ -24,6 +24,18 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 - [x] 边框
 
 
+### 一、色彩
+<table>
+    <tr><td bgcolor=rgb(40, 44, 52)>rgb(40, 44, 52) #282C34</td></tr>
+    <tr><td bgcolor=rgba(255,229,100,0.3)>rgba(255,229,100,0.3) #FFE564</td></tr>
+</table>
+
+
+
+### 二、边框
+
+
+
 
 
 <br>

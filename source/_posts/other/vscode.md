@@ -14,13 +14,13 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 关于彻底删除`vscode`
-#### c/{用户}/{用户}/.vscode 这是`vscode`放置安装的插件
+### 一. 关于彻底删除`vscode`
+#### 1.1 c/{用户}/{用户}/.vscode 这是`vscode`放置安装的插件
 
-#### c/{用户}/{用户}/AppData/Roaming/Code 这是`vscode`放置用户信息和缓存信息
+#### 1.2 c/{用户}/{用户}/AppData/Roaming/Code 这是`vscode`放置用户信息和缓存信息
 
 
-### 配置`vscode`终端命令
+### 二. 配置`vscode`终端命令
 ```
 // setting.json
 
