@@ -52,13 +52,17 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 **type**
 
-1. `feat`: 新功能（feature）
-2. `fix`: 修补bug
-3. `docs`: 文档 （documentation）
-4. `style`: 格式（不影响代码运行的变动）
+1. `feat`: 新功能、特性（feature）
+2. `fix`: 修补bug、修改问题
+3. `docs`: 文档修改 （documentation）
+4. `style`: 代码格式修改（不影响代码运行的变动）
 5. `refactor`: 重构（既不是添加功能，也不是修改bug的代码变动）
-6. `test`: 添加测试
-7. `chore`: 构建过程或辅助工具变动
+6. `test`: 测试用例修改
+7. `chore`: 其他修改、构建过程或辅助工具变动
+8. `scope`: 影响的范围
+9. `subject`: commit 的概述, 建议符合  50/72 formatting
+10. `body`: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
+11. `footer`: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
 
 <br>
 <br>
