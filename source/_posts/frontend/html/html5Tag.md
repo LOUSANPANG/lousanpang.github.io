@@ -1,5 +1,5 @@
 ---
-title: HTML5语义化用起来
+title: HTML5标签语义化你的HTML文档
 date: 2019-12-25
 tags: 
     - HTML5
@@ -14,7 +14,7 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-[超文本标记语言](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
+[使用HTML5优化你的HTML文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
 
 <iframe
      src="https://codesandbox.io/embed/html5biaoqiandaquan-w194e?fontsize=14&hidenavigation=1&theme=dark"
@@ -23,28 +23,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
-
-### 语义化标签使用起来
-
-`abbr` 鼠标hover时展示title的内容
-- 行内标签
-- 清除默认样式(下滑点) `font-variant: none`
-```
-<abbr title="Cascading Style Sheets">CSS</abbr> 
-
-<dfn id="CSS"> // 更语义化一些
-    <abbr title="Cascading Style Sheets">CSS</abbr> 
-</dfn>
-```
-
-
-
-
-
-
-
-
-
 
 
 
