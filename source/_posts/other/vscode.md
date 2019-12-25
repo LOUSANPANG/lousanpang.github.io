@@ -27,6 +27,78 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe" // 你放置git命令的存储地方
 ```
 
+### 三. 快速生成代码
+后代 >
+```
+div>span>a
+
+<div>
+    <span>
+        <a href=""></a>
+    </span>
+</div>
+```
+
+兄弟 +
+```
+div+p+span
+
+<div></div>
+<p></p>
+<span></span>
+```
+
+上级 ^
+```
+div>span^i
+
+<div>
+    <span></span>
+</div>
+<i></i>
+```
+
+乘法 *
+```
+ul>li*2
+
+<ul>
+    <li></li>
+    <li></li>
+</ul>
+```
+
+文本 {}
+```
+div>span{this is vv's test}
+
+<div>
+    <span>this is vv's test</span>
+</div>
+```
+
+自增符 $
+```
+ul>li.list_${list $}*3
+
+<ul>
+    <li class="list_1">list 1</li>
+    <li class="list_2">list 2</li>
+    <li class="list_3">list 3</li>
+</ul>
+```
+
+@3 表示从3开始计数
+```
+ul>li.item$@3*3 
+
+<ul>
+    <li class="item3">list 1</li>
+    <li class="item4">list 2</li>
+    <li class="item5">list 3</li>
+</ul>
+```
+
 
 
 <br>
