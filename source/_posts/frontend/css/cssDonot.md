@@ -44,6 +44,15 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 滑动页面,堆叠效果
 
 
+#### 1.2 边距合并
+当两个垂直外边距相遇时，它们将形成一个外边距。合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者。
+
+只有普通文档流中块框的垂直外边距才会发生外边距合并。 行内框、浮动框或绝对定位之间的外边距不会合并。
+
+#### 1.3 定位
+
+
+
 ### 二、加载性能优化css
 
 #### 2.1 异步加载css
@@ -104,6 +113,68 @@ text-align-last: justify;
 
 #### 3.3 使用object-fit规定图像尺寸
 [object-fit](https://developer.mozilla.org/zh-CN/docs/Web/CSS/object-fit)
+
+
+### 四、css好用的属性
+
+#### 4.1 background-attachment属性
+背景图像位置
+```
+background-attachment: scroll; // 默认值。背景图像会随着页面其余部分的滚动而移动。
+background-attachment: fixed; // 当页面的其余部分滚动时，背景图像不会移动。
+```
+
+#### 4.2 文本
+**（1）空隙**
+`word-spacing` 单词之间的空隙， `letter-spacing` 字符之间的空隙；
+
+**（2）大小写**
+`text-transform 处理文本大小写`
+```
+uppercase 转换全部大写
+
+lowercase 转换全部小写
+
+capitalize 首字母大写
+```
+
+**（3）换行**
+`white-space` 处理空白符
+```
+white-space: pre; // 识别换行符和空格，按标签内容格式来展示
+
+white-space: nowrap; // 文本不换行
+```
+值 | 空白符 | 换行符 | 自动换行
+------- | ------- | ------- | -------
+pre-line | 合并 | 保留 | 允许
+normal | 合并 | 忽略 | 允许
+nowrap | 合并 | 忽略 | 不允许
+pre | 保留 | 保留 | 不允许
+pre-wrap | 保留 | 保留 | 允许
+
+#### 4.3 链接
+```
+a:link    /* 未被访问的链接 */
+a:visited /* 已被访问的链接 */
+a:hover   /* 鼠标指针移动到链接上 */
+a:active  /* 正在被点击的链接 */
+
+a:hover 必须位于 a:link 和 a:visited 之后！！
+a:active 必须位于 a:hover 之后！！
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <br>
