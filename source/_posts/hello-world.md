@@ -100,8 +100,9 @@ deploy: # 主目录的_config.yml
  hexo g
  hexo d
  git add --a
- git commit -a -m ''
- git push --set-upstream origin lgh
+ git commit -a -m 'feat: :art: pull md'
+ git push
+ // git push --set-upstream origin lgh
 ```
 
 ### 四、[常见命令](https://hexo.io/zh-cn/docs/commands)

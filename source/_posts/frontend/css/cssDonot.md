@@ -164,6 +164,14 @@ a:hover 必须位于 a:link 和 a:visited 之后！！
 a:active 必须位于 a:hover 之后！！
 ```
 
+#### 4.4 设置可拖动的div
+```
+div {
+  resize:both;
+  overflow:auto;
+}
+```
+
 
 
 
