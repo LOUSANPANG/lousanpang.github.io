@@ -96,7 +96,59 @@ onSaveExitState 保留状态页数据
 ```
 
 
-### 四、自定义组件
+### 四、[自定义组件(*)](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/)
+* 注意：在组件wxss中不应使用ID选择器、属性选择器和标签名选择器。
+
+json设置`"component": true` --> 定义`Component` ---> 使用自定义组件`usingComponents` ---> 使用
+```
+// 组件
+{
+  "component": true
+}
+
+<view class="inner">
+  {{innerText}}
+</view>
+<slot></slot>
+
+Component({
+  properties: {
+    innerText: {
+      type: String,
+      value: 'default value',
+    }
+  },
+  data: {
+  },
+  methods: {
+  }
+})
+```
+```
+{
+  "usingComponents": {
+    "component-tag-name": "path/to/the/custom/component"
+  }
+}
+
+<component-tag-name inner-text="Some text"></component-tag-name>
+```
+
+
+### 五、基础能力
+#### 5.1 网络
+请求、上传下载最大并发10个；
+
+sockt并发5个；
+
+只要成功接收到服务器返回，无论 statusCode 是多少，都会进入 success 回调。请开发者根据业务逻辑对返回值进行判断。
+
+#### 5.2 [分包加载](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html)
+
+#### 5.3 [多线程worker](https://developers.weixin.qq.com/miniprogram/dev/framework/workers.html)
+
+#### 5.4 自定义tabBar
+
 
 
 
@@ -110,7 +162,15 @@ onSaveExitState 保留状态页数据
 不用本页面的setData。
 2. 使用this.animate去制作关键帧动画。
 
-####10.3 
+####10.3 [周期性更新](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/background-fetch.html)
+
+用户七天内使用过的小程序
+
+周期性更新能够在用户未打开小程序的情况下，也能从服务器提前拉取数据，当用户打开小程序时可以更快地渲染页面，减少用户等待时间，增强在弱网条件下的可用性。
+
+#### 10.4 [数据预拉取](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/pre-fetch.html)
+
+
 
 
 
