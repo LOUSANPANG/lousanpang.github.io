@@ -14,21 +14,18 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 应用分支流程
+### 一、应用分支流程
 
-自己分支
-
+#### 1.1 自己分支
 1. git pull // 更新自己的远程分支
 2. git add --a // 将所有新文件至缓存仓库
 3. git commit -a -m '' // 提交说明至缓存仓库
 4. git push // 提交至自己的远程仓库
 
-更换至本地公共仓库
-
+#### 1.2 更换至本地公共仓库
 1. git checkout xxx
 
-公共分支
-
+#### 1.3 公共分支
 1. git pull // 将远程公共仓库更新至本地
 2. git merge xx // 拉自己的代码至本地公共仓库
 3. <!- 解决冲突 ->
@@ -36,31 +33,61 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 5. git commit -a -m '' // 提交说明至缓存仓库
 6. git push // 提交至公共远程仓库
 
-更换至自己本地仓库
-
+#### 1.4 更换至自己本地仓库
 1. git checkout xx
 2. git merge dev // 拉最全的公共代码仓库
 3. git add --a
 4. git commit -a -m ''
 5. git push
 
-### 二、[提交规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
-**Commit message 格式**
+### 二、[部署Angular 团队Git的规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
-**Header Body Footer 三部分**
+#### 2.1 Commitizen: 替代你的 git commit
 ```
-<type>(<scope>): <subject>
-// 空一行
-<body>
-// 空一行
-<footer>
+npm install -g commitizen cz-conventional-changelog
+
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
-#### 2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。
+#### 2.2 项目安装
+```
+npm install -D commitizen cz-conventional-changelog
+```
 
+#### 2.3 package.json中配置
+```
+"script": {
+    "commit": "git-cz",
+},
+"config": {
+  "commitizen": {
+    "path": "node_modules/cz-conventional-changelog"
+  }
+}
+```
+
+#### 2.4 自动生成CHANGELOG
+```
+npm i -D standard-version
+```
+
+```
+"script": {
+  "release": "standard-version"
+}
+```
+
+#### 2.4 试运行
+- `git add --a`
+- `git cz`
+- `npm run release`
+- `git push`
+
+
+### 三、`git cz` 介绍
+#### 3.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。
 **type**
-
 1. `feat`: 新功能、特性（feature）
 2. `fix`: 修补bug、修改问题
 3. `docs`: 文档修改 （documentation）
@@ -70,24 +97,27 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 7. `chore`: 其他修改、构建过程或辅助工具变动
 
 **scope**
-
 `scope`: 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
 
 **subject**
-
 1. `subject`: commit 的概述, 建议符合  <50 formatting
 2. 以动词开头，使用第一人称现在时，比如change，而不是changed或changes
 3. 第一个字母小写
 4. 结尾不加句号（.）
 
-**配合`gitmoji表情包更加清晰`**
+#### 3.2 Provide a longer description of the change 提供更改的详细说明
+#### 3.3 Are there any breaking changes? 有重大变化吗
+#### 3.4 Does this change affect any open issues 此更改是否影响任何未解决的问题
 
-安装
+
+
+### 四、[配合gitmoji表情包更加清晰](https://gitmoji.carloscuesta.me/)
+#### 4.1 安装
 ```
 npm i -g gitmoji-cli
 ```
 
-使用
+#### 4.2 使用
 ```
 git commit -m 'fix: :memo: 修改bug'
 ```
@@ -156,65 +186,3 @@ emoji | emoji代码 | 说明
 :mag: | :mag: | 提升SEO
 :wheel_of_dharma: | :wheel_of_dharma: | 关于Kubernetes的工作
 :label: | :label: | 添加或更新类型（Flow，Typescript）
-
-
-#### 2.2 Body(可选)
-
-`body`: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
-
-#### 2.3 Footer(可选)
-
-`footer`: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
-
-
-### 三、撰写合格 Commit message 的工具
-
-安装命令如下。
-```
-npm install -g commitizen
-```
-
-然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式。
-```
-commitizen init cz-conventional-changelog --save --save-exact
-```
-
-以后，凡是用到`git commit`命令，一律改为使用`git cz`。这时，就会出现选项，用来生成符合格式的 Commit message。
-```
-git cz 替代 git commit
-```
-
-### 四、生成 Change log
-
-`conventional-changelog` 就是生成 Change log 的工具，运行下面的命令即可
-```
-npm install -g conventional-changelog
-cd my-project
-conventional-changelog -p angular -i CHANGELOG.md -w
-```
-
-上面命令不会覆盖以前的 Change log，只会在CHANGELOG.md的头部加上自从上次发布以来的变动。
-如果你想生成所有发布的 Change log，要改为运行下面的命令。
-```
-conventional-changelog -p angular -i CHANGELOG.md -w -r 0
-```
-
-为了方便使用，可以将其写入`package.json`的`scripts`字段。
-```
-{
-  "scripts": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
-  }
-}
-```
-
-```
-npm run changelog
-```
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
