@@ -20,7 +20,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 #### 1.1 安装前提
 * [Node.js (Should be at least nodejs 6.9)](https://nodejs.org/en/)
 * [Git](https://git-scm.com/)
-* `npm install -g hexo-cli`
+* `npm install -g hexo-cli@2.0.0`
 
 #### 1.2 相关依赖
 ```
@@ -41,6 +41,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 #### 1.3 安装依赖
 ```
+  git clone https://github.com/LOUSANPANG/lousanpang.github.io.git
+
   cd lousanpang.github.io
 
   git checkout lgh
