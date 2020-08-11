@@ -1,6 +1,6 @@
 ---
 title: Git
-date: 2019-11-18
+date: 2018-07-01
 tags:
     - Git
 categories: Git
@@ -14,48 +14,22 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 一、应用分支流程
 
-#### 1.1 自己分支
-1. git pull // 更新自己的远程分支
-2. git add --a // 将所有新文件至缓存仓库
-3. git commit -a -m '' // 提交说明至缓存仓库
-4. git push // 提交至自己的远程仓库
+### 一、[部署Angular 团队Git的规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
-#### 1.2 更换至本地公共仓库
-1. git checkout xxx
-
-#### 1.3 公共分支
-1. git pull // 将远程公共仓库更新至本地
-2. git merge xx // 拉自己的代码至本地公共仓库
-3. <!- 解决冲突 ->
-4. git add --a // 将所有文件至缓存仓库
-5. git commit -a -m '' // 提交说明至缓存仓库
-6. git push // 提交至公共远程仓库
-
-#### 1.4 更换至自己本地仓库
-1. git checkout xx
-2. git merge dev // 拉最全的公共代码仓库
-3. git add --a
-4. git commit -a -m ''
-5. git push
-
-
-### 二、[部署Angular 团队Git的规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
-
-#### 2.1 Commitizen: 替代你的 git commit
+#### 1.1 Commitizen: 替代你的 git commit
 ```
 npm install -g commitizen cz-conventional-changelog
 
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
-#### 2.2 项目安装
+#### 1.2 项目安装
 ```
 npm install -D commitizen cz-conventional-changelog
 ```
 
-#### 2.3 package.json中配置
+#### 1.3 package.json中配置
 ```
 "script": {
     "commit": "git-cz",
@@ -67,7 +41,7 @@ npm install -D commitizen cz-conventional-changelog
 }
 ```
 
-#### 2.4 自动生成CHANGELOG
+#### 1.4 自动生成CHANGELOG
 ```
 npm i -D standard-version
 ```
@@ -78,15 +52,15 @@ npm i -D standard-version
 }
 ```
 
-#### 2.4 试运行
+#### 1.4 试运行
 - `git add --a`
 - `git cz`
 - `npm run release`
 - `git push`
 
 
-### 三、`git cz` 介绍
-#### 3.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。
+### 二、`git cz` 介绍
+#### 2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。
 **type**
 1. `feat`: 新功能、特性（feature）
 2. `fix`: 修补bug、修改问题
@@ -105,19 +79,19 @@ npm i -D standard-version
 3. 第一个字母小写
 4. 结尾不加句号（.）
 
-#### 3.2 Provide a longer description of the change 提供更改的详细说明
-#### 3.3 Are there any breaking changes? 有重大变化吗
-#### 3.4 Does this change affect any open issues 此更改是否影响任何未解决的问题
+#### 2.2 Provide a longer description of the change 提供更改的详细说明
+#### 2.3 Are there any breaking changes? 有重大变化吗
+#### 2.4 Does this change affect any open issues 此更改是否影响任何未解决的问题
 
 
 
-### 四、[配合gitmoji表情包更加清晰](https://gitmoji.carloscuesta.me/)
-#### 4.1 安装
+### 三、[配合gitmoji表情包更加清晰](https://gitmoji.carloscuesta.me/)
+#### 3.1 安装
 ```
 npm i -g gitmoji-cli
 ```
 
-#### 4.2 使用
+#### 3.2 使用
 ```
 git commit -m 'fix: :memo: 修改bug'
 ```
@@ -186,3 +160,48 @@ emoji | emoji代码 | 说明
 :mag: | :mag: | 提升SEO
 :wheel_of_dharma: | :wheel_of_dharma: | 关于Kubernetes的工作
 :label: | :label: | 添加或更新类型（Flow，Typescript）
+
+
+
+### 四、应用分支流程
+
+#### 4.1 自己分支
+1. git pull // 更新自己的远程分支
+2. git add --a // 将所有新文件至缓存仓库
+3. git commit -a -m '' // 提交说明至缓存仓库
+4. git push // 提交至自己的远程仓库
+
+#### 4.2 更换至本地公共仓库
+1. git checkout xxx
+
+#### 4.3 公共分支
+1. git pull // 将远程公共仓库更新至本地
+2. git merge xx // 拉自己的代码至本地公共仓库
+3. <!- 解决冲突 ->
+4. git add --a // 将所有文件至缓存仓库
+5. git commit -a -m '' // 提交说明至缓存仓库
+6. git push // 提交至公共远程仓库
+
+#### 4.4 更换至自己本地仓库
+1. git checkout xx
+2. git merge dev // 拉最全的公共代码仓库
+3. git add --a
+4. git commit -a -m ''
+5. git push
+
+
+#### 4.5 关于版本回退
+1. git reflog 查找提交记录找到版本号
+```
+c920c31 HEAD@{4}: commit: fix unit test bug
+c43a105 HEAD@{5}: commit: proxy request param value
+d2d8134 HEAD@{6}: commit: add proxy http request address
+aca04dd HEAD@{7}: commit: add unit test
+f6f9b44 HEAD@{8}: commit: disable eureka in test env
+c7ddf92 HEAD@{9}: pull: Merge made by the 'recursive' strategy.
+f96380b HEAD@{10}: checkout: moving from proxyOpt to test
+```
+
+2. git reset --hard c920c31 通过gitreset命令回退到c920c31版本
+
+3. git push origin test --force 强制将分区内容推送到远程服务器

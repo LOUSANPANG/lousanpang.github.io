@@ -1,6 +1,6 @@
 ---
 title: defineProperty
-date: 2018-11-11
+date: 2018-04-16
 tags: 
     - JavaScript
 categories: JavaScript
