@@ -333,31 +333,72 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 }
 ```
 
+#### 2.6 动画参考列表
+[动画参考列表loader](https://codepen.io/vineethtrv/pen/NWxZqMM?editors=1100)
 
 
+### 三、常用的css样式 `box-shadow` `hover`
+
+#### 3.1 关于box-shoadow用法
+```
+/* x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */
+box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+/* 插页(阴影向内) | x偏移量 | y偏移量 | 阴影颜色 */
+box-shadow: inset 5em 1em gold;
+
+/* 任意数量的阴影，以逗号分隔 */
+box-shadow: 3px 3px red, -1em 0 0.4em olive;
+```
+
+#### 3.2 示例
+```
+.u-box-shadow1 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.u-box-shadow2 {
+  box-shadow: 
+    inset 0 -3em 3em rgba(0,0,0,0.1), 
+          0 0  0 2px rgb(255,255,255),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.u-box-shadow3 {
+  box-shadow: 0 30px 40px -15px rgba(0,0,0,0.35);
+}
+
+.u-box-shadow4 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.u-box-shadow5 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.u-box-shadow6 {
+  box-shadow: 0 0 50px rgba(0,0,0,0.75);
+}
+```
 
 
+### 四、常用的css样式 - `color background font` 渐变色
+
+#### 4.1 传统色
+[CHINESE COLOR](https://colors.ichuantong.cn/)
+
+[Color Hunt](https://colorhunt.co/?nsukey=FXRkxgX1APqgqsz%2FDtFjIYurt4Ulhe%2BHECaAcwjEzniSmQC32%2FXWDBmECLVK%2FSd9x1a0iyKJq3fS4CFvZLYMGTYpa72pEMHgQ%2FnbRiDhh1IEYm4JtycTm90lIsseOJ30lIsWZkc%2FG49ULIuL1vOIwoPGrnFUZAWF25dMbOOl8us1LXHJ%2Fj%2B0Abh%2FLPzBsukZxUn8Ax3L7dChDYGxHDMXqg%3D%3D)
+
+#### 4.2 渐变色
+[渐变色参考链接](https://evankarageorgos.github.io/hue/grid.html)
 
 
-
-### 三、常用的css样式 - `box-shadow`
-
-
-
-
-### 四、常用的css样式 - `border border-radius`
-
-
-
-
-### 五、常用的css样式 - `color background font`
-
-
-
-### 六、404页面示例
-
-
-
+### 五、404页面示例
+[暂停维护](https://codepen.io/takaneichinose/pen/oomjqm)
+[404](https://codepen.io/ricardpriet/pen/MOKEam)
+[404](https://codepen.io/rennan/pen/ACBKu)
+[404](https://codepen.io/cluzier/pen/BOZmMp?editors=1100)
+[404](https://codepen.io/nelsonleite/pen/zqZQLo)
 
 <br>
 <br>
