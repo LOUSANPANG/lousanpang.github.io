@@ -396,11 +396,11 @@ box-shadow: 3px 3px red, -1em 0 0.4em olive;
 ### 五、404页面示例
 ![aONuAf.png](https://s1.ax1x.com/2020/08/11/aONuAf.png)
 
-[暂停维护](https://codepen.io/takaneichinose/pen/oomjqm)
-[404](https://codepen.io/ricardpriet/pen/MOKEam)
-[404](https://codepen.io/rennan/pen/ACBKu)
-[404](https://codepen.io/cluzier/pen/BOZmMp?editors=1100)
-[404](https://codepen.io/nelsonleite/pen/zqZQLo)
+[暂停维护页面](https://codepen.io/takaneichinose/pen/oomjqm)
+[404页面](https://codepen.io/ricardpriet/pen/MOKEam)
+[404页面](https://codepen.io/rennan/pen/ACBKu)
+[404页面](https://codepen.io/cluzier/pen/BOZmMp?editors=1100)
+[404页面](https://codepen.io/nelsonleite/pen/zqZQLo)
 
 <br>
 <br>
