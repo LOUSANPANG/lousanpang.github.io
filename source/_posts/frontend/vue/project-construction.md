@@ -15,30 +15,30 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
-### 一、除项目搭建外，一些常用组件、工具、规范等开发前的准备。
+### 一、开发前的准备。
 
-**配置方面**
+#### 1.1 **配置方面**
 1. 部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`
 2. px -> rem/vw 适配
 3. webpack打包路径问题
 4. webpack其他基础开发常用配置（别名等）
 5. eslintc 全局变量等忽略规则配置
 
-**初始化文件方面**
+#### 1.2 **初始化文件方面**
 1. 样式文件 - `reset.css`(各浏览器兼容问题的css)
 2. 样式文件 - `base.css`（滚动条设置等）
 3. 工具函数 - `xx.utils.js`(常用方法的工具函数)
 4. 全局配置问题static - `tstatic > config.js`(存储服务api前缀)
 5. pages - 404页面
 
-**依赖方面**
+#### 1.3 **依赖方面**
 1. axios二次封装 - `src > services`(状态码封装、服务拦截前后做拦截后的提示错误信息等)
 2. vuex二次封装 - `src > store`(模块化的状态管理器)
 3. scss/less/stylus - `src > style`(mixin.less variables.less)
 4. ui库方面 - 二次封装缺少的功能等
 5. 低版本兼容为题 babel
 
-**规范方面**
+#### 1.4 **规范方面**
 1. rule.vue 规范行的vue文件
 2. 参考vue代码风格指南
 
