@@ -25,7 +25,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 #### 1.2. eslintc 全局变量、忽略规则配置
 
-### 1.3. webpack（build、config文件）
+#### 1.3. webpack（build、config文件）
 - 构建工具打包图片、css路径问题
 - 修改host、proxy、alias
 
