@@ -1,5 +1,5 @@
 ---
-title: 项目总结-vue@2.9.6搭建篇
+title: 项目总结-vue@2.x搭建篇
 date: 2019-10-11
 tags: 
     - Vue
@@ -14,8 +14,11 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
+#### 关于vue两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
 
-### 一、开发前的准备。
+#### 这一篇关于开发环境的搭建准备，主要是通过大纲和[代码库](https://github.com/LOUSANPANG/Frame_vueTemplate)的方式进行列举参考。
+
+### 一、关于开发环境的搭建准备。
 
 #### 1.1 **配置方面**
 1. 部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`
