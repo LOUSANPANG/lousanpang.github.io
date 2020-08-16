@@ -14,36 +14,57 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-#### 关于vue两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
+### 描述
+#### 关于vue，梳理了两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
 
-#### 这一篇关于开发环境的搭建准备，主要是通过大纲和[代码库](https://github.com/LOUSANPANG/Frame_vueTemplate)的方式进行列举参考。
+#### 这一篇是关于开发环境的搭建准备，主要是通过大纲和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
 
-### 一、关于开发环境的搭建准备。
 
-#### 1.1 **配置方面**
-1. 部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`
-2. px -> rem/vw 适配
-3. webpack打包路径问题
-4. webpack其他基础开发常用配置（别名等）
-5. eslintc 全局变量等忽略规则配置
+### 一、构建工具配置方面
+#### 1.1. 部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`
 
-#### 1.2 **初始化文件方面**
-1. 样式文件 - `reset.css`(各浏览器兼容问题的css)
-2. 样式文件 - `base.css`（滚动条设置等）
-3. 工具函数 - `xx.utils.js`(常用方法的工具函数)
-4. 全局配置问题static - `tstatic > config.js`(存储服务api前缀)
-5. pages - 404页面
+#### 1.2. eslintc 全局变量、忽略规则配置
 
-#### 1.3 **依赖方面**
-1. axios二次封装 - `src > services`(状态码封装、服务拦截前后做拦截后的提示错误信息等)
-2. vuex二次封装 - `src > store`(模块化的状态管理器)
-3. scss/less/stylus - `src > style`(mixin.less variables.less)
-4. ui库方面 - 二次封装缺少的功能等
-5. 低版本兼容为题 babel
+### 1.3. webpack（build、config文件）
+- 构建工具打包图片、css路径问题
+- 修改host、proxy、alias
 
-#### 1.4 **规范方面**
-1. rule.vue 规范行的vue文件
-2. 参考vue代码风格指南
+
+### 二、 添加常用文件方面
+#### 2.1. `static config.js` 添加静态全局服务route（对应微服务、不同环境地址切换服务前缀）
+
+#### 2.2. `static lib` 添加静态资源（mapbox min.css min.js min.json）
+
+#### 2.3. `src style` 样式文件
+- normalize.css 样式初始化重置 (解决各浏览器初始化兼容问题)
+- base.css 基础样式(滚动条等)
+- mixin.less/scss/stylus 功能样式 （常用颜色、字体、布局等）
+
+#### 2.4. `src utils` 工具函数
+- 常用方法工具函数
+
+#### 2.5. 组件方面
+- `src components` loading组件
+- `src pages 404` 404页面
+
+
+### 三 依赖、构建方面
+#### 3.1. `src services`axios二次封装
+
+#### 3.2. `src store` vuex二次封装
+
+#### 3.3. `less scss stylus`css模块包
+
+#### 3.4. ui库 + 二次封装
+
+#### 3.5. babel低版本兼容
+
+#### 3.6. `px2rem/vw` 适配方案
+
+### 四、规范方面
+#### 4.1. rule.vue vue规范文件示例
+
+#### 4.2. vue代码风格指南
 
 
 
