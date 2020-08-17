@@ -23,7 +23,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ### 一、构建工具配置方面
 #### 1.1. [部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`](https://lousanpang.github.io/2019/11/01/frontend/git/git/)
 
-#### 1.2. eslintc 全局变量、忽略规则配置
+#### 1.2. [eslintc 全局变量、忽略规则配置](https://lousanpang.github.io/2018/07/05/other/use-eslint/)
 ```
 .eslintrc.js
 
