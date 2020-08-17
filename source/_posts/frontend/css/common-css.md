@@ -402,6 +402,13 @@ box-shadow: 3px 3px red, -1em 0 0.4em olive;
 [404页面](https://codepen.io/cluzier/pen/BOZmMp?editors=1100)
 [404页面](https://codepen.io/nelsonleite/pen/zqZQLo)
 
+
+### 六、常用的动画库
+[Hover动画](https://github.com/IanLunn/Hover)
+[制作动画工具生成代码](https://angrytools.com/css/animation/)
+[animate.css](https://github.com/animate-css/animate.css)
+[css3动画及效果开发参考大全](https://animista.net/play)
+
 <br>
 <br>
 <br>
