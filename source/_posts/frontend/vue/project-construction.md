@@ -21,9 +21,25 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 
 ### 一、构建工具配置方面
-#### 1.1. 部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`
+#### 1.1. [部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`](https://lousanpang.github.io/2019/11/01/frontend/git/git/)
 
 #### 1.2. eslintc 全局变量、忽略规则配置
+```
+.eslintrc.js
+
+module.exports = {
+  rules: {
+    'generator-star-spacing': 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "no-new": 0,
+    "no-unused-vars":0
+  },
+  globals: {
+    $CONFIG: false,
+    $API: false,
+  }
+}
+```
 
 #### 1.3. webpack（build、config文件）
 - 构建工具打包图片、css路径问题

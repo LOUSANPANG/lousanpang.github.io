@@ -14,7 +14,7 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-<!-- ![pexels-photo-2294878.jpeg](https://i.loli.net/2019/09/11/sR9xEpuAhTYcFiw.jpg) -->
+![pexels-photo-2294878.jpeg](https://i.loli.net/2019/09/11/sR9xEpuAhTYcFiw.jpg)
 
 ### 一、命令
 #### 1.1 安装前提
@@ -106,6 +106,7 @@ deploy: # 主目录的_config.yml
  git push
  
  // git push --set-upstream origin lgh
+ // hexo g && hexo d && git add --a && git commit -a -m 'style: add xxx' && git push
 ```
 
 ### 四、[常见命令](https://hexo.io/zh-cn/docs/commands)
