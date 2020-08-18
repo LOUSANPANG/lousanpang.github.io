@@ -42,7 +42,7 @@ module.exports = {
 ```
 
 #### 1.3. webpack（build、config文件）
-- 构建工具打包图片、css路径问题
+<!-- - 构建工具打包图片、css路径问题 -->
 - 修改host、proxy、alias
 
 
