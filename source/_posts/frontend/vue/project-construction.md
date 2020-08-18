@@ -98,13 +98,10 @@ module.exports = {
 #### 2.2. `static lib` 添加静态资源（mapbox min.css min.js min.json）
 
 #### 2.3. `src style` 样式文件
-- [normalize.css 样式初始化1 (解决各浏览器初始化兼容问题)](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/normalize.css)
-- [reset.css 样式初始化2](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/reset.css)
+- [normalize.css 样式初始化1 (解决各浏览器初始化兼容问题)](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/normalize.css) [参考资料 normalize.css](https://github.com/necolas/normalize.css)
+- [reset.css 样式初始化2](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/reset.css) [参考资料 base.css](https://github.com/kujian/simple-flexible/blob/master/base.css)
 - [base.css 基础样式(滚动条等)](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/base.css)
 - mixin.less/scss/stylus 功能样式 （常用颜色、字体、布局等）
-- **参考资料**
-1. [normalize.css](https://github.com/necolas/normalize.css)
-2. [参考base.css](https://github.com/kujian/simple-flexible/blob/master/base.css)
 
 #### 2.4. `src utils` 工具函数
 - 常用方法工具函数
