@@ -93,7 +93,7 @@ module.exports = {
 
 
 ### 二、 添加常用文件方面
-#### 2.1. `static config.js` 添加静态全局服务route（对应微服务、不同环境地址切换服务前缀）
+#### 2.1. [`static config.js` 添加静态全局服务route（对应微服务、不同环境地址切换服务前缀）](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/static/config)
 
 #### 2.2. `static lib` 添加静态资源（mapbox min.css min.js min.json）
 
