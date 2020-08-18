@@ -43,7 +43,53 @@ module.exports = {
 
 #### 1.3. webpack（build、config文件）
 <!-- - 构建工具打包图片、css路径问题 -->
-- 修改host、proxy、alias
+- 修改host (便于访问、演示)
+```
+config/index.js
+
+module.exports = {
+  dev: {
+    host: '0.0.0.0'
+  }
+}
+```
+
+- [webpack配置proxy (本地解决跨域，域名前缀问题)](https://webpack.docschina.org/configuration/dev-server/#devserverproxy)
+- [如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。这个问题可以通过 vue.config.js 中的 devServer.proxy 选项来配置。](https://cli.vuejs.org/zh/config/#devserver)
+```
+module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: '<url>', // 代理地址，这里设置的地址会代替axios中设置的baseURL
+        ws: true, // proxy websockets
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+        pathRewrite: { // 重写url
+          '^/api': '/api/v1' // target + /api/v1
+          //pathRewrite: {'^/api': '/'} 重写之后url为 <url>/
+          //pathRewrite: {'^/api': '/api'} 重写之后url为 <url>/api
+        }
+      },
+      '/foo': {
+        target: '<other_url>'
+      }
+    }
+  }
+}
+```
+
+- 修改alias （便捷的路径访问）
+```
+build/webpack.base.config.js
+
+module.exports = {
+  resolve: {
+    alias: {
+      '@': resolve('src')
+    }
+  }
+}
+```
 
 
 ### 二、 添加常用文件方面
