@@ -124,6 +124,8 @@ module.exports = {
 #### 3.2. `src store` [vuex二次封装](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/store)
 
 #### 3.3. `less scss stylus`css模块包
+- mixin.less
+- variables.less
 
 #### 3.4. ui库 + 二次封装
 - antdesign 目录树
@@ -131,7 +133,12 @@ module.exports = {
 #### 3.5. babel低版本兼容
 
 #### 3.6. `px2rem/vw` 适配方案
-- px -> vw
+- [px -> vw](https://github.com/michael-ciniawsky/postcss-load-config)
+```
+npm i -D postcss-px-to-viewport
+
+- postcssrc.js
+```
 
 - px -> rem
 <br>
