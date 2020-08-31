@@ -8,7 +8,7 @@ keywords: [Vue]
 description: cli初始化配置、vuex、ui、lodash、eslint、封装axios、默认打包性能优化、等组织规范
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
-cover:  # 缩略图
+cover: https://s1.ax1x.com/2020/08/31/dXde5F.png # 缩略图s
 toc: # 章节目录 除非特定文章设置，可以不写
 toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
@@ -17,7 +17,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ### 描述
 #### 关于vue，梳理了两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
 
-#### 这一篇是关于开发环境的搭建准备，主要是通过大纲和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
+#### 这一篇是关于开发环境的搭建准备，主要是通过[大纲](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
 <br>
 <br>
 
@@ -117,7 +117,7 @@ module.exports = {
 <br>
 
 
-### 三 依赖、构建方面
+### 三、 依赖、构建方面
 #### 3.1. `src services`[axios二次封装、状态码、服务列表、全局错误提示](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/services)
 [component-taro-request](https://github.com/LOUSANPANG/component-taro-request)
 
@@ -126,9 +126,6 @@ module.exports = {
 #### 3.3. `less scss stylus`css模块包
 - mixin.less
 - variables.less
-
-#### 3.4. ui库 + 二次封装
-- [antdesign 目录树添加图标]((https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/custom-ui/ant-tree.vue))
 
 
 #### 3.5. babel低版本兼容
