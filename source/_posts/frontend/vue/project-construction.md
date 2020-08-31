@@ -118,25 +118,30 @@ module.exports = {
 
 
 ### 三 依赖、构建方面
-#### 3.1. `src services`axios二次封装
+#### 3.1. `src services`[axios二次封装、状态码、服务列表、全局错误提示](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/services)
+[component-taro-request](https://github.com/LOUSANPANG/component-taro-request)
 
-#### 3.2. `src store` vuex二次封装
+#### 3.2. `src store` [vuex二次封装](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/store)
 
 #### 3.3. `less scss stylus`css模块包
 
 #### 3.4. ui库 + 二次封装
+- antdesign 目录树
 
 #### 3.5. babel低版本兼容
 
 #### 3.6. `px2rem/vw` 适配方案
+- px -> vw
+
+- px -> rem
 <br>
 <br>
 
 
 ### 四、规范方面
-#### 4.1. rule.vue vue规范文件示例
+#### 4.1. [rule.vue vue规范文件示例]((https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/rules))
 
-#### 4.2. vue代码风格指南
+#### 4.2. [vue代码风格指南](https://cn.vuejs.org/v2/style-guide/)
 
 
 <br>
