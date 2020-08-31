@@ -655,6 +655,34 @@ box-shadow: 3px 3px red, -1em 0 0.4em olive;
 }
 ```
 
+![链接下划线动画1](https://s1.ax1x.com/2020/08/31/dLdWG9.png)
+```
+  h2 > a {
+    position: relative;
+    color: #000;
+    text-decoration: none;
+  }
+  h2 > a:hover {
+    color: #000;
+  }
+  h2 > a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+  }
+  h2 > a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+```
+
 ![阴影效果](https://s1.ax1x.com/2020/08/31/dLd3KP.png)
 ```
   .box {
