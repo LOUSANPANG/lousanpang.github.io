@@ -128,19 +128,88 @@ module.exports = {
 - variables.less
 
 #### 3.4. ui库 + 二次封装
-- antdesign 目录树
+- [antdesign 目录树添加图标]((https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/custom-ui/ant-tree.vue))
+
 
 #### 3.5. babel低版本兼容
+- 1. 根目录下新建 .babelrc 文件
+```
+{
+ "presets": ["@babel/preset-env"],
+ "plugins": [
+  "@babel/plugin-transform-runtime"
+ ]
+}
+```
+
+- 2. 修改 babel.config.js
+```
+const plugins = [];
+if (['production', 'prod'].includes(process.env.NODE_ENV)) {
+ plugins.push("transform-remove-console")
+}
+ 
+module.exports = {
+ presets: [
+  [
+   "@vue/app",
+   {
+    "useBuiltIns": "entry",
+    polyfills: [
+     'es6.promise',
+     'es6.symbol'
+    ]
+   }
+  ]
+ ],
+ plugins: plugins
+};
+```
+
+- 3. 修改 vue.config.js
+```
+module.exports = {
+ transpileDependencies: ['webpack-dev-server/client'],
+ chainWebpack: config => {
+  config.entry.app = ['babel-polyfill', './src/main.js'];
+ }
+}
+```
+
+- 4. 修改 main.js 文件
+```
+import '@babel/polyfill';
+import Es6Promise from 'es6-promise'
+Es6Promise.polyfill()
+```
+
+- 5. 安装依赖
+```
+npm install --save-dev @babel/core @babel/plugin-transform-runtime @babel/preset-env es6-promise babel-polyfill babel-plugin-transform-remove-console
+```
 
 #### 3.6. `px2rem/vw` 适配方案
-- [px -> vw](https://github.com/michael-ciniawsky/postcss-load-config)
+- px -> vw
 ```
-npm i -D postcss-px-to-viewport
+1. npm i -D postcss-px-to-viewport
 
-- postcssrc.js
+2. postcssrc.js
 ```
 
-- px -> rem
+- [px -> rem](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/px2rem)
+```
+1. 添加`flexible.js`
+
+2. main.js
+import '@/config/flexible'
+
+3. variables.less
+@designWidth: 1920;
+@initRem: @designWidth/10rem;
+.px2rem (@type, @px) {
+  @{type}: @px/@initRem
+}
+```
 <br>
 <br>
 
