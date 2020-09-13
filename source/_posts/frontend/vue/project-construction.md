@@ -17,9 +17,16 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ### 描述
 #### 关于vue，梳理了两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
 
-#### 这一篇是关于开发环境的搭建准备，主要是通过[大纲](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
+#### 这一篇是关于`Vue Cli V2`开发环境的搭建准备，主要是通过[大纲](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
 <br>
 <br>
+
+
+### CLI V2
+```
+npm i -g vue-cli
+vue init webpack xxx
+```
 
 ### 一、构建工具配置方面
 #### 1.1. [部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`](https://lousanpang.github.io/2019/11/01/frontend/git/git/)
