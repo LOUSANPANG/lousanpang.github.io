@@ -521,8 +521,84 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
   }
 ```
 
+#### 2.9 伸拉的输入框
+![伸拉的输入框](https://s1.ax1x.com/2020/09/15/wsXYbd.gif)
+```
+<input class="search" type="text" placeholder="搜索...">
 
-#### 2.9 动画参考列表
+.search{
+    width:80px;
+    height:40px;
+    border-radius:40px;
+    border:2px solid lightblue;
+    position: absolute;
+    right:200px;
+    outline:none;
+    text-indent:12px;
+    color:#666;
+    font-size:16px;
+    padding:0;
+    -webkit-transition:width 0.5s;
+}
+.search:focus{
+    width:200px;
+}
+```
+
+#### 2.10 手浮右侧切入动画
+![手浮右侧切入动画](https://s1.ax1x.com/2020/09/15/wsXNVA.gif)
+```
+<div class="banner1">
+    <a href="javascript:;">博</a>
+    <span>这是我的个人博客</span>
+</div>
+
+.banner1{
+    width:234px;
+    height:34px;
+    border-radius:40px;
+    position:absolute;
+    top:400px;
+    left:600px;
+}
+.banner1 a{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    line-height:30px;
+    border-radius:50%;
+    border:2px solid lightblue;
+    position:absolute;
+    left:0px;top:0px;
+    background:lightgreen;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+    z-index:2;
+}
+.banner1 a:hover + span{
+    -webkit-transform:translateX(40px);
+    opacity:1;
+}
+.banner1 span{
+    display:inline-block;
+    width:auto;
+    padding:0 20px;
+    height:30px;line-height:30px;
+    background:lightblue;
+    border-radius:30px;
+    text-align: center;
+    color:#fff;
+    position:absolute;
+    top:2px;
+    opacity:0;
+    -webkit-transition:all 1s;
+    -webkit-transform:translateX(80px);
+}
+```
+
+#### 2.100 动画参考列表
 [动画参考列表loader](https://codepen.io/vineethtrv/pen/NWxZqMM?editors=1100)
 
 
