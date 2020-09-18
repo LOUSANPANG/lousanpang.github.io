@@ -1,5 +1,5 @@
 ---
-title: 项目总结-vue@2.x搭建篇
+title: 项目总结-vue搭建篇
 date: 2019-10-11
 tags: 
     - Vue
