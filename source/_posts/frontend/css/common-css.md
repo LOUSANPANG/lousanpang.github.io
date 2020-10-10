@@ -4,7 +4,7 @@ date: 2019-05-01
 tags: 
     - Css
     - 项目总结
-categories: 项目总结
+categories: Css
 keywords: [Css]
 description: Css
 top_img: # 除非特定需要，可以不写
@@ -967,6 +967,7 @@ button:hover:after {
 [渐变色参考链接](https://evankarageorgos.github.io/hue/grid.html)
 
 
+
 ### 五、404页面示例
 ![aONuAf.png](https://s1.ax1x.com/2020/08/11/aONuAf.png)
 
@@ -982,6 +983,56 @@ button:hover:after {
 [制作动画工具生成代码](https://angrytools.com/css/animation/)
 [animate.css](https://github.com/animate-css/animate.css)
 [css3动画及效果开发参考大全](https://animista.net/play)
+
+
+### 七、常见的css问题
+[你不不知道的Css](https://lousanpang.github.io/2018/06/01/frontend/css/cssDonot/)
+
+#### 7.1 不定宽溢出文本适配滚动
+![不定宽溢出文本适配滚动](https://s1.ax1x.com/2020/10/10/0yttOS.gif)
+```
+  <div class="wrap">
+    <p title="我的宽度是正常宽度">我的宽度是正常宽度</p>
+    <p class="scroll" title="我的宽度是溢出了一小部分">我的宽度是溢出了一小部分</p>
+    <p class="scroll" title="我的宽度是溢出了溢出了很大一部分">我的宽度是溢出了溢出了很大一部分</p>
+  </div>
+
+  .wrap {
+    position: relative;
+    width: 150px;
+    overflow: hidden;
+  }
+
+  p {
+      white-space: nowrap;
+      display: inline-block;
+  }
+  p:hover {
+      animation: move 1.5s infinite alternate linear;
+  }
+  <!-- 父级定宽 -->
+  @keyframes move {
+      0% {
+          transform: translate(0, 0);
+      }
+      100% {
+          transform: translate(calc(-100% + 150px), 0);
+      }
+  }
+  <!-- 父级不定宽 -->
+  <!-- @keyframes move {
+      0% {
+          left: 0;
+          transform: translate(0, 0);
+      }
+      100% {
+          left: 100%;
+          transform: translate(-100%, 0);
+      }
+  } -->
+```
+
+
 
 <br>
 <br>
