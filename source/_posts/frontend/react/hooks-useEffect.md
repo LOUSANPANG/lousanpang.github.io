@@ -21,7 +21,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 - 可以认为是 componentDidMount, componentDidUpdate, componentWillUnmount 的替代品
 
 ### 1.2 **只执行一次 useEffect**
-```tsx
+```ts
 // class
 
 import React, { Component } from 'react'
@@ -55,7 +55,7 @@ class RunEffectsOnlyOnce extends Component {
 export default RunEffectsOnlyOnce
 ```
 
-```tsx
+```ts
 import React, { useState, useEffect } from 'react'
 
 function RunEffectsOnlyOnce() {
@@ -88,7 +88,7 @@ export default RunEffectsOnlyOnce
 - 如果你传入了一个空数组（[]），effect 内部的 props 和 state 就会一直拥有其初始值。尽管传入 [] 作为第二个参数更接近大家更熟悉的 componentDidMount 和 componentWillUnmount 思维模式，但我们有更好的方式来避免过于频繁的重复调用 effect。除此之外，请记得 React 会等待浏览器完成画面渲染之后才会延迟调用 useEffect，因此会使得额外操作很方便。
 
 ### 1.3 **有条件地执行 useEffect**
-```tsx
+```ts
 import React, { Component } from 'react'
 
 interface stateType {
@@ -141,7 +141,7 @@ class ClassCounter extends Component {
 export default ClassCounter
 ```
 
-```tsx
+```ts
 import React, { useState, useEffect } from 'react'
 
 function HookCounter() {
@@ -177,13 +177,13 @@ export default HookCounter
 ### 1.4 **需要清除的 Effect**
 - 如何实现 willUnmount 这个生命周期，实现组件销毁时，清除 effect 逻辑。
 
-```tsx
+```ts
 componentWillUnmount() {
   document.removeEventListener('mousemove', this.logMousePos)
 }
 ```
 
-```tsx
+```ts
   useEffect(() => {
     console.log('addEventListener')
     document.addEventListener('mousemove', logMousePos)
@@ -198,7 +198,7 @@ componentWillUnmount() {
 
 ### 1.5 注意到的问题：**useEffect 中依赖错误导致的 bug**
 
-```tsx
+```ts
 /**
  * 每秒 +1 的计数器
  */
@@ -241,7 +241,7 @@ export default Counter
 ```
 
 下边的hooks代码错误 
-```tsx
+```ts
 import React, { useState, useEffect } from 'react'
 
 function IntervalCouterHooks() {
@@ -272,11 +272,11 @@ export default IntervalCouterHooks
 - 传入空的依赖数组 []，意味着该 hook 只在组件挂载时运行一次，并非重新渲染时。但如此会有问题，在 setInterval 的回调中，count 的值不会发生变化。因为当 effect 执行时，我们会创建一个闭包，并将 count 的值被保存在该闭包当中，且初值为 0。每隔一秒，回调就会执行 setCount(0 + 1)，因此，count 永远不会超过 1。
 - 解法一：这里我们不能将 useEffect 的第二个参数设置为空数组，而是 [count]。指定 [count] 作为依赖列表就能修复这个 Bug，但会导致每次改变发生时定时器都被重置。事实上，每个 setInterval 在被清除前（类似于 setTimeout）都会调用一次。但这并不是我们想要的。要解决这个问题，我们可以使用 setState 的函数式更新形式。它允许我们指定 state 该如何改变而不用引用当前 state
 - 解法二：将
-```tsx
+```ts
 setCount(count + 1)
 ```
 - 改为
-```tsx
+```ts
 setCount((preCount) =>  preCount + 1)
 ```
 
