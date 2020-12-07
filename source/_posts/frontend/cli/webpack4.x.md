@@ -546,6 +546,7 @@ if(module.hot){
 
 ### 4.5 Babel处理ES6语法
 1. 安装
+
 ```bash
 npm install --save-dev babel-loader @babel/core
 // @babel/core 是babel中的一个核心库
@@ -556,7 +557,9 @@ npm install --save-dev @babel/preset-env
 npm install --save @babel/polyfill
 // 将Promise,map等低版本中没有实现的语法,用polyfill来实现.
 ```
+
 2. 配置module👇
+
 ```js
 module: {
   rules: [
@@ -580,21 +583,27 @@ module: {
 // exclude参数: node_modules目录下的js文件不需要做转es5语法,也就是排除一些目录
 // "useBuiltIns"参数
 ```
+
 - 有了preset-env这个模块后,我们就会发现我们写的「const语法被翻译成成var」
 - 但是细心的会发现,对于Promise以及map这些语法,低版本浏览器是不支持的,
 - 所以我们需要@babel/polyfill模块,对Promise,map进行补充,完成该功能,也就是前面说的polyfill
+
 3. 使用
+
 ```bash
 import "@babel/polyfill";
 ```
+
 会发现问题,用完这个以后,打包的文件体积瞬间增加了10多倍之多。
 
 这是因为,@babel/polyfill为了弥补Promise,map等语法的功能,该模块就需要「自己去实现Promise,map等语法」的功能,这也就是为什么打包后的文件很大的原因.
 
 那我们需要对@babel/polyfill参数做一些配置即可,如下👇
+
 ```
 "useBuiltIns": "usage"
 ```
+
 这个语法作用就是: 只会对我们index.js当前要打包的文件中使用过的语法,比如Promise,map做polyfill,其他es6未出现的语法,我们暂时不去做polyfill,这样子,打包后的文件就减少体积了。
 
 「总结」
@@ -612,7 +621,9 @@ npm install --save-dev @babel/plugin-transform-runtime
 
 npm install --save @babel/runtime
 ```
+
 我们这个时候可以在根目录下建一个.babelrc文件,将原本要在options中的配置信息写在.babelrc文件👇
+
 ```js
 {
     
@@ -629,10 +640,12 @@ npm install --save @babel/runtime
     ]
   }
 ```
+
 ```bash
 // 当你的 "corejs": 2,需要安装下面这个
 npm install --save @babel/runtime-corejs2
 ```
+
 这样子的话,在使用语法是,就不需要去通过import "@babel/polyfill";这样子的语法去完成了,直接正常写就行了,而且从打包的体积来看,其实可以接受的。
 
 「总结」
@@ -650,6 +663,7 @@ tree树，shaking摇动，那么你可以把程序想成一颗树。绿色表示
 `optimization.usedExports`
 
 使webpack确定每个模块导出项（exports）的使用情况。依赖于`optimization.providedExports`的配置。`optimization.usedExports`收集到的信息会被其他优化项或产出代码使用到（模块未用到的导出项不会被导出，在语法完全兼容的情况下会把导出名称混淆为单个char）。为了最小化代码体积，未用到的的导出项目（exports）会被删除。生产环境(production)默认开启。
+
 ```js
 module.exports = {
   //...
@@ -658,6 +672,7 @@ module.exports = {
   }
 };
 ```
+
 这个时候，再去看看自己的打包bundle.js文件，就会发现，它会有相应的提升功能。
 
 「将文件标记为无副作用(side-effect-free)」
@@ -665,15 +680,18 @@ module.exports = {
 有时候，当我们的模块不是达到很纯粹，这个时候，webpack就无法识别出哪些代码需要删除，所以，此时有必要向 webpack 的 compiler 提供提示哪些代码是“纯粹部分”。
 
 这种方式是通过 package.json 的 "sideEffects" 属性来实现的。
+
 ```
 {
   "name": "webpack-demo",
   "sideEffects": false
 }
 ```
+
 如同上面提到的，如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack，它可以安全地删除未用到的 export 导出。
 
-_注意，任何导入的文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 css-loader 并导入 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：_
+注意，任何导入的文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 css-loader 并导入 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：
+
 ```
 {
   "name": "webpack-demo",
@@ -682,13 +700,14 @@ _注意，任何导入的文件都会受到 tree shaking 的影响。这意味�
   ]
 }
 ```
-**「压缩输出」**
 
-_通过如上方式，我们已经可以通过 import 和 export 语法，找出那些需要删除的“未使用代码(dead code)”，然而，我们不只是要找出，还需要在 bundle 中删除它们。为此，我们将使用 -p(production) 这个 webpack 编译标记，来启用 uglifyjs 压缩插件。_
+「压缩输出」
 
-**「从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。」**
+通过如上方式，我们已经可以通过 import 和 export 语法，找出那些需要删除的“未使用代码(dead code)”，然而，我们不只是要找出，还需要在 bundle 中删除它们。为此，我们将使用 -p(production) 这个 webpack 编译标记，来启用 uglifyjs 压缩插件。
 
-**「总结」**
+「从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。」
+
+「总结」
 - 为了使用tree-shaking的话，需要使用ES Module语法，也就是使用 ES2015 模块语法（即 import 和 export）。
 - 在项目 package.json 文件中，添加一个 "sideEffects" 入口。
 - 引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin），当然了，webpack4开始，以及支持压缩输出了。
@@ -704,12 +723,14 @@ _通过如上方式，我们已经可以通过 import 和 export 语法，找出
 
 ### 5.2.2 webpack-merge安装
 那么首先需要安装的就是webpack-merge,之后再整合一起。
+
 ```
 cnpm install --save-dev webpack-merge
 ```
-那么我们的目录就是这样子的👇
-```
 
+那么我们的目录就是这样子的👇
+
+```
  webpack-demo
   |- build
     |- webpack.common.js  //三个新webpack配置文件
@@ -725,9 +746,10 @@ cnpm install --save-dev webpack-merge
   |- /node_modules
 ```
 
-+ 从开始到现在配置了哪些信息
+从开始到现在配置了哪些信息
 
 **「webpack.common.js**
+
 ```js
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -793,6 +815,7 @@ module.exports = commonConfig
 ```
 
 **「webpack.dev.js」**
+
 ```js
 const path = require('path')
 const webpack = require('webpack')
@@ -823,6 +846,7 @@ module.exports = merge(commonConfig, devConfig)
 ```
 
 **「webpack.prod.js」**
+
 ```js
 const {merge} = require('webpack-merge')
 const commomConfig = require('./webpack.common')
@@ -833,10 +857,12 @@ const prodConfig = {
 
 module.exports = merge(commomConfig, prodConfig)
 ```
+
 注意，在环境特定的配置中使用 merge() 很容易地包含我们在 dev 和 prod 中的常见配置。webpack-merge 工具提供了多种合并(merge)的高级功能，但是在我们的用例中，无需用到这些功能。
 
 ### 5.2.3 npm Scripts
 现在，我们把 scripts 重新指向到新配置。我们将 npm run dev 定义为开发环境脚本，并在其中使用 webpack-dev-server，将 npm run build 定义为生产环境脚本：
+
 ```
 {
   "name": "webpack-demo",
@@ -847,20 +873,24 @@ module.exports = merge(commomConfig, prodConfig)
   },
 }
 ```
+
 需要注意的是，我将三个文件放在了build目录下，当然了，在根目录情况下，我们就把--config后面的指令路径修改即可。
 
 还有一个需要注意的就是clean-webpack-plugin这个插件的配置，当你把它都放进build目录下，此时的相对该插件的根目录就是build，所以我们需要做修改👇
+
 ```js
 new CleanWebpackPlugin({
     // 不需要做任何的配置
 }),
 ```
+
 最新的clean-webpack-plugin，不需要设置清除目录，自动清除打包路径，也就是dist目录。
 
 ### 5.3 SplitChunksPlugin代码分隔
 当你有多个入口文件，或者是打包文件需要做一个划分，举个例子，比如第三方库lodash，jquery等库需要打包到一个目录下，自己的业务逻辑代码需要打包到一个文件下，这个时候，就需要提取公共模块了，也就需要SplitChunksPlugin这个插件登场了。
 
 这个是webpack4新增加的插件，我们需要手动去配置optimization.splitChunks。接下来，我们就来看看它的基本配置吧👇
+
 ```js
 module.exports = {
   //...
@@ -888,7 +918,9 @@ module.exports = {
   },
 };
 ```
+
 那我们从每个参数开始说起👇
+
 - 在cacheGroups外层的属性设置适用于所有的缓存组，不过每个缓存组内部都可以「重新」设置它们的值
 - chunks: "async" 这个属性设置的是以「什么类型」的代码经行分隔，有三个值
   - initial 入口代码块
@@ -914,16 +946,21 @@ module.exports = {
 那么我们来看看，如何实现懒加载👇
 
 在讲这个之前，我们的先借助一个插件，完成对import语法的识别。
+
 ```bash
 cnpm install --save-dev @babel/plugin-syntax-dynamic-import
 ```
+
 然后再.babelrc文件下配置，增加一个插件
+
 ```
 {
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
 ```
+
 这样子的话，我们就可以项目中自由的使用import按需加载模块了。
+
 ```js
 // create.js
 async function create() {
@@ -945,6 +982,7 @@ function demo() {
 
 export default demo;
 ```
+
 我这个模块的功能，就是当你点击页面后，会触发create函数，然后加载loadsh库，最后再页面中懒加载lodash，打包是正常打包，但是呢，有些资源，可以当你触发某些条件，再去加载，这也算是优化手段吧。
 
 **Chunk**
@@ -968,12 +1006,15 @@ Chunk只是一个概念，理解了Chunk概念，更有利于对webpack有一定
 将css提取为独立的文件插件，支持按需加载的css和sourceMap,我们可以查看GitHub官方，来看看它的文档
 
 **目前缺失功能，HMR。**所以，我们可以把它运用到生成环境中去，开始安装👇
+
 ```
 npm install --save-dev mini-css-extract-plugin
 ```
+
 对着这个插件的使用，还是建议在webpack.prod.js中(生产环境)配置，这个插件暂时暂时不支持HMR，而且在开发环境中development，是需要用到HMR的，所以我们这次配置只在webpack.prod.js配置。
 
 需要注意的一点是，当你的webpack版本是4版本的时候，需要去package.json中配置sideEffects属性，这样子就「避免了把css文件作为Tree-shaking」。
+
 ```
 {
   "name": "webpack-demo",
@@ -982,7 +1023,9 @@ npm install --save-dev mini-css-extract-plugin
   ]
 }
 ```
+
 然后的话，我们看看webpack.prod.js是如何配置参数的。
+
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {
@@ -1014,16 +1057,20 @@ const prodConfig = {
 
 module.exports = merge(commomConfig, prodConfig)
 ```
+
 当你在js中引入css模块时，最后在dist目录下，看到了css单独的Chunk的话，说明css代码提取成功了，接下来就是对「css代码的压缩」。
 
 webpack4默认在生产环境下，是不会去压缩css代码的，所以我们需要下载对于的plugin
 
 ### 5.6 optimize-css-assets-webpack-plugin css代码压缩
 这个会对打包后的css代码经行代码压缩，我们下载这个包👇
+
 ```
 npm install --save-dev optimize-css-assets-webpack-plugin
 ```
+
 接下来就是设置 「optimization.minimizer」 ，这里需要注意的就是，此时设置optimization.minimizer会覆盖webpack默认提供的规则，比如「JS代码就不会再去压缩了」。
+
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -1075,14 +1122,18 @@ const prodConfig = {
 
 module.exports = merge(commomConfig, prodConfig)
 ```
+
 但是呢，此时就会发现在生产环境下，JS压缩也会存在问题，所以为了解决问题，我们统一在下面梳理👇
 
 ### 5.7 uglifyjs-webpack-plugin代码压缩
 这个插件解决的问题，就是当你需要去optimization.minimizer中设置，这样子会覆盖「webpack基本配置」，原本JS代码压缩的功能就会被覆盖，所以我们需要下载它。
+
 ```
 npm install -D uglifyjs-webpack-plugin
 ```
+
 然后在webpack.prod.js配置如上信息即可，它的更多配置看官网文档
+
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -1134,6 +1185,7 @@ const prodConfig = {
 
 module.exports = merge(commonConfig, prodConfig)
 ```
+
 对于开发者环境而言，对css代码提取，以及打包是没有意义的，统一对于js代码压缩，也会降低效率，也是不推荐这么去做的，所以我们就跳过在开发环境中对它们的配置。
 
 ### 5.8 contenthash解决浏览器缓存
@@ -1159,9 +1211,10 @@ contenthash表示由文件内容产生的hash值，内容不同产生的contenth
 
 对于webpack，旧版本而言，即便每次你npm run build，「内容不做修改的话，contenthash值还是会有所改变」，这个是因为，当你在模块之间存在相互之间的引用关系，有一个「manifest文件」。
 
-_manifest文件是用来引导所以模块的交互，manifest文件包含了加载和处理模块的逻辑，举个例子，你的第三方库打包后的文件，我们称之为vendors，你的逻辑代码称为main，当你webpack生成一个bundle时，它同时会去维护一个manifest文件，你可以理解成每个bundle文件存在这里信息，所以每个bundle之间的manifest信息有不同，这样子我们就需要将manifest文件给提取出来。_
+_manifest_文件是用来引导所以模块的交互，manifest文件包含了加载和处理模块的逻辑，举个例子，你的第三方库打包后的文件，我们称之为vendors，你的逻辑代码称为main，当你webpack生成一个bundle时，它同时会去维护一_个manifest文件，你可以理解成每个bundle文件存在这里信息，所以每个bundle之间的manifest信息有不同，这样子我们就需要将manifest文件给提取出来。_
 
 这个时候，需要在「optimization」中增加一个配置👇
+
 ```js
 module.exports = {
   optimization: {
@@ -1174,9 +1227,11 @@ module.exports = {
   }
 }
 ```
+
 当然了，要是还没来理解的话，可以去webpack官方网站，看看manifest定义以及它的含义。
 
 说完了这个，我们看看我们应该如何去配置output吧，我们先看下webpack.prod.js配置
+
 ```js
 output: {
     filename: '[name].[contenthash].js',
@@ -1185,6 +1240,7 @@ output: {
     path: path.join(__dirname, '../dist')
 }
 ```
+
 对于的webpack.dev.js中只需要将contenthash改为hash就行，这样子开发的时候，提高开发效率。
 
 ### 5.9 shimming 全局变量
@@ -1195,15 +1251,18 @@ output: {
 使用 ProvidePlugin 后，能够在通过 webpack 编译的每个模块中，通过访问一个变量来获取到 package 包。
 
 增加一个Plugin配置👇
+
 ```
 new webpack.ProvidePlugin({
-			// 这里设置的就是你相应的规则了
-			// 等价于在你使用lodash模块中语句👇
-			// import _ from 'lodash'
-            _: 'lodash'
+    // 这里设置的就是你相应的规则了
+    // 等价于在你使用lodash模块中语句👇
+    // import _ from 'lodash'
+    _: 'lodash'
 })
 ```
+
 举个例子👇
+
 ```
 // array_add.js
 export const Arr_add = arr=>{
@@ -1211,6 +1270,7 @@ export const Arr_add = arr=>{
     return str;
 }
 ```
+
 这样子没有正常导入lodash库的话，是会报错的，但是我们使用了ProvidePlugin插件，使得它会提供相应的lodash包，注意到的就是，避免多个lodash包被打包多次，可以使用CommonsChunkPlugin插件，webpack4已经抛弃它了，使用的是splitChunksPlugin插件取代它，我在之前的地方已经梳理过了。
 
 更多的用法可以查看shimming垫片
