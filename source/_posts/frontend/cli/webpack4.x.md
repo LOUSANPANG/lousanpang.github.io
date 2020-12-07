@@ -639,9 +639,581 @@ npm install --save @babel/runtime-corejs2
 - 从业务场景来看,可以使用@babel/preset-env
 - 从自己生成第三方库或者时UI时,使用@babel/plugin-transform-runtime,它作用是将 helper 和 polyfill 都改为从一个统一的地方引- 入，并且引入的对象和全局变量是完全隔离的,避免了全局的污染
 
+## 五、高级概念
+### 5.1 使用tree shaking
+tree树，shaking摇动，那么你可以把程序想成一颗树。绿色表示实际用到的源码和 library，是树上活的树叶。灰色表示无用的代码，是秋天树上枯萎的树叶。为了除去死去的树叶，你必须摇动这棵树，使它们落下。
 
+通俗意义而言，当你引入一个模块时，你可能用到的只是其中的某些功能，这个时候，我们不希望这些无用的代码打包到项目中去。通过tree-shaking，就能将没有使用的模块摇掉，这样达到了删除无用代码的目的。
 
+需要注意的时webpack4默认的production下是会进行tree-shaking的
 
+`optimization.usedExports`
+
+使webpack确定每个模块导出项（exports）的使用情况。依赖于`optimization.providedExports`的配置。`optimization.usedExports`收集到的信息会被其他优化项或产出代码使用到（模块未用到的导出项不会被导出，在语法完全兼容的情况下会把导出名称混淆为单个char）。为了最小化代码体积，未用到的的导出项目（exports）会被删除。生产环境(production)默认开启。
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: true
+  }
+};
+```
+这个时候，再去看看自己的打包bundle.js文件，就会发现，它会有相应的提升功能。
+
+「将文件标记为无副作用(side-effect-free)」
+
+有时候，当我们的模块不是达到很纯粹，这个时候，webpack就无法识别出哪些代码需要删除，所以，此时有必要向 webpack 的 compiler 提供提示哪些代码是“纯粹部分”。
+
+这种方式是通过 package.json 的 "sideEffects" 属性来实现的。
+```
+{
+  "name": "webpack-demo",
+  "sideEffects": false
+}
+```
+如同上面提到的，如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack，它可以安全地删除未用到的 export 导出。
+
+_注意，任何导入的文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 css-loader 并导入 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：_
+```
+{
+  "name": "webpack-demo",
+  "sideEffects": [
+    "*.css"
+  ]
+}
+```
+**「压缩输出」**
+
+_通过如上方式，我们已经可以通过 import 和 export 语法，找出那些需要删除的“未使用代码(dead code)”，然而，我们不只是要找出，还需要在 bundle 中删除它们。为此，我们将使用 -p(production) 这个 webpack 编译标记，来启用 uglifyjs 压缩插件。_
+
+**「从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。」**
+
+**「总结」**
+- 为了使用tree-shaking的话，需要使用ES Module语法，也就是使用 ES2015 模块语法（即 import 和 export）。
+- 在项目 package.json 文件中，添加一个 "sideEffects" 入口。
+- 引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin），当然了，webpack4开始，以及支持压缩输出了。
+
+### 5.2.1 development和production环境构建
+在开发环境和生成环境中，我们依赖的功能是不一样的，举个例子👇
+- 开发环境中，我们需要具有强大的、具有实时重新加载(live reloading)或热模块替换(hot module replacement)能力的 source map 和 localhost server。
+- 生产环境中，我们的目标则转向于关注更小的 bundle，更轻量的 source map，以及更优化的资源，以改善加载时间。
+
+基于以上两点的话，我们需要为每个环境搭建彼此独立的webpack配置。
+
+其实，写过vue，React都会发现，有一个webpack.common.js的配置文件，它的作用就是不必在配置中配置重复的代码。
+
+### 5.2.2 webpack-merge安装
+那么首先需要安装的就是webpack-merge,之后再整合一起。
+```
+cnpm install --save-dev webpack-merge
+```
+那么我们的目录就是这样子的👇
+```
+
+ webpack-demo
+  |- build
+    |- webpack.common.js  //三个新webpack配置文件
+    |- webpack.dev.js    //三个新webpack配置文件
+    |- webpack.prod.js  //三个新webpack配置文件
+  |- package.json
+  |-postcss.config.js
+  |-.babelrc
+  |- /dist
+  |- /src
+    |- index.js
+    |- math.js
+  |- /node_modules
+```
+
++ 从开始到现在配置了哪些信息
+
+**「webpack.common.js**
+```js
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const commonConfig = {
+    entry: {
+        main: './src/index.js',
+    },
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: "babel-loader"
+        }, {
+            test: /\.(jpg|gif|png)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    name: '[name]_[hash].[ext]',
+                    outputPath: 'images/',
+                    limit: 1024 //100KB
+                }
+            }
+        }, {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader', 'postcss-loader']
+        }, {
+            test: /\.scss$/,
+            use: ['style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 2,
+                        modules: true
+                    }
+                },
+                'sass-loader',
+                'postcss-loader'
+            ]
+        }, {
+            test: /\.(woff|woff2|eot|ttf|otf)$/,
+            use: [
+                'file-loader'
+            ]
+        }]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'src/index.html' // 以src/目录下的index.html为模板打包
+        }),
+        new CleanWebpackPlugin({
+            // 不需要做任何的配置
+        }),
+    ],
+    output: {
+        filename: '[name].js',
+        // publicPath: "https://cdn.example.com/assets/",
+        path: path.join(__dirname, '../dist')
+    }
+}
+
+module.exports = commonConfig
+```
+
+**「webpack.dev.js」**
+```js
+const path = require('path')
+const webpack = require('webpack')
+const {merge} = require('webpack-merge')
+const commonConfig = require('./webpack.common')
+
+const devConfig = {
+    mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        port: 9000,
+        open: true,
+        hot: true,
+        // hotOnly: true,
+    },
+    plugins: [
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+    ],
+    optimization:{
+        usedExports: true
+    }
+}
+
+module.exports = merge(commonConfig, devConfig)
+```
+
+**「webpack.prod.js」**
+```js
+const {merge} = require('webpack-merge')
+const commomConfig = require('./webpack.common')
+const prodConfig = {
+    mode: 'production',
+    devtool: 'cheap-module-source-map',
+}
+
+module.exports = merge(commomConfig, prodConfig)
+```
+注意，在环境特定的配置中使用 merge() 很容易地包含我们在 dev 和 prod 中的常见配置。webpack-merge 工具提供了多种合并(merge)的高级功能，但是在我们的用例中，无需用到这些功能。
+
+### 5.2.3 npm Scripts
+现在，我们把 scripts 重新指向到新配置。我们将 npm run dev 定义为开发环境脚本，并在其中使用 webpack-dev-server，将 npm run build 定义为生产环境脚本：
+```
+{
+  "name": "webpack-demo",
+  "scripts": {
+  "dev": "webpack-dev-server --config ./build/webpack.dev.js",
+  "build": "webpack --config ./build/webpack.prod.js",
+  "start": "npx webpack --config ./build/webpack.dev.js"
+  },
+}
+```
+需要注意的是，我将三个文件放在了build目录下，当然了，在根目录情况下，我们就把--config后面的指令路径修改即可。
+
+还有一个需要注意的就是clean-webpack-plugin这个插件的配置，当你把它都放进build目录下，此时的相对该插件的根目录就是build，所以我们需要做修改👇
+```js
+new CleanWebpackPlugin({
+    // 不需要做任何的配置
+}),
+```
+最新的clean-webpack-plugin，不需要设置清除目录，自动清除打包路径，也就是dist目录。
+
+### 5.3 SplitChunksPlugin代码分隔
+当你有多个入口文件，或者是打包文件需要做一个划分，举个例子，比如第三方库lodash，jquery等库需要打包到一个目录下，自己的业务逻辑代码需要打包到一个文件下，这个时候，就需要提取公共模块了，也就需要SplitChunksPlugin这个插件登场了。
+
+这个是webpack4新增加的插件，我们需要手动去配置optimization.splitChunks。接下来，我们就来看看它的基本配置吧👇
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+        chunks: "async",
+        minSize: 30000,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+            vendors: { 
+                test: /[\\/]node_modules[\\/]/,  //匹配node_modules中的模块
+                priority: -10   //优先级,当模块同时命中多个缓存组的规则时，分配到优先级高的缓存组
+            },
+        default: {
+                minChunks: 2, //覆盖外层的全局属性
+                priority: -20,
+                reuseExistingChunk: true  //是否复用已经从原代码块中分割出来的模块
+            }
+        }
+    }
+  },
+};
+```
+那我们从每个参数开始说起👇
+- 在cacheGroups外层的属性设置适用于所有的缓存组，不过每个缓存组内部都可以「重新」设置它们的值
+- chunks: "async" 这个属性设置的是以「什么类型」的代码经行分隔，有三个值
+  - initial 入口代码块
+  - all 全部
+  - async 按需加载的代码块
+- minSize: 30000 模块大小超过30kb的模块才会提取
+- minChunks: 1, 当某个模块至少被多少个模块引用时，才会被提取成新的chunk
+- maxAsyncRequests: 5,分割后，按需加载的代码块最多允许的并行请求数
+- maxInitialRequests: 3· 分割后，入口代码块最多允许的并行请求数
+- automaticNameDelimiter: "~"代码块命名分割符
+- name: true,每个缓存组打包得到的代码块的名称
+- cacheGroups 缓存组，定制相应的规则。
+
+自己根据实际情况去设置相应的规则，每个缓存组根据规则将匹配的模块会分配到代码块（chunk）中，每个缓存组的打包结果可以是单一 chunk，也可以是多个 chunk。
+
+这里有篇实际项目中如何代码分隔的，有兴趣的可以看看SplitChunk代码实例
+
+### 5.4 Lazy-loding懒加载和Chunk
+**import异步加载模块**
+
+在webpack中，什么是懒加载，举个例子，当我需要按需引入某个模块时，这个时候，我们就可以使用懒加载，其实实现的方案就是import语法，在达到某个条件时，我们才会去请求资源。
+
+那么我们来看看，如何实现懒加载👇
+
+在讲这个之前，我们的先借助一个插件，完成对import语法的识别。
+```bash
+cnpm install --save-dev @babel/plugin-syntax-dynamic-import
+```
+然后再.babelrc文件下配置，增加一个插件
+```
+{
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+```
+这样子的话，我们就可以项目中自由的使用import按需加载模块了。
+```js
+// create.js
+async function create() {
+    const {
+        default: _
+    } = await import(/*webpackChunkName:"lodash"*/'lodash')
+    let element = document.createElement('div')
+    element.innerHTML = _.join(['TianTian', 'lee'], '-')
+    return element
+}
+
+function demo() {
+    document.addEventListener('click', function () {
+        create().then(element => {
+            document.body.appendChild(element)
+        })
+    })
+}
+
+export default demo;
+```
+我这个模块的功能，就是当你点击页面后，会触发create函数，然后加载loadsh库，最后再页面中懒加载lodash，打包是正常打包，但是呢，有些资源，可以当你触发某些条件，再去加载，这也算是优化手段吧。
+
+**Chunk**
+
+Chunk在Webpack里指一个代码块，那具体是指什么样的代码块呢？👇
+
+Chunk是Webpack打包过程中，一堆module的集合。Webpack通过引用关系逐个打包模块，这些module就形成了一个Chunk。
+
+「产生Chunk的三种途径」
+- entry入口
+- 异步加载模块
+- 代码分割（code spliting）
+
+Chunk只是一个概念，理解了Chunk概念，更有利于对webpack有一定的认识。
+
+### 5.5 CSS代码压缩提取
+在线上的环境中，我们需要去将我们的CSS文件单独的打包到一个Chunk下，所以需要借助一定的插件，完成这个工作。
+
+**mini-css-extract-plugin css代码提取**
+
+将css提取为独立的文件插件，支持按需加载的css和sourceMap,我们可以查看GitHub官方，来看看它的文档
+
+**目前缺失功能，HMR。**所以，我们可以把它运用到生成环境中去，开始安装👇
+```
+npm install --save-dev mini-css-extract-plugin
+```
+对着这个插件的使用，还是建议在webpack.prod.js中(生产环境)配置，这个插件暂时暂时不支持HMR，而且在开发环境中development，是需要用到HMR的，所以我们这次配置只在webpack.prod.js配置。
+
+需要注意的一点是，当你的webpack版本是4版本的时候，需要去package.json中配置sideEffects属性，这样子就「避免了把css文件作为Tree-shaking」。
+```
+{
+  "name": "webpack-demo",
+  "sideEffects": [
+  	"*.css"
+  ]
+}
+```
+然后的话，我们看看webpack.prod.js是如何配置参数的。
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {
+    merge
+} = require('webpack-merge')
+const commomConfig = require('./webpack.common')
+
+const prodConfig = {
+    mode: 'production',
+    devtool: 'cheap-module-source-map',
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename:'[name].[hash].css',
+            chunkFilename: '[id].[hash].css',
+        })
+    ],
+    module: {
+        rules: [{
+            test: /\.(sa|sc|c)ss$/,
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ],
+        }]
+    }
+}
+
+module.exports = merge(commomConfig, prodConfig)
+```
+当你在js中引入css模块时，最后在dist目录下，看到了css单独的Chunk的话，说明css代码提取成功了，接下来就是对「css代码的压缩」。
+
+webpack4默认在生产环境下，是不会去压缩css代码的，所以我们需要下载对于的plugin
+
+### 5.6 optimize-css-assets-webpack-plugin css代码压缩
+这个会对打包后的css代码经行代码压缩，我们下载这个包👇
+```
+npm install --save-dev optimize-css-assets-webpack-plugin
+```
+接下来就是设置 「optimization.minimizer」 ，这里需要注意的就是，此时设置optimization.minimizer会覆盖webpack默认提供的规则，比如「JS代码就不会再去压缩了」。
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const {
+    merge
+} = require('webpack-merge')
+const commomConfig = require('./webpack.common')
+
+const prodConfig = {
+    mode: 'production',
+    devtool: 'cheap-module-source-map',
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                sourceMap: true,
+                parallel: true, // 启用多线程并行运行提高编译速度
+            }),
+            new OptimizeCSSAssetsPlugin({}),
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            // 类似 webpackOptions.output里面的配置 可以忽略
+            filename: '[name].[hash].css',
+            chunkFilename: '[id].[hash].css'
+        })
+    ],
+    module: {
+        rules: [{
+            test: /\.(sa|sc|c)ss$/,
+            use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        // 这里可以指定一个 publicPath
+                        // 默认使用 webpackOptions.output中的publicPathcss
+                        // 举个例子,后台支持把css代码块放入cdn
+                        publicPath: "https://cdn.example.com/css/"
+                    },
+                },
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ],
+        }]
+    },
+
+}
+
+module.exports = merge(commomConfig, prodConfig)
+```
+但是呢，此时就会发现在生产环境下，JS压缩也会存在问题，所以为了解决问题，我们统一在下面梳理👇
+
+### 5.7 uglifyjs-webpack-plugin代码压缩
+这个插件解决的问题，就是当你需要去optimization.minimizer中设置，这样子会覆盖「webpack基本配置」，原本JS代码压缩的功能就会被覆盖，所以我们需要下载它。
+```
+npm install -D uglifyjs-webpack-plugin
+```
+然后在webpack.prod.js配置如上信息即可，它的更多配置看官网文档
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const {
+    merge
+} = require('webpack-merge')
+const commonConfig = require('./webpack.common')
+
+const prodConfig = {
+    mode: 'production',
+    devtool: 'cheap-module-source-map',
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                sourceMap: true,
+                parallel: true,  // 启用多线程并行运行提高编译速度
+            }),
+            new OptimizeCSSAssetsPlugin({}),
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            // 类似 webpackOptions.output里面的配置 可以忽略
+            filename: '[name].[hash].css',
+            chunkFilename: '[id].[hash].css'
+        })
+    ],
+    module: {
+        rules: [{
+            test: /\.(sa|sc|c)ss$/,
+            use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        // 这里可以指定一个 publicPath
+                        // 默认使用 webpackOptions.output中的publicPathcss
+                        // 举个例子,后台支持把css代码块放入cdn
+                        publicPath: "https://cdn.example.com/css/"
+                    },
+                },
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ],
+        }]
+    },
+
+}
+
+module.exports = merge(commonConfig, prodConfig)
+```
+对于开发者环境而言，对css代码提取，以及打包是没有意义的，统一对于js代码压缩，也会降低效率，也是不推荐这么去做的，所以我们就跳过在开发环境中对它们的配置。
+
+### 5.8 contenthash解决浏览器缓存
+当你打包一个项目即将上线时，有一个需求，你只是修改了部分的文件，只希望用户对于其他的文件，依旧去采用浏览器缓存中的文件，所以这个时候，我们需要用到contenthash。
+
+webpack中关于hash，有三种，分别是👇
+
+**hash**
+
+hash，主要用于开发环境中，在构建的过程中，当你的项目有一个文件发现了改变，整个项目的hash值就会做修改(整个项目的hash值是一样的)，这样子，每次更新，文件都不会让浏览器缓存文件，保证了文件的更新率，提高开发效率。
+
+**chunkhash**
+
+跟打包的chunk有关，具体来说webpack是根据入口entry配置文件来分析其依赖项并由此来构建该entry的chunk，并生成对应的hash值。不同的chunk会有不同的hash值。
+
+在生产环境中，我们会把第三方或者公用类库进行单独打包，所以不改动公共库的代码，该chunk的hash就不会变，可以合理的使用浏览器缓存了。
+
+但是这个中hash的方法其实是存在问题的，生产环境中我们会用webpack的插件，将css代码打单独提取出来打包。这时候chunkhash的方式就不够灵活，因为只要同一个chunk里面的js修改后，css的chunk的hash也会跟随着改动。因此我们需要contenthash。
+
+**contenthash**
+
+contenthash表示由文件内容产生的hash值，内容不同产生的contenthash值也不一样。生产环境中，通常做法是把项目中css都抽离出对应的css文件来加以引用。
+
+对于webpack，旧版本而言，即便每次你npm run build，「内容不做修改的话，contenthash值还是会有所改变」，这个是因为，当你在模块之间存在相互之间的引用关系，有一个「manifest文件」。
+
+_manifest文件是用来引导所以模块的交互，manifest文件包含了加载和处理模块的逻辑，举个例子，你的第三方库打包后的文件，我们称之为vendors，你的逻辑代码称为main，当你webpack生成一个bundle时，它同时会去维护一个manifest文件，你可以理解成每个bundle文件存在这里信息，所以每个bundle之间的manifest信息有不同，这样子我们就需要将manifest文件给提取出来。_
+
+这个时候，需要在「optimization」中增加一个配置👇
+```js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      // ...
+    },
+    runtimeChunk: {// 解决的问题是老版本中内容不发生改变的话,contenthash依旧会发生改变
+      name: 'manifest'
+    }
+  }
+}
+```
+当然了，要是还没来理解的话，可以去webpack官方网站，看看manifest定义以及它的含义。
+
+说完了这个，我们看看我们应该如何去配置output吧，我们先看下webpack.prod.js配置
+```js
+output: {
+    filename: '[name].[contenthash].js',
+    chunkFilename:'[vendors].[contenthash].js',
+    // publicPath: "https://cdn.example.com/assets/",
+    path: path.join(__dirname, '../dist')
+}
+```
+对于的webpack.dev.js中只需要将contenthash改为hash就行，这样子开发的时候，提高开发效率。
+
+### 5.9 shimming 全局变量
+简单翻译就是垫片，它解决的场景有哪些呢，举个例子，当你再使用第三方库，此时需要引入它，又或者是你有很多的第三方库或者是自己写的库，每个js文件都需要依赖它，让人很繁琐，这个时候，shimming就派上用场了。
+
+我们需要使用 ProvidePlugin 插件，这个webpack是内置的，shimming依赖的就是这个插件。
+
+使用 ProvidePlugin 后，能够在通过 webpack 编译的每个模块中，通过访问一个变量来获取到 package 包。
+
+增加一个Plugin配置👇
+```
+new webpack.ProvidePlugin({
+			// 这里设置的就是你相应的规则了
+			// 等价于在你使用lodash模块中语句👇
+			// import _ from 'lodash'
+            _: 'lodash'
+})
+```
+举个例子👇
+```
+// array_add.js
+export const Arr_add = arr=>{
+    let str = _.join(arr,'++');
+    return str;
+}
+```
+这样子没有正常导入lodash库的话，是会报错的，但是我们使用了ProvidePlugin插件，使得它会提供相应的lodash包，注意到的就是，避免多个lodash包被打包多次，可以使用CommonsChunkPlugin插件，webpack4已经抛弃它了，使用的是splitChunksPlugin插件取代它，我在之前的地方已经梳理过了。
+
+更多的用法可以查看shimming垫片
 
 
 
