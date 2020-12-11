@@ -52,6 +52,24 @@ npm i -D standard-version
 }
 ```
 
+#### 1.4 配置commitlint
+```bash
+yarn add husky @commitlint/config-conventional @commitlint/cli -D
+```
+``` js
+// package,json
+"husky": {
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  }
+}
+
+// .commitlintrc.js
+module.exports = {
+    extends: ['@commitlint/config-conventional']
+}
+```
+
 #### 1.4 试运行
 - `git add --a`
 - `git cz`
