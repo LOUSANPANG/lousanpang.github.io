@@ -1,11 +1,11 @@
 ---
-title: JavaScript常见的报错及异常捕获与处理方法
+title: 开发规范之常见报错及异常捕获
 date: 2019-09-17
 tags: 
-    - error
-categories: 项目规范
-keywords: [项目规范]
-description: JavaScript常见的一些错误类型
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
+description: 规范之报错及异常捕获
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s3.ax1x.com/2020/12/07/DvMLd0.png # 缩略图

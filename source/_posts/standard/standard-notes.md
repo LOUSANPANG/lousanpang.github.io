@@ -1,11 +1,11 @@
 ---
-title: 编写高质量可维护的代码：一目了然的注释
+title: 开发规范之代码注释
 date: 2020-09-05
 tags: 
-    - 规范注释
-categories: 项目规范
-keywords: [项目规范]
-description: 编写高质量可维护的代码：一目了然的注释
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
+description: 开发规范之代码注释
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s1.ax1x.com/2020/10/21/BCAiNQ.jpg # 缩略图

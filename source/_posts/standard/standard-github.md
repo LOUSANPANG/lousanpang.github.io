@@ -1,11 +1,11 @@
 ---
-title: 如何丰满自己的开源项目
+title: 开发规范之GitHub
 date: 2020-12-11
 tags:
-    - GitHub
-categories: GitHub
-keywords: [GitHub]
-description: GitHub
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
+description: 开发规范之GitHub
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s3.ax1x.com/2020/12/11/rA0RsK.png # 缩略图

@@ -1,11 +1,11 @@
 ---
-title: ESLint 无规矩 不编程
+title: 开发规范之ESlint
 date: 2018-07-05
 tags: 
-    - ESlint
-categories: 项目规范
-keywords: [ESlint]
-description: ESLint里的规则教会我，无规矩 不编程
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
+description: 开发规范之ESlint
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s1.ax1x.com/2020/08/17/dZBgUJ.jpg # 缩略图

@@ -1,11 +1,11 @@
 ---
-title: Git
+title: Git规范
 date: 2019-11-01
 tags:
     - Git
 categories: Git
 keywords: [Git]
-description: Git
+description: Git规范
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s2.ax1x.com/2019/11/29/QkuLb4.md.png # 缩略图

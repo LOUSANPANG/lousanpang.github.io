@@ -1,11 +1,11 @@
 ---
-title: 项目总结-vue搭建篇
+title: Vue@2.x搭建篇
 date: 2019-10-11
 tags: 
     - Vue
-categories: 项目总结
+categories: Vue
 keywords: [Vue]
-description: cli初始化配置、vuex、ui、lodash、eslint、封装axios、默认打包性能优化、等组织规范
+description: Vue@2.x搭建篇
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s1.ax1x.com/2020/08/31/dXde5F.png # 缩略图s
@@ -14,49 +14,76 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 描述
-#### 关于vue，梳理了两篇文章，[一篇关于开发环境的搭建准备](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)，[另一篇关于生产环境的部署优化](https://lousanpang.github.io/2019/12/01/frontend/vue/project-optimization/)。
+# cli2.x-vue2.x
 
-#### 这一篇是关于`Vue Cli V2 & next`开发环境的搭建准备，主要是通过[大纲](https://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/)和[代码库](https://github.com/LOUSANPANG/VueBuildTool)的方式进行列举参考。
-<br>
-<br>
+* 基于`vue-cli 2.x`的`Vue2.x`项目模板
 
+* 集成`vue(vuex、vue-router、axios)`
 
-### [Vue CLI](https://cli.vuejs.org/zh/guide/installation.html)
+* 集成`antdesign-vue`
+
+## 一、构建工具配置方面
+
+### 1.1 部署`Angular` 团队Git的规范，用 `git cz` 代替 `git commit`，添加commitlint。
+
+```bash
+yarn add -g commitizen cz-conventional-changelog
+
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+
+yarn add -D commitizen cz-conventional-changelog
+
+yarn add -D husky @commitlint/cli @commitlint/config-conventional
 ```
-CLI V2
-npm i -g vue-cli
-vue init webpack xxx
 
-CLI next
-npm install -g @vue/cli
-vue create xxx
+package.json中配置
 ```
-
-### 一、构建工具配置方面
-#### 1.1. [部署Angular 团队Git的规范，用 `git cz` 代替 `git commit`](https://lousanpang.github.io/2019/11/01/frontend/git/git/)
-
-#### 1.2. [eslintc 全局变量、忽略规则配置](https://lousanpang.github.io/2018/07/05/other/use-eslint/)
-```
-.eslintrc.js
-
-module.exports = {
-  rules: {
-    'generator-star-spacing': 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "no-new": 0,
-    "no-unused-vars":0
-  },
-  globals: {
-    $CONFIG: false,
-    $API: false,
+"script": {
+    "commit": "git-cz",
+},
+"config": {
+  "commitizen": {
+    "path": "node_modules/cz-conventional-changelog"
+  }
+},
+"husky": {
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   }
 }
 ```
 
-#### 1.3. webpack（build、config文件）
-<!-- - 构建工具打包图片、css路径问题 -->
-- 修改host (便于访问、演示)
+新建.commitlintrc
+```
+module.exports = {
+    extends: ['@commitlint/config-conventional']
+};
+```
+
+自动生成CHANGELOG
+```
+yarn add -D standard-version
+```
+
+```
+"script": {
+  "release": "standard-version"
+}
+```
+
+```
+git add .
+git cz
+npm run release -- --dry-run // 检测提交日志是否正确
+npm run release
+git push --follow-tags origin dev
+git push
+```
+
+
+### 1.2 `webpack`（build、config文件）
+
+修改host
 ```
 config/index.js
 
@@ -67,31 +94,8 @@ module.exports = {
 }
 ```
 
-- [webpack配置proxy (本地解决跨域，域名前缀问题)](https://webpack.docschina.org/configuration/dev-server/#devserverproxy)
-- [如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。这个问题可以通过 vue.config.js 中的 devServer.proxy 选项来配置。](https://cli.vuejs.org/zh/config/#devserver)
-```
-module.exports = {
-  devServer: {
-    proxy: {
-      '/api': {
-        target: '<url>', // 代理地址，这里设置的地址会代替axios中设置的baseURL
-        ws: true, // proxy websockets
-        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
-        pathRewrite: { // 重写url
-          '^/api': '/api/v1' // target + /api/v1
-          //pathRewrite: {'^/api': '/'} 重写之后url为 <url>/
-          //pathRewrite: {'^/api': '/api'} 重写之后url为 <url>/api
-        }
-      },
-      '/foo': {
-        target: '<other_url>'
-      }
-    }
-  }
-}
-```
+### 1.3 修改`alias` （便捷的路径访问）
 
-- 修改alias （便捷的路径访问）
 ```
 build/webpack.base.config.js
 
@@ -103,130 +107,355 @@ module.exports = {
   }
 }
 ```
-<br>
-<br>
+
+### 1.4 配置`prettier` `eslint` `editorConfig`
+- 安装vscode插件
+`prettier` `eslint` `EditorConfig for VS Code`
+
+- 安装依赖
+```bash
+yarn add -D prettier eslint-config-prettier eslint-plugin-prettier @vue/eslint-config-prettier
+```
+
+- 配置`.editorconfig`
+```bash
+# http://editorconfig.org
+root = true
+
+# 说明
+## 设置文件编码为 UTF-8；
+## 用两个空格代替制表符；
+## 在保存时删除尾部的空白字符；
+## 在文件结尾添加一个空白行；
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+```
+
+- 配置`.eslintrc`
+```js
+module.exports = {
+  root: true,
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  env: {
+    browser: true,
+  },
+  extends: [
+    'standard',
+    'plugin:vue/essential',
+    '@vue/prettier',
+    'plugin:prettier/recommended'
+  ],
+  plugins: [
+    'vue'
+  ],
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        'singleQuote': true, // 单引号
+        'trailingComma': 'none', // 尾逗号
+        'semi': false, // 尾分号
+      },
+    ],
+    'generator-star-spacing': 'off',
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "no-new": 'off'
+  },
+  globals: {
+    $CONFIG: false,
+    $API: false,
+  }
+}
+```
+
+- 配置`.prettierrc`
+```json
+{
+  "endOfLine": "auto" ,
+  "printWidth": 100,
+  "tabWidth": 2
+}
+```
+
+- Tips [Delete `␍`eslint(prettier/prettier) ](https://juejin.cn/post/6844904069304156168)
+  - 第一种方法：
+    - yarn run lint --fix
+  - 第二种方法：
+    - 配置.prettierrc文件 "endOfLine": "auto"
+  - 第三种方法：
+    - git config --global core.autocrlf false
+    - git全局配置之后，你需要重新拉取代码
+
+- 集成`prettier`
+```json
+// .vscode/settings.json
+{
+    "workbench.colorTheme": "Atom One Dark",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.tabSize": 2,
+    "editor.fontWeight": "normal",
+    "editor.lineHeight": 24,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "terminal.integrated.shell.windows": "D:\\Git\\Git\\bin\\bash.exe",
+    "window.zoomLevel": 0,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    }
+}
+```
 
 
-### 二、 添加常用文件方面
-#### 2.1. [`static config.js` 添加静态全局服务route（对应微服务、不同环境地址切换服务前缀）](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/static/config)
 
-#### 2.2. `static lib` 添加静态资源（mapbox min.css min.js min.json）
+## 二、添加常用文件
 
-#### 2.3. `src style` 样式文件
-- [normalize.css 样式初始化1 (解决各浏览器初始化兼容问题)](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/normalize.css) [参考资料 normalize.css](https://github.com/necolas/normalize.css)
-- [reset.css 样式初始化2](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/reset.css) [参考资料 base.css](https://github.com/kujian/simple-flexible/blob/master/base.css)
-- [base.css 基础样式(滚动条等)](https://github.com/LOUSANPANG/VueBuildTool/blob/master/dev/src/style/base.css)
-- font 字体
-- mixin.less 功能样式(布局、方法、颜色)
+### 2.1 `static/config.js` 添加静态全局服务`route`（对应微服务、不同环境地址切换服务前缀）
 
-#### 2.4. `src utils` 工具函数
-- 常用方法工具函数
+### 2.2 static/lib 添加静态资源（`min.css` `min.js` `min.json`）
 
-#### 2.5. 组件方面
-- `src components` [loading组件](https://lousanpang.github.io/2019/05/01/frontend/css/common-css/#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8%E7%9A%84css%E5%8A%A8%E7%94%BB)
-- `src pages 404` [404页面](https://lousanpang.github.io/2019/05/01/frontend/css/common-css/#%E4%BA%94%E3%80%81404%E9%A1%B5%E9%9D%A2%E7%A4%BA%E4%BE%8B)
-<br>
-<br>
+### 2.3 `src/style` 样式文件
 
+* `normalize.css` 样式初始化1 (解决各浏览器初始化兼容问题)
+* `base.css` 基础样式(滚动条等)
 
-### 三、 依赖、构建方面
-#### 3.1. `src services`[axios二次封装、状态码、服务列表、全局错误提示](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/services)
-[component-taro-request](https://github.com/LOUSANPANG/component-taro-request)
+###  2.4 `src utils` 工具文件
 
-#### 3.2. `src store` [vuex二次封装](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/store)
+### 2.5 组件方面
 
-#### 3.3. `less scss stylus`css模块包
-- mixin.less
-- variables.less
+* `src components loading` 组件
+* `src pages 404` 404页面
+
+### 2.6 基础源代码更改 `instances`
+
+* `antdesign.js`
 
 
-#### 3.5. babel低版本兼容
-- 1. 根目录下新建 .babelrc 文件
+## 三、依赖构建方面
+
+### 3.1 `src services` axios二次封装、状态码、全局错误拦截。
+
+文件目录
+
+```
+在`src/`文件下
+
+├─services // 请求文件
+|    ├─base-axiosconfig.js axios封装（请求拦截、响应拦截、错误统一处理）
+|    ├─base-statuscode.js request请求状态码
+|    ├─service-list
+|    |  ├─service-test // 对应组件下的请求服务地址
+|    |  └index.js // api接口的统一出口
+├─static // 配置文件
+```
+
+依赖环境
+
+```
+yarn add -D axios ant-design-vue
+```
+
+使用
+
+``` js
+// index.html
+<script src="./static/config.js"></script>
+
+// main.js
+import $API from '@/services/service-list'
+Vue.prototype.$API = $API
+window.$CONFIG = $CONFIG
+
+// .vue
+this.$API.getTestService({})
+.then(res => { })
+.catch(err => { })
+.finally(() => { })
+```
+
+### 3.2 `src store` vuex二次封装
+
+安装
+
+```bash
+yarn add -D vuex
+```
+
+使用
+
+```js
+// main.js
+import store from '@/store'
+new Vue({
+  store
+})
+
+// .vue
+import { mapState, mapMutations } from 'vuex'
+computed: {
+  ...mapState({
+    staTest: state => state.Test.staTest
+  })
+},
+methods: {
+  ...mapMutations({
+    mutTest: 'Test/mutTest'
+  })
+}
+// this.staTest 取值
+// this.mutTest('') 设置值
+```
+
+### 3.2 `less` css模块包（与ui框的保持一致）
+
+```
+yarn add less@2.7.2 less-loader@4.1.0 sass-resources-loader -D
+```
+
+build/webpack.base.conf.js
+```js
+{
+  test: /\.less$/,
+  loader: 'style-loader!css-loader!less-loader'
+}
+```
+
+build/utils
+```js
+return {
+    less: generateLoaders('less', { javascriptEnabled: true }).concat({
+      loader: 'sass-resources-loader',
+      options: {
+        resources: [
+          path.resolve(__dirname, '../src/style/mixin.less')
+        ]
+      }
+    }),
+}
+```
+
+.vue
+```js
+<style lang="less">
+</style>
+```
+
+### 3.3  `babel`
+
+>低版本兼容
+
+```
+yarn add babel-polyfill -D
+```
+
+main.js
+```js
+import 'babel-polyfill';
+```
+
+.babelrc
 ```
 {
- "presets": ["@babel/preset-env"],
- "plugins": [
-  "@babel/plugin-transform-runtime"
- ]
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      },
+      "useBuiltIns": "entry"
+    }],
+    "stage-2"
+  ],
+  "plugins": ["transform-vue-jsx", "transform-runtime"]
 }
 ```
 
-- 2. 修改 babel.config.js
+> antd 按需加载组件代码和样式的 babel 插件
 ```
-const plugins = [];
-if (['production', 'prod'].includes(process.env.NODE_ENV)) {
- plugins.push("transform-remove-console")
-}
- 
-module.exports = {
- presets: [
-  [
-   "@vue/app",
-   {
-    "useBuiltIns": "entry",
-    polyfills: [
-     'es6.promise',
-     'es6.symbol'
-    ]
-   }
-  ]
- ],
- plugins: plugins
-};
+yarn add babel-plugin-import --dev
 ```
 
-- 3. 修改 vue.config.js
+修改.babelrc文件，配置 babel-plugin-import
 ```
-module.exports = {
- transpileDependencies: ['webpack-dev-server/client'],
- chainWebpack: config => {
-  config.entry.app = ['babel-polyfill', './src/main.js'];
- }
-}
-```
-
-- 4. 修改 main.js 文件
-```
-import '@babel/polyfill';
-import Es6Promise from 'es6-promise'
-Es6Promise.polyfill()
-```
-
-- 5. 安装依赖
-```
-npm install --save-dev @babel/core @babel/plugin-transform-runtime @babel/preset-env es6-promise babel-polyfill babel-plugin-transform-remove-console
-```
-
-#### 3.6. `px2rem/vw` 适配方案
-- px -> vw
-```
-1. npm i -D postcss-px-to-viewport
-
-2. postcssrc.js
+  {
+    "presets": [
+      ["env", {
+        "modules": false,
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+        }
+      }],
+      "stage-2"
+    ],
+-   "plugins": ["transform-vue-jsx", "transform-runtime"]
++   "plugins": [
++     "transform-vue-jsx",
++     "transform-runtime",
++     ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }]
++   ]
+  }
 ```
 
-- [px -> rem](https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/px2rem)
+## 四、关于打包的额外配置
+
+### 4.1 使用`hash`打包
 ```
-1. 添加`flexible.js`
+// /build/utils.js
 
-2. main.js
-import '@/config/flexible'
-
-3. variables.less
-@designWidth: 1920;
-@initRem: @designWidth/10rem;
-.px2rem (@type, @px) {
-  @{type}: @px/@initRem
+if (options.extract) {
+  return ExtractTextPlugin.extract({
+    use: loaders,
+    fallback: 'vue-style-loader',
+    + publicPath: '../../' // hash 打包
+    // publicPath: '/' // history 打包
+  })
 }
 ```
-<br>
-<br>
 
+```
+// config/index.js
 
-### 四、规范方面
-#### 4.1. [rule.vue vue规范文件示例]((https://github.com/LOUSANPANG/VueBuildTool/tree/master/dev/src/rules))
+build: {
 
-#### 4.2. [vue代码风格指南](https://cn.vuejs.org/v2/style-guide/)
+  + assetsPublicPath: './', // hash 打包
+  // assetsPublicPath: '/', // history 打包
+
+}
+```
+
+## [风格指南](https://cn.vuejs.org/v2/style-guide/)
 
 
 <br>

@@ -1,11 +1,11 @@
 ---
-title: vscode配置
+title: 开发规范之VScode
 date: 2018-05-21
 tags:
-    - vscode
-categories: vscode
-keywords: [vscode]
-description: vscode
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
+description: 开发规范之VScode
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://i.loli.net/2019/11/19/1qQ5UGn2P3RA6NW.jpg # 缩略图

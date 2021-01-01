@@ -1,9 +1,9 @@
 ---
 title: 构建一个npm包管理工具
-date: 2020-10-05
+date: 2020-12-31
 tags: 
     - npm
-categories: CLI
+categories: cli
 keywords: [npm]
 description: 如何整合一个共享的代码库
 top_img: # 除非特定需要，可以不写

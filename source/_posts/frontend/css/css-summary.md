@@ -1,12 +1,11 @@
 ---
-title: 项目总结-css记录篇
+title: css记录篇
 date: 2019-05-01
 tags: 
-    - Css
-    - 项目总结
-categories: Css
-keywords: [Css]
-description: Css
+    - css
+categories: css
+keywords: [css]
+description: css记录总结
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s1.ax1x.com/2020/08/11/aLklo8.th.png # 缩略图
