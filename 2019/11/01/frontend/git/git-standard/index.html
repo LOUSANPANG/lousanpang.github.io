@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Git规范 | Lou Guanghao</title><meta name="description" content="Git规范"><meta name="keywords" content="Git"><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://lousanpang.github.io/2019/11/01/frontend/git/git-standard/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Git规范"><meta name="twitter:description" content="Git规范"><meta name="twitter:image" content="https://s2.ax1x.com/2019/11/29/QkuLb4.md.png"><meta property="og:type" content="article"><meta property="og:title" content="Git规范"><meta property="og:url" content="http://lousanpang.github.io/2019/11/01/frontend/git/git-standard/"><meta property="og:site_name" content="Lou Guanghao"><meta property="og:description" content="Git规范"><meta property="og:image" content="https://s2.ax1x.com/2019/11/29/QkuLb4.md.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="Mapbox项目实践应用" href="http://lousanpang.github.io/2019/12/28/frontend/mapbox/mapbox-application/"><link rel="next" title="Vue@2.x搭建篇" href="http://lousanpang.github.io/2019/10/11/frontend/vue/project-construction/"><meta name="baidu-site-verification" content="725b13ee7d59bc97f5a2ca424005998c"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: undefined,
+  highlight_copy: 'true',
+  highlight_lang: 'false',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、部署Angular-团队Git的规范"><span class="toc-text">一、部署Angular 团队Git的规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Commitizen-替代你的-git-commit"><span class="toc-text">1.1 Commitizen: 替代你的 git commit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-项目安装"><span class="toc-text">1.2 项目安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-package-json中配置"><span class="toc-text">1.3 package.json中配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-自动生成CHANGELOG"><span class="toc-text">1.4 自动生成CHANGELOG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-配置commitlint"><span class="toc-text">1.4 配置commitlint</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-试运行"><span class="toc-text">1.4 试运行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、git-cz-介绍"><span class="toc-text">二、git cz 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。"><span class="toc-text">2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Provide-a-longer-description-of-the-change-提供更改的详细说明"><span class="toc-text">2.2 Provide a longer description of the change 提供更改的详细说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-Are-there-any-breaking-changes-有重大变化吗"><span class="toc-text">2.3 Are there any breaking changes? 有重大变化吗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-Does-this-change-affect-any-open-issues-此更改是否影响任何未解决的问题"><span class="toc-text">2.4 Does this change affect any open issues 此更改是否影响任何未解决的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、配合gitmoji表情包更加清晰"><span class="toc-text">三、配合gitmoji表情包更加清晰</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-安装"><span class="toc-text">3.1 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-使用"><span class="toc-text">3.2 使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、应用分支流程"><span class="toc-text">四、应用分支流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-自己分支"><span class="toc-text">4.1 自己分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-更换至本地公共仓库"><span class="toc-text">4.2 更换至本地公共仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-公共分支"><span class="toc-text">4.3 公共分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-更换至自己本地仓库"><span class="toc-text">4.4 更换至自己本地仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-关于版本回退"><span class="toc-text">4.5 关于版本回退</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/11/29/QkuLb4.md.png)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">Lou Guanghao</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><div class="menu_mask"></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item text-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">27</div></a></div></div><div class="mobile_data_item text-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">14</div></a></div></div><div class="mobile_data_item text-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG"><i class="fa-fw fa fa-github"></i><span> GitHub</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG/lousanpang.github.io/issues"><i class="fa-fw fa fa-coffee"></i><span> Speak</span></a></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Git规范</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-11-01<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-01-01</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Git/">Git</a></span></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h3 id="一、部署Angular-团队Git的规范"><a href="#一、部署Angular-团队Git的规范" class="headerlink" title="一、部署Angular 团队Git的规范"></a>一、<a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">部署Angular 团队Git的规范</a></h3><h4 id="1-1-Commitizen-替代你的-git-commit"><a href="#1-1-Commitizen-替代你的-git-commit" class="headerlink" title="1.1 Commitizen: 替代你的 git commit"></a>1.1 Commitizen: 替代你的 git commit</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g commitizen cz-conventional-changelog</span><br><span class="line"></span><br><span class="line">echo &apos;&#123; &quot;path&quot;: &quot;cz-conventional-changelog&quot; &#125;&apos; &gt; ~/.czrc</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-项目安装"><a href="#1-2-项目安装" class="headerlink" title="1.2 项目安装"></a>1.2 项目安装</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -D commitizen cz-conventional-changelog</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-package-json中配置"><a href="#1-3-package-json中配置" class="headerlink" title="1.3 package.json中配置"></a>1.3 package.json中配置</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;script&quot;: &#123;</span><br><span class="line">    &quot;commit&quot;: &quot;git-cz&quot;,</span><br><span class="line">&#125;,</span><br><span class="line">&quot;config&quot;: &#123;</span><br><span class="line">  &quot;commitizen&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;node_modules/cz-conventional-changelog&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-自动生成CHANGELOG"><a href="#1-4-自动生成CHANGELOG" class="headerlink" title="1.4 自动生成CHANGELOG"></a>1.4 自动生成CHANGELOG</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -D standard-version</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;script&quot;: &#123;</span><br><span class="line">  &quot;release&quot;: &quot;standard-version&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-配置commitlint"><a href="#1-4-配置commitlint" class="headerlink" title="1.4 配置commitlint"></a>1.4 配置commitlint</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add husky @commitlint/config-conventional @commitlint/cli -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// package,json</span></span><br><span class="line"><span class="string">"husky"</span>: &#123;</span><br><span class="line">  <span class="string">"hooks"</span>: &#123;</span><br><span class="line">    <span class="string">"commit-msg"</span>: <span class="string">"commitlint -E HUSKY_GIT_PARAMS"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .commitlintrc.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    extends: [<span class="string">'@commitlint/config-conventional'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-试运行"><a href="#1-4-试运行" class="headerlink" title="1.4 试运行"></a>1.4 试运行</h4><ul>
+<li><code>git add --a</code></li>
+<li><code>git cz</code></li>
+<li><code>npm run release</code></li>
+<li><code>git push</code></li>
+</ul>
+<h3 id="二、git-cz-介绍"><a href="#二、git-cz-介绍" class="headerlink" title="二、git cz 介绍"></a>二、<code>git cz</code> 介绍</h3><h4 id="2-1-Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。"><a href="#2-1-Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。" class="headerlink" title="2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。"></a>2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。</h4><p><strong>type</strong></p>
+<ol>
+<li><code>feat</code>: 新功能、特性（feature）</li>
+<li><code>fix</code>: 修补bug、修改问题</li>
+<li><code>docs</code>: 文档修改 （documentation）</li>
+<li><code>style</code>: 代码格式修改（不影响代码运行的变动）</li>
+<li><code>refactor</code>: 重构（既不是添加功能，也不是修改bug的代码变动）</li>
+<li><code>test</code>: 测试用例修改</li>
+<li><code>chore</code>: 其他修改、构建过程或辅助工具变动</li>
+</ol>
+<p><strong>scope</strong><br><code>scope</code>: 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+<p><strong>subject</strong></p>
+<ol>
+<li><code>subject</code>: commit 的概述, 建议符合  &lt;50 formatting</li>
+<li>以动词开头，使用第一人称现在时，比如change，而不是changed或changes</li>
+<li>第一个字母小写</li>
+<li>结尾不加句号（.）</li>
+</ol>
+<h4 id="2-2-Provide-a-longer-description-of-the-change-提供更改的详细说明"><a href="#2-2-Provide-a-longer-description-of-the-change-提供更改的详细说明" class="headerlink" title="2.2 Provide a longer description of the change 提供更改的详细说明"></a>2.2 Provide a longer description of the change 提供更改的详细说明</h4><h4 id="2-3-Are-there-any-breaking-changes-有重大变化吗"><a href="#2-3-Are-there-any-breaking-changes-有重大变化吗" class="headerlink" title="2.3 Are there any breaking changes? 有重大变化吗"></a>2.3 Are there any breaking changes? 有重大变化吗</h4><h4 id="2-4-Does-this-change-affect-any-open-issues-此更改是否影响任何未解决的问题"><a href="#2-4-Does-this-change-affect-any-open-issues-此更改是否影响任何未解决的问题" class="headerlink" title="2.4 Does this change affect any open issues 此更改是否影响任何未解决的问题"></a>2.4 Does this change affect any open issues 此更改是否影响任何未解决的问题</h4><h3 id="三、配合gitmoji表情包更加清晰"><a href="#三、配合gitmoji表情包更加清晰" class="headerlink" title="三、配合gitmoji表情包更加清晰"></a>三、<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">配合gitmoji表情包更加清晰</a></h3><h4 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -g gitmoji-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-使用"><a href="#3-2-使用" class="headerlink" title="3.2 使用"></a>3.2 使用</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git commit -m &apos;fix: :memo: 修改bug&apos;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>emoji</th>
+<th>emoji代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:art:</td>
+<td>:art:</td>
+<td>改进代码结构或代码格式</td>
+</tr>
+<tr>
+<td>:zap:</td>
+<td>:zap:</td>
+<td>提升性能</td>
+</tr>
+<tr>
+<td>:fire:</td>
+<td>:fire:</td>
+<td>移除代码或文件</td>
+</tr>
+<tr>
+<td>:bug:</td>
+<td>:bug:</td>
+<td>修复bug</td>
+</tr>
+<tr>
+<td>:ambulance:</td>
+<td>:ambulance:</td>
+<td>关键补丁</td>
+</tr>
+<tr>
+<td>:sparkles:</td>
+<td>:sparkles:</td>
+<td>添加新功能</td>
+</tr>
+<tr>
+<td>:memo:</td>
+<td>:memo:</td>
+<td>写文档</td>
+</tr>
+<tr>
+<td>:rocket:</td>
+<td>:rocket:</td>
+<td>部署功能</td>
+</tr>
+<tr>
+<td>:lipstick:</td>
+<td>:lipstick:</td>
+<td>修改UI和样式文件</td>
+</tr>
+<tr>
+<td>:tada:</td>
+<td>:tada:</td>
+<td>初次提交</td>
+</tr>
+<tr>
+<td>:white_check_mark:</td>
+<td>:white_check_mark:</td>
+<td>添加测试</td>
+</tr>
+<tr>
+<td>:lock:</td>
+<td>:lock:</td>
+<td>修复安全问题</td>
+</tr>
+<tr>
+<td>:apple:</td>
+<td>:apple:</td>
+<td>修复macOS下的问题</td>
+</tr>
+<tr>
+<td>:penguin:</td>
+<td>:penguin:</td>
+<td>修复Linux下的问题</td>
+</tr>
+<tr>
+<td>:checkered_flag:</td>
+<td>:checkered_flag:</td>
+<td>修复Windows下的问题</td>
+</tr>
+<tr>
+<td>:robot:</td>
+<td>:robot:</td>
+<td>修复安卓下的问题</td>
+</tr>
+<tr>
+<td>:green_apple:</td>
+<td>:green_apple:</td>
+<td>修复IOS下的问题</td>
+</tr>
+<tr>
+<td>:bookmark:</td>
+<td>:bookmark:</td>
+<td>发行或版本标签</td>
+</tr>
+<tr>
+<td>:rotating_light:</td>
+<td>:rotating_light:</td>
+<td>移除linter警告</td>
+</tr>
+<tr>
+<td>:construction:</td>
+<td>:construction:</td>
+<td>工作中</td>
+</tr>
+<tr>
+<td>:green_heart:</td>
+<td>:green_heart:</td>
+<td>修复CI构建</td>
+</tr>
+<tr>
+<td>:arrow_down:</td>
+<td>:arrow_down:</td>
+<td>降级依赖</td>
+</tr>
+<tr>
+<td>:arrow_up:</td>
+<td>:arrow_up:</td>
+<td>升级依赖</td>
+</tr>
+<tr>
+<td>:pushpin:</td>
+<td>:puahpin:</td>
+<td>将依赖项固定到特定版本</td>
+</tr>
+<tr>
+<td>:construction_worker:</td>
+<td>:construction_worker:</td>
+<td>添加CI构建系统</td>
+</tr>
+<tr>
+<td>:chart_with_upwards_trend:</td>
+<td>:chart_with_upwards_trend:</td>
+<td>添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td>:recycle:</td>
+<td>:recycle:</td>
+<td>重构代码</td>
+</tr>
+<tr>
+<td>:whale:</td>
+<td>:whale:</td>
+<td>关于Docker的工作</td>
+</tr>
+<tr>
+<td>:heavy_plus_sign:</td>
+<td>:heavy_plus_sign:</td>
+<td>添加依赖</td>
+</tr>
+<tr>
+<td>:heavy_minus_sign:</td>
+<td>:heavy_minus_sign:</td>
+<td>移除依赖</td>
+</tr>
+<tr>
+<td>:wrench:</td>
+<td>:wrench:</td>
+<td>更改配置文件</td>
+</tr>
+<tr>
+<td>:globe_with_meridians:</td>
+<td>:globe_with_meridians:</td>
+<td>国际化和本土化</td>
+</tr>
+<tr>
+<td>:pencil2:</td>
+<td>:pencil2:</td>
+<td>修改错别字</td>
+</tr>
+<tr>
+<td>:hankey:</td>
+<td>:hankey:</td>
+<td>编写需要改进的错误代码</td>
+</tr>
+<tr>
+<td>:rewind:</td>
+<td>:rewind:</td>
+<td>还原更改</td>
+</tr>
+<tr>
+<td>:twisted_rightwards_arrows:</td>
+<td>:twisted_rightwards_arrows:</td>
+<td>合并分支</td>
+</tr>
+<tr>
+<td>:package:</td>
+<td>:package:</td>
+<td>更新编译的文件或包</td>
+</tr>
+<tr>
+<td>:alien:</td>
+<td>:alien:</td>
+<td>由于外部API更改而更新代码</td>
+</tr>
+<tr>
+<td>:truck:</td>
+<td>:truck:</td>
+<td>移动或重命名文件</td>
+</tr>
+<tr>
+<td>:page_facing_up:</td>
+<td>:page_facing_up:</td>
+<td>添加或更新许可证</td>
+</tr>
+<tr>
+<td>:boom:</td>
+<td>:boom:</td>
+<td>引入重大变更</td>
+</tr>
+<tr>
+<td>:bento:</td>
+<td>:bento:</td>
+<td>添加或更新assets</td>
+</tr>
+<tr>
+<td>:ok_hand:</td>
+<td>:ok_hand:</td>
+<td>由于代码审查更改而更新代码</td>
+</tr>
+<tr>
+<td>:wheelchair:</td>
+<td>:wheelchair:</td>
+<td>改善可访问性</td>
+</tr>
+<tr>
+<td>:bulb:</td>
+<td>:bulb:</td>
+<td>记录源代码</td>
+</tr>
+<tr>
+<td>:beers:</td>
+<td>:beers:</td>
+<td>喝多了写的代码</td>
+</tr>
+<tr>
+<td>:speech_balloon:</td>
+<td>:speech_balloon:</td>
+<td>更新文本和文字</td>
+</tr>
+<tr>
+<td>:card_file_box:</td>
+<td>:card_file_box:</td>
+<td>执行与数据库相关的更改</td>
+</tr>
+<tr>
+<td>:loud_sound:</td>
+<td>:loud_sound:</td>
+<td>添加日志</td>
+</tr>
+<tr>
+<td>:mute:</td>
+<td>:mute:</td>
+<td>删除日志</td>
+</tr>
+<tr>
+<td>:busts_in_silhouette:</td>
+<td>:busts_in_silhouette:</td>
+<td>添加贡献者</td>
+</tr>
+<tr>
+<td>:children_crossing:</td>
+<td>:children_crossing:</td>
+<td>改善用户体验/可用性</td>
+</tr>
+<tr>
+<td>:building_construction:</td>
+<td>:building_construction:</td>
+<td>进行架构更改。</td>
+</tr>
+<tr>
+<td>:iphone:</td>
+<td>:iphone:</td>
+<td>响应式设计</td>
+</tr>
+<tr>
+<td>:clown_face:</td>
+<td>:clown_face:</td>
+<td>Mocking things（嘲笑？？？）</td>
+</tr>
+<tr>
+<td>:egg:</td>
+<td>:egg:</td>
+<td>彩蛋</td>
+</tr>
+<tr>
+<td>:see_no_evil:</td>
+<td>:see_no_evil:</td>
+<td>添加或更新.gitignore文件</td>
+</tr>
+<tr>
+<td>:camera_flash:</td>
+<td>:camera_flash:</td>
+<td>添加或更新快照</td>
+</tr>
+<tr>
+<td>:alembic:</td>
+<td>:alembic:</td>
+<td>尝试新玩意儿</td>
+</tr>
+<tr>
+<td>:mag:</td>
+<td>:mag:</td>
+<td>提升SEO</td>
+</tr>
+<tr>
+<td>:wheel_of_dharma:</td>
+<td>:wheel_of_dharma:</td>
+<td>关于Kubernetes的工作</td>
+</tr>
+<tr>
+<td>:label:</td>
+<td>:label:</td>
+<td>添加或更新类型（Flow，Typescript）</td>
+</tr>
+</tbody></table>
+<h3 id="四、应用分支流程"><a href="#四、应用分支流程" class="headerlink" title="四、应用分支流程"></a>四、应用分支流程</h3><h4 id="4-1-自己分支"><a href="#4-1-自己分支" class="headerlink" title="4.1 自己分支"></a>4.1 自己分支</h4><ol>
+<li>git pull // 更新自己的远程分支</li>
+<li>git add –a // 将所有新文件至缓存仓库</li>
+<li>git commit -a -m ‘’ // 提交说明至缓存仓库</li>
+<li>git push // 提交至自己的远程仓库</li>
+</ol>
+<h4 id="4-2-更换至本地公共仓库"><a href="#4-2-更换至本地公共仓库" class="headerlink" title="4.2 更换至本地公共仓库"></a>4.2 更换至本地公共仓库</h4><ol>
+<li>git checkout xxx</li>
+</ol>
+<h4 id="4-3-公共分支"><a href="#4-3-公共分支" class="headerlink" title="4.3 公共分支"></a>4.3 公共分支</h4><ol>
+<li>git pull // 将远程公共仓库更新至本地</li>
+<li>git merge xx // 拉自己的代码至本地公共仓库</li>
+<li>&lt;!- 解决冲突 -&gt;</li>
+<li>git add –a // 将所有文件至缓存仓库</li>
+<li>git commit -a -m ‘’ // 提交说明至缓存仓库</li>
+<li>git push // 提交至公共远程仓库</li>
+</ol>
+<h4 id="4-4-更换至自己本地仓库"><a href="#4-4-更换至自己本地仓库" class="headerlink" title="4.4 更换至自己本地仓库"></a>4.4 更换至自己本地仓库</h4><ol>
+<li>git checkout xx</li>
+<li>git merge dev // 拉最全的公共代码仓库</li>
+<li>git add –a</li>
+<li>git commit -a -m ‘’</li>
+<li>git push</li>
+</ol>
+<h4 id="4-5-关于版本回退"><a href="#4-5-关于版本回退" class="headerlink" title="4.5 关于版本回退"></a>4.5 关于版本回退</h4><ol>
+<li><p>git reflog 查找提交记录找到版本号</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c920c31 HEAD@&#123;4&#125;: commit: fix unit test bug</span><br><span class="line">c43a105 HEAD@&#123;5&#125;: commit: proxy request param value</span><br><span class="line">d2d8134 HEAD@&#123;6&#125;: commit: add proxy http request address</span><br><span class="line">aca04dd HEAD@&#123;7&#125;: commit: add unit test</span><br><span class="line">f6f9b44 HEAD@&#123;8&#125;: commit: disable eureka in test env</span><br><span class="line">c7ddf92 HEAD@&#123;9&#125;: pull: Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">f96380b HEAD@&#123;10&#125;: checkout: moving from proxyOpt to test</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git reset –hard c920c31 通过gitreset命令回退到c920c31版本</p>
+</li>
+<li><p>git push origin test –force 强制将分区内容推送到远程服务器</p>
+</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Lou Guanghao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://lousanpang.github.io/2019/11/01/frontend/git/git-standard/">http://lousanpang.github.io/2019/11/01/frontend/git/git-standard/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://lousanpang.github.io">Lou Guanghao</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git    </a></div><div class="post_share"><div class="social-share" data-image="https://s2.ax1x.com/2019/11/29/QkuLb4.md.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/12/28/frontend/mapbox/mapbox-application/"><img class="prev_cover lozad" data-src="https://s3.ax1x.com/2020/12/23/r65lVg.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>Mapbox项目实践应用</span></div></a></div><div class="next-post pull-right"><a href="/2019/10/11/frontend/vue/project-construction/"><img class="next_cover lozad" data-src="https://s1.ax1x.com/2020/08/31/dXde5F.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Vue@2.x搭建篇</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = false == true ? true : false;
+var verify = false == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'95a9R9VBnOH4DwyKMPbEFN7e-gzGzoHsz',
+  appKey:'gAuNuYlxMU3vt0Ea0OJrfbcr',
+  placeholder:'离线请留言',
+  avatar:'wavatar',
+  guest_info:guest_info,
+  pageSize:'6',
+  lang:'en',
+  recordIP: true
+});</script></div></div></div><footer><div id="footer"><div class="copyright">&copy;2018 - 2021 By Lou Guanghao</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><a id="to_comment" href="#post-comment"><i class="scroll_to_comment fa fa-comments"></i></a><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><i class="nightshift fa fa-moon-o" id="nightshift" title="夜间模式"></i></section><div class=" " id="post_bottom"><div id="post_bottom_items"><a id="mobile_to_comment" href="#post-comment"><i class="mobile_scroll_to_comment fa fa-comments"></i></a><i class="fa fa-list" id="mobile_toc"></i><div id="toc_mobile"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#一、部署Angular-团队Git的规范"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">一、部署Angular 团队Git的规范</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-1-Commitizen-替代你的-git-commit"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">1.1 Commitizen: 替代你的 git commit</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-2-项目安装"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">1.2 项目安装</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-3-package-json中配置"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">1.3 package.json中配置</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-4-自动生成CHANGELOG"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">1.4 自动生成CHANGELOG</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-4-配置commitlint"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">1.4 配置commitlint</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#1-4-试运行"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">1.4 试运行</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#二、git-cz-介绍"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">二、git cz 介绍</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#2-1-Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text">2.1 Header部分只有一行，包括三个字段：type（必需）、scope（可选）和subject（必需）。</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#2-2-Provide-a-longer-description-of-the-change-提供更改的详细说明"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text">2.2 Provide a longer description of the change 提供更改的详细说明</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#2-3-Are-there-any-breaking-changes-有重大变化吗"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text">2.3 Are there any breaking changes? 有重大变化吗</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#2-4-Does-this-change-affect-any-open-issues-此更改是否影响任何未解决的问题"><span class="toc_mobile_items-number">2.4.</span> <span class="toc_mobile_items-text">2.4 Does this change affect any open issues 此更改是否影响任何未解决的问题</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#三、配合gitmoji表情包更加清晰"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">三、配合gitmoji表情包更加清晰</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#3-1-安装"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">3.1 安装</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#3-2-使用"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">3.2 使用</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#四、应用分支流程"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">四、应用分支流程</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#4-1-自己分支"><span class="toc_mobile_items-number">4.1.</span> <span class="toc_mobile_items-text">4.1 自己分支</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#4-2-更换至本地公共仓库"><span class="toc_mobile_items-number">4.2.</span> <span class="toc_mobile_items-text">4.2 更换至本地公共仓库</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#4-3-公共分支"><span class="toc_mobile_items-number">4.3.</span> <span class="toc_mobile_items-text">4.3 公共分支</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#4-4-更换至自己本地仓库"><span class="toc_mobile_items-number">4.4.</span> <span class="toc_mobile_items-text">4.4 更换至自己本地仓库</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#4-5-关于版本回退"><span class="toc_mobile_items-number">4.5.</span> <span class="toc_mobile_items-text">4.5 关于版本回退</span></a></li></ol></li></ol></div></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script async src="/js/search/local-search.js"></script><script src="/js/nightshift.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

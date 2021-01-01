@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>开发规范之常见报错及异常捕获 | Lou Guanghao</title><meta name="description" content="规范之报错及异常捕获"><meta name="keywords" content="开发规范"><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://lousanpang.github.io/2019/09/17/standard/standard-error/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="开发规范之常见报错及异常捕获"><meta name="twitter:description" content="规范之报错及异常捕获"><meta name="twitter:image" content="https://s3.ax1x.com/2020/12/07/DvMLd0.png"><meta property="og:type" content="article"><meta property="og:title" content="开发规范之常见报错及异常捕获"><meta property="og:url" content="http://lousanpang.github.io/2019/09/17/standard/standard-error/"><meta property="og:site_name" content="Lou Guanghao"><meta property="og:description" content="规范之报错及异常捕获"><meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DvMLd0.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="杭州行" href="http://lousanpang.github.io/2019/10/07/tourism/hangzhou/"><link rel="next" title="css记录篇" href="http://lousanpang.github.io/2019/05/01/frontend/css/css-summary/"><meta name="baidu-site-verification" content="725b13ee7d59bc97f5a2ca424005998c"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: undefined,
+  highlight_copy: 'true',
+  highlight_lang: 'false',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、常见的错误类型"><span class="toc-text">一、常见的错误类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、常见的错误"><span class="toc-text">二、常见的错误</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-RangeError"><span class="toc-text">2.1 RangeError</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-ReferenceError"><span class="toc-text">2.2 ReferenceError</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-SyntaxError"><span class="toc-text">2.3 SyntaxError</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-TypeError"><span class="toc-text">2.4 TypeError</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、异常调试及捕获"><span class="toc-text">三、异常调试及捕获</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s3.ax1x.com/2020/12/07/DvMLd0.png)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">Lou Guanghao</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><div class="menu_mask"></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item text-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">27</div></a></div></div><div class="mobile_data_item text-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">14</div></a></div></div><div class="mobile_data_item text-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG"><i class="fa-fw fa fa-github"></i><span> GitHub</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG/lousanpang.github.io/issues"><i class="fa-fw fa fa-coffee"></i><span> Speak</span></a></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title"><div class="posttitle">开发规范之常见报错及异常捕获</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-09-17<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-01-01</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/开发规范/">开发规范</a></span></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><p><a href="https://imgchr.com/i/DvMLd0" target="_blank" rel="noopener"><img alt="错误类型" data-src="https://s3.ax1x.com/2020/12/07/DvMLd0.png" class="lozad"></a></p>
+<h2 id="一、常见的错误类型"><a href="#一、常见的错误类型" class="headerlink" title="一、常见的错误类型"></a>一、常见的错误类型</h2><ul>
+<li>RangeError：标记一个错误，当设置的数值超出相应的范围触发。比如，new Array(-20)。</li>
+<li>ReferenceError：引用类型错误，当一个不存在的变量被引用时发生的错误。比如：console.log(a)。</li>
+<li>SyntaxError：语法错误。比如 if(true) {。</li>
+<li>TypeError：类型错误，表示值的类型非预期类型时发生的错误。</li>
+</ul>
+<h2 id="二、常见的错误"><a href="#二、常见的错误" class="headerlink" title="二、常见的错误"></a>二、常见的错误</h2><h3 id="2-1-RangeError"><a href="#2-1-RangeError" class="headerlink" title="2.1 RangeError"></a>2.1 RangeError</h3><ol>
+<li>RangeError: Maximum call stack size exceeded (超出了最大的堆栈大小)</li>
+</ol>
+<ul>
+<li>使用递归时消耗大量堆栈，导致浏览器抛出错误，因为浏览器给分配的内存不是无限的.</li>
+</ul>
+<h3 id="2-2-ReferenceError"><a href="#2-2-ReferenceError" class="headerlink" title="2.2 ReferenceError"></a>2.2 ReferenceError</h3><ol>
+<li>ReferenceError: “x” is not defined (“x”未定义)</li>
+</ol>
+<ul>
+<li>引用一个没有定义的变量</li>
+</ul>
+<h3 id="2-3-SyntaxError"><a href="#2-3-SyntaxError" class="headerlink" title="2.3 SyntaxError"></a>2.3 SyntaxError</h3><ol>
+<li>SyntaxError: Identifier ‘x’ has already been declared (标识符已申明)</li>
+</ol>
+<ul>
+<li>某个变量名称已经作为参数出现了，又在再次声明</li>
+</ul>
+<ol start="2">
+<li>SyntaxError: Invalid or unexpected token (捕获无效或意外的标记)</li>
+</ol>
+<ul>
+<li>代码中有非法的字符或者缺少必要的标识符号，比如减号 ( - ) 与连接符 ( – ) ，或者是英文双引号 ( “ ) 与中文双引号 ( “ )</li>
+</ul>
+<ol start="3">
+<li>SyntaxError: Unexpected end of input (意外的终止输入)</li>
+</ol>
+<ul>
+<li>码中某些地方的括号或引号不匹配缺失</li>
+</ul>
+<ol start="4">
+<li>SyntaxError: Invalid regular expression flags (正则表达式标志无效)</li>
+</ol>
+<ul>
+<li>在代码中出现了无效的正则表达式的标记</li>
+</ul>
+<h3 id="2-4-TypeError"><a href="#2-4-TypeError" class="headerlink" title="2.4 TypeError"></a>2.4 TypeError</h3><ol>
+<li>TypeError: Cannot read property ‘x’ of undefined (无法读取属性‘x’)</li>
+</ol>
+<ul>
+<li>访问或设置未定义(undefined)或null值的属性时会发生这种报错</li>
+</ul>
+<ol start="2">
+<li>TypeError: ‘x’ is not a constructor (表示 ‘x’不是构造函数)</li>
+</ol>
+<ul>
+<li>使用不是构造器的对象或者变量来作为构造器使用</li>
+</ul>
+<h2 id="三、异常调试及捕获"><a href="#三、异常调试及捕获" class="headerlink" title="三、异常调试及捕获"></a>三、异常调试及捕获</h2><ol>
+<li><p>try/catch，Js中处理异常的一种模式，try用于可能会发生错误的代码，catch对错误的处理。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;<span class="keyword">catch</span>(error) &#123;</span><br><span class="line">   <span class="comment">// 打印错误信息</span></span><br><span class="line">  <span class="built_in">console</span>.log(error)  <span class="comment">// ReferenceError: a is not defined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>throw，用来抛出一个用户自定义的异常，执行将被停止。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!name) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'用户名无效'</span>);</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line">getUserName()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Promise 的异常处理,Promise执行中，本身自带try…catch的异常处理，出错时，将错误Rejact函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'error!'</span>);</span><br><span class="line">&#125;).catch(alert);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>console</p>
+</li>
+<li><p>debugger</p>
+<br>
+<br>
+<br>
+<br>
+</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Lou Guanghao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://lousanpang.github.io/2019/09/17/standard/standard-error/">http://lousanpang.github.io/2019/09/17/standard/standard-error/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://lousanpang.github.io">Lou Guanghao</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/开发规范/">开发规范    </a></div><div class="post_share"><div class="social-share" data-image="https://s3.ax1x.com/2020/12/07/DvMLd0.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/10/07/tourism/hangzhou/"><img class="prev_cover lozad" data-src="https://i.loli.net/2019/10/07/POj7aM49A2XmRtE.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>杭州行</span></div></a></div><div class="next-post pull-right"><a href="/2019/05/01/frontend/css/css-summary/"><img class="next_cover lozad" data-src="https://s1.ax1x.com/2020/08/11/aLklo8.th.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>css记录篇</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = false == true ? true : false;
+var verify = false == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'95a9R9VBnOH4DwyKMPbEFN7e-gzGzoHsz',
+  appKey:'gAuNuYlxMU3vt0Ea0OJrfbcr',
+  placeholder:'离线请留言',
+  avatar:'wavatar',
+  guest_info:guest_info,
+  pageSize:'6',
+  lang:'en',
+  recordIP: true
+});</script></div></div></div><footer><div id="footer"><div class="copyright">&copy;2018 - 2021 By Lou Guanghao</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><a id="to_comment" href="#post-comment"><i class="scroll_to_comment fa fa-comments"></i></a><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><i class="nightshift fa fa-moon-o" id="nightshift" title="夜间模式"></i></section><div class=" " id="post_bottom"><div id="post_bottom_items"><a id="mobile_to_comment" href="#post-comment"><i class="mobile_scroll_to_comment fa fa-comments"></i></a><i class="fa fa-list" id="mobile_toc"></i><div id="toc_mobile"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#一、常见的错误类型"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">一、常见的错误类型</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#二、常见的错误"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">二、常见的错误</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-1-RangeError"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text">2.1 RangeError</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-2-ReferenceError"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text">2.2 ReferenceError</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-3-SyntaxError"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text">2.3 SyntaxError</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-4-TypeError"><span class="toc_mobile_items-number">2.4.</span> <span class="toc_mobile_items-text">2.4 TypeError</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#三、异常调试及捕获"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">三、异常调试及捕获</span></a></li></ol></div></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script async src="/js/search/local-search.js"></script><script src="/js/nightshift.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

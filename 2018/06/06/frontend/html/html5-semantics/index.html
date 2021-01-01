@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Html5语义化你的文档 | Lou Guanghao</title><meta name="description" content="Html5语义化"><meta name="keywords" content="Html5"><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://lousanpang.github.io/2018/06/06/frontend/html/html5-semantics/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Html5语义化你的文档"><meta name="twitter:description" content="Html5语义化"><meta name="twitter:image" content="https://s2.ax1x.com/2019/12/25/li1aGT.png"><meta property="og:type" content="article"><meta property="og:title" content="Html5语义化你的文档"><meta property="og:url" content="http://lousanpang.github.io/2018/06/06/frontend/html/html5-semantics/"><meta property="og:site_name" content="Lou Guanghao"><meta property="og:description" content="Html5语义化"><meta property="og:image" content="https://s2.ax1x.com/2019/12/25/li1aGT.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="开发规范之ESlint" href="http://lousanpang.github.io/2018/07/05/standard/standard-eslint/"><link rel="next" title="你不知道的css" href="http://lousanpang.github.io/2018/06/01/frontend/css/css-donot/"><meta name="baidu-site-verification" content="725b13ee7d59bc97f5a2ca424005998c"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: undefined,
+  highlight_copy: 'true',
+  highlight_lang: 'false',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、列举"><span class="toc-text">一、列举</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-智能提示"><span class="toc-text">1.1 智能提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-搜索提示"><span class="toc-text">1.2 搜索提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-展示更多"><span class="toc-text">1.3 展示更多</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-提示框"><span class="toc-text">1.4 提示框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-字体形态"><span class="toc-text">1.5 字体形态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-地址"><span class="toc-text">1.6 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-独立结构"><span class="toc-text">1.7 独立结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">独立结构article</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-侧边栏"><span class="toc-text">1.8 侧边栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-呈现计算机代码片段"><span class="toc-text">1.9 呈现计算机代码片段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-del-删除线"><span class="toc-text">2.0 del 删除线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-内容展示"><span class="toc-text">2.1 内容展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-图片上的字体"><span class="toc-text">2.2 图片上的字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-iframe"><span class="toc-text">2.3 iframe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-ol"><span class="toc-text">2.4 ol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-link"><span class="toc-text">2.5 link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-select下的分界线"><span class="toc-text">2.5 select下的分界线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-输出"><span class="toc-text">2.5 输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-带有格式的内容"><span class="toc-text">2.5 带有格式的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-拼音"><span class="toc-text">2.5 拼音</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-trach-字幕"><span class="toc-text">2.5 trach 字幕</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/12/25/li1aGT.png)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">Lou Guanghao</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><div class="menu_mask"></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item text-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">27</div></a></div></div><div class="mobile_data_item text-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">14</div></a></div></div><div class="mobile_data_item text-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG"><i class="fa-fw fa fa-github"></i><span> GitHub</span></a></div><div class="menus_item"><a class="site-page" href="https://github.com/LOUSANPANG/lousanpang.github.io/issues"><i class="fa-fw fa fa-coffee"></i><span> Speak</span></a></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Html5语义化你的文档</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2018-06-06<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-01-01</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Html5/">Html5</a></span></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h2 id="一、列举"><a href="#一、列举" class="headerlink" title="一、列举"></a>一、列举</h2><h3 id="1-1-智能提示"><a href="#1-1-智能提示" class="headerlink" title="1.1 智能提示"></a>1.1 智能提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dfn id=&quot;abbr&quot;&gt;</span><br><span class="line">    &lt;abbr title=&quot;这是个abbr标签&quot;&gt;鼠标hover时查看详细信息&lt;/abbr&gt;</span><br><span class="line">&lt;/dfn&gt;</span><br></pre></td></tr></table></figure>
+
+<dfn id="abbr">
+    <abbr title="这是个abbr标签">鼠标hover时查看详细信息</abbr>
+</dfn>
+
+<h3 id="1-2-搜索提示"><a href="#1-2-搜索提示" class="headerlink" title="1.2 搜索提示"></a>1.2 搜索提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;input list=&quot;browsers&quot; placeholder=&quot;datalist&quot; /&gt;</span><br><span class="line">&lt;datalist id=&quot;browsers&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;Chrome&quot;&gt;&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;Firefox&quot;&gt;&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;Internet Explorer&quot;&gt;&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;Opera&quot;&gt;&lt;/option&gt;</span><br><span class="line">&lt;/datalist&gt;</span><br></pre></td></tr></table></figure>
+
+<input list="browsers" placeholder="datalist">
+<datalist id="browsers">
+    <option value="Chrome"></option>
+    <option value="Firefox"></option>
+    <option value="Internet Explorer"></option>
+    <option value="Opera"></option>
+</datalist>
+
+<h3 id="1-3-展示更多"><a href="#1-3-展示更多" class="headerlink" title="1.3 展示更多"></a>1.3 展示更多</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;details&gt;</span><br><span class="line">    &lt;summary&gt;details summary&lt;/summary&gt;</span><br><span class="line">    details元素可创建一个挂件，仅在被切换成展开状态时，它才会显示内含的信息。summary元素可为该部件提供概要或者标签。</span><br><span class="line">&lt;/details&gt;</span><br></pre></td></tr></table></figure>
+
+<details>
+    <summary>details summary</summary>
+    details元素可创建一个挂件，仅在被切换成展开状态时，它才会显示内含的信息。summary元素可为该部件提供概要或者标签。
+</details>
+
+<h3 id="1-4-提示框"><a href="#1-4-提示框" class="headerlink" title="1.4 提示框"></a>1.4 提示框</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dialog open&gt;</span><br><span class="line">    &lt;p&gt;dialog标签 类似提示框 open属性开关&lt;/p&gt;</span><br><span class="line">&lt;/dialog&gt;</span><br></pre></td></tr></table></figure>
+
+<dialog open>
+    <p>dialog标签 类似提示框 open属性开关</p>
+</dialog>
+<br>
+<br>
+<br>
+<br>
+
+<h3 id="1-5-字体形态"><a href="#1-5-字体形态" class="headerlink" title="1.5 字体形态"></a>1.5 字体形态</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;em&gt;着重阅读元素 em标签&lt;/em&gt;</span><br><span class="line"></span><br><span class="line">&lt;i&gt;i标签斜体&lt;/i&gt;</span><br><span class="line"></span><br><span class="line">&lt;small&gt;small标签变小&lt;/small&gt;</span><br><span class="line"></span><br><span class="line">&lt;strong&gt;strong标签加粗&lt;/strong&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;sub标签字体更低: H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;下划线 &lt;u&gt;speling&lt;/u&gt; mistakes, so the writer can &lt;u&gt;u标签&lt;/u&gt; them.&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><em>着重阅读元素 em标签</em><br><i>i标签斜体</i><br><small>small标签变小</small><br><strong>strong标签加粗</strong></p>
+<p>sub标签字体更低: H<sub>2</sub>O</p>
+<p>下划线 <u>speling</u> mistakes, so the writer can <u>u标签</u> them.</p>
+
+<h3 id="1-6-地址"><a href="#1-6-地址" class="headerlink" title="1.6 地址"></a>1.6 地址</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;address&gt;</span><br><span class="line">    &lt;a href=&quot;mailto:1271255653@qq.com&quot;&gt;联系邮箱&lt;/a&gt;</span><br><span class="line">&lt;/address&gt;</span><br></pre></td></tr></table></figure>
+
+<address>
+    <a href="mailto:1271255653@qq.com" target="_blank" rel="noopener">联系邮箱</a>
+</address>
+
+<h3 id="1-7-独立结构"><a href="#1-7-独立结构" class="headerlink" title="1.7 独立结构"></a>1.7 独立结构</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;article&gt;</span><br><span class="line">    &lt;h4&gt;独立结构article&lt;/h4&gt;</span><br><span class="line">&lt;/article&gt;</span><br><span class="line">&lt;section&gt;section独立部分&lt;/section&gt;</span><br></pre></td></tr></table></figure>
+
+<article>
+    <h4>独立结构article</h4>
+</article>
+<section>section独立部分</section>
+
+<h3 id="1-8-侧边栏"><a href="#1-8-侧边栏" class="headerlink" title="1.8 侧边栏"></a>1.8 侧边栏</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;aside&gt;aside独立的一部分&lt;/aside&gt;</span><br></pre></td></tr></table></figure>
+
+<aside>aside独立的一部分</aside>
+
+<h3 id="1-9-呈现计算机代码片段"><a href="#1-9-呈现计算机代码片段" class="headerlink" title="1.9 呈现计算机代码片段"></a>1.9 呈现计算机代码片段</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;code&gt;code标签代码片段&lt;/code&gt;</span><br><span class="line">&lt;var&gt;var 表示变量标签&lt;/var&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>code标签代码片段</code><br><var>var 表示变量标签</var></p>
+<h3 id="2-0-del-删除线"><a href="#2-0-del-删除线" class="headerlink" title="2.0 del 删除线"></a>2.0 del 删除线</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;del&gt;del标签下架商品&lt;/del&gt;</span><br><span class="line">&lt;s&gt;s标签&lt;/s&gt;</span><br></pre></td></tr></table></figure>
+
+<p><del>del标签下架商品</del><br><s>s标签</s></p>
+<h3 id="2-1-内容展示"><a href="#2-1-内容展示" class="headerlink" title="2.1 内容展示"></a>2.1 内容展示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;main&gt;main标签的内容&lt;em&gt;这是em标签&lt;/em&gt;&lt;/main&gt;</span><br><span class="line">    &lt;p&gt;time 标签&lt;time&gt;20:00&lt;/time&gt;.&lt;/p&gt;</span><br><span class="line">    &lt;progress value=&quot;40&quot; max=&quot;100&quot;&gt;&lt;/progress&gt;</span><br><span class="line">    &lt;mark&gt;mark标签高亮&lt;/mark&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;nav&gt;nav标签&lt;/nav&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line">    我是footer一个底部标签</span><br><span class="line">&lt;/footer&gt;</span><br></pre></td></tr></table></figure>
+
+<header>
+    <main>main标签的内容<em>这是em标签</em></main>
+    <p>time 标签<time>20:00</time>.</p>
+    <progress value="40" max="100"></progress>
+    <mark>mark标签高亮</mark>
+</header>
+<nav>nav标签</nav>
+<footer>
+    我是footer一个底部标签
+</footer>
+
+<h3 id="2-2-图片上的字体"><a href="#2-2-图片上的字体" class="headerlink" title="2.2 图片上的字体"></a>2.2 图片上的字体</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;figure&gt;</span><br><span class="line">    &lt;img</span><br><span class="line">    src=&quot;https://interactive-examples.mdn.mozilla.net/media/examples/elephant-660-480.jpg&quot;</span><br><span class="line">    /&gt;</span><br><span class="line">    &lt;figcaption&gt;figure figcaption 组合&lt;/figcaption&gt;</span><br><span class="line">&lt;/figure&gt;</span><br></pre></td></tr></table></figure>
+
+<figure>
+    <img data-src="https://interactive-examples.mdn.mozilla.net/media/examples/elephant-660-480.jpg" class="lozad">
+    <figcaption>figure figcaption 组合</figcaption>
+</figure>
+
+<h3 id="2-3-iframe"><a href="#2-3-iframe" class="headerlink" title="2.3 iframe"></a>2.3 iframe</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;iframe</span><br><span class="line">    src=&quot;https://www.baidu.com&quot;</span><br><span class="line">    width=&quot;100&quot;</span><br><span class="line">    height=&quot;100&quot;</span><br><span class="line">    frameborder=&quot;10&quot;</span><br><span class="line">&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+
+<iframe src="https://www.baidu.com" width="100" height="100" frameborder="10"></iframe>
+
+<h3 id="2-4-ol"><a href="#2-4-ol" class="headerlink" title="2.4 ol"></a>2.4 ol</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ol type=&quot;a&quot;&gt;</span><br><span class="line">    &lt;li value=&quot;1&quot;&gt;third item&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;fourth item&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;fifth item&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure>
+
+<ol type="a">
+    <li value="1">third item</li>
+    <li>fourth item</li>
+    <li>fifth item</li>
+</ol>
+
+<h3 id="2-5-link"><a href="#2-5-link" class="headerlink" title="2.5 link"></a>2.5 link</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;favicon.ico&quot; rel=&quot;icon&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<link href="favicon.ico" rel="icon">
+
+<h3 id="2-5-select下的分界线"><a href="#2-5-select下的分界线" class="headerlink" title="2.5 select下的分界线"></a>2.5 select下的分界线</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;select name=&quot;&quot; id=&quot;&quot;&gt;</span><br><span class="line">    &lt;optgroup label=&quot;我是optgroup&quot;&gt;</span><br><span class="line">        &lt;option&gt;111111&lt;/option&gt;</span><br><span class="line">        &lt;option selected&gt;222222&lt;/option&gt;</span><br><span class="line">    &lt;/optgroup&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<select name id>
+    <optgroup label="我是optgroup">
+    <option>111111</option>
+    <option selected>222222</option>
+    </optgroup>
+</select>
+
+
+<h3 id="2-5-输出"><a href="#2-5-输出" class="headerlink" title="2.5 输出"></a>2.5 输出</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;form oninput=&quot;result.value=parseInt(a.value)+parseInt(b.value)&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;range&quot; name=&quot;b&quot; value=&quot;50&quot; /&gt; +</span><br><span class="line">    &lt;input type=&quot;number&quot; name=&quot;a&quot; value=&quot;10&quot; /&gt; =</span><br><span class="line">    &lt;output name=&quot;result&quot;&gt;&lt;/output&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+    <input type="range" name="b" value="50"> +
+    <input type="number" name="a" value="10"> =
+    <output name="result"></output>
+</form>
+
+
+<h3 id="2-5-带有格式的内容"><a href="#2-5-带有格式的内容" class="headerlink" title="2.5 带有格式的内容"></a>2.5 带有格式的内容</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;pre&gt;</span><br><span class="line">    L          TE</span><br><span class="line">    A       A</span><br><span class="line">        C    V</span><br><span class="line">        R A</span><br><span class="line">        DOU</span><br><span class="line">        LOU</span><br><span class="line">        REUSE</span><br><span class="line">        QUE TU</span><br><span class="line">        PORTES</span><br><span class="line">    ET QUI T&apos;</span><br><span class="line">    ORNE O CI</span><br><span class="line">        VILISÉ</span><br><span class="line">    OTE-  TU VEUX</span><br><span class="line">        LA    BIEN</span><br><span class="line">    SI      RESPI</span><br><span class="line">            RER       - pre标签</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<pre>
+    L          TE
+    A       A
+        C    V
+        R A
+        DOU
+        LOU
+        REUSE
+        QUE TU
+        PORTES
+    ET QUI T'
+    ORNE O CI
+        VILISÉ
+    OTE-  TU VEUX
+        LA    BIEN
+    SI      RESPI
+            RER       - pre标签
+</pre>
+
+<h3 id="2-5-拼音"><a href="#2-5-拼音" class="headerlink" title="2.5 拼音"></a>2.5 拼音</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ruby&gt;</span><br><span class="line">    &lt;rb&gt;旧&lt;/rb&gt;</span><br><span class="line">    &lt;rb&gt;金&lt;/rb&gt;</span><br><span class="line">    &lt;rb&gt;山&lt;/rb&gt;</span><br><span class="line">    &lt;rt&gt;jiù&lt;/rt&gt;</span><br><span class="line">    &lt;rt&gt;jīn&lt;/rt&gt;</span><br><span class="line">    &lt;rt&gt;shān&lt;/rt&gt;</span><br><span class="line">    &lt;rtc&gt;San Francisco&lt;/rtc&gt;</span><br><span class="line">&lt;/ruby&gt;</span><br></pre></td></tr></table></figure>
+
+<ruby>
+    <rb>旧</rb>
+    <rb>金</rb>
+    <rb>山</rb>
+    <rt>jiù</rt>
+    <rt>jīn</rt>
+    <rt>shān</rt>
+    <rtc>San Francisco</rtc>
+</ruby>
+
+<h3 id="2-5-trach-字幕"><a href="#2-5-trach-字幕" class="headerlink" title="2.5 trach 字幕"></a>2.5 trach 字幕</h3><br>
+<br>
+<br>
+<br>
+<br></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Lou Guanghao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://lousanpang.github.io/2018/06/06/frontend/html/html5-semantics/">http://lousanpang.github.io/2018/06/06/frontend/html/html5-semantics/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://lousanpang.github.io">Lou Guanghao</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Html5/">Html5    </a></div><div class="post_share"><div class="social-share" data-image="https://s2.ax1x.com/2019/12/25/li1aGT.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2018/07/05/standard/standard-eslint/"><img class="prev_cover lozad" data-src="https://s1.ax1x.com/2020/08/17/dZBgUJ.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>开发规范之ESlint</span></div></a></div><div class="next-post pull-right"><a href="/2018/06/01/frontend/css/css-donot/"><img class="next_cover lozad" data-src="https://s2.ax1x.com/2019/12/06/QJAUW6.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>你不知道的css</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = false == true ? true : false;
+var verify = false == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'95a9R9VBnOH4DwyKMPbEFN7e-gzGzoHsz',
+  appKey:'gAuNuYlxMU3vt0Ea0OJrfbcr',
+  placeholder:'离线请留言',
+  avatar:'wavatar',
+  guest_info:guest_info,
+  pageSize:'6',
+  lang:'en',
+  recordIP: true
+});</script></div></div></div><footer><div id="footer"><div class="copyright">&copy;2018 - 2021 By Lou Guanghao</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><a id="to_comment" href="#post-comment"><i class="scroll_to_comment fa fa-comments"></i></a><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><i class="nightshift fa fa-moon-o" id="nightshift" title="夜间模式"></i></section><div class=" " id="post_bottom"><div id="post_bottom_items"><a id="mobile_to_comment" href="#post-comment"><i class="mobile_scroll_to_comment fa fa-comments"></i></a><i class="fa fa-list" id="mobile_toc"></i><div id="toc_mobile"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#一、列举"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">一、列举</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-1-智能提示"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">1.1 智能提示</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-2-搜索提示"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">1.2 搜索提示</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-3-展示更多"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">1.3 展示更多</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-4-提示框"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">1.4 提示框</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-5-字体形态"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">1.5 字体形态</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-6-地址"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">1.6 地址</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-7-独立结构"><span class="toc_mobile_items-number">1.7.</span> <span class="toc_mobile_items-text">1.7 独立结构</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#null"><span class="toc_mobile_items-number">1.7.1.</span> <span class="toc_mobile_items-text">独立结构article</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-8-侧边栏"><span class="toc_mobile_items-number">1.8.</span> <span class="toc_mobile_items-text">1.8 侧边栏</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-9-呈现计算机代码片段"><span class="toc_mobile_items-number">1.9.</span> <span class="toc_mobile_items-text">1.9 呈现计算机代码片段</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-0-del-删除线"><span class="toc_mobile_items-number">1.10.</span> <span class="toc_mobile_items-text">2.0 del 删除线</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-1-内容展示"><span class="toc_mobile_items-number">1.11.</span> <span class="toc_mobile_items-text">2.1 内容展示</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-2-图片上的字体"><span class="toc_mobile_items-number">1.12.</span> <span class="toc_mobile_items-text">2.2 图片上的字体</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-3-iframe"><span class="toc_mobile_items-number">1.13.</span> <span class="toc_mobile_items-text">2.3 iframe</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-4-ol"><span class="toc_mobile_items-number">1.14.</span> <span class="toc_mobile_items-text">2.4 ol</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-link"><span class="toc_mobile_items-number">1.15.</span> <span class="toc_mobile_items-text">2.5 link</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-select下的分界线"><span class="toc_mobile_items-number">1.16.</span> <span class="toc_mobile_items-text">2.5 select下的分界线</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-输出"><span class="toc_mobile_items-number">1.17.</span> <span class="toc_mobile_items-text">2.5 输出</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-带有格式的内容"><span class="toc_mobile_items-number">1.18.</span> <span class="toc_mobile_items-text">2.5 带有格式的内容</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-拼音"><span class="toc_mobile_items-number">1.19.</span> <span class="toc_mobile_items-text">2.5 拼音</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-5-trach-字幕"><span class="toc_mobile_items-number">1.20.</span> <span class="toc_mobile_items-text">2.5 trach 字幕</span></a></li></ol></li></ol></div></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script async src="/js/search/local-search.js"></script><script src="/js/nightshift.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
