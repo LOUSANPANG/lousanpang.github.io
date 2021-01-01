@@ -16,9 +16,65 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ![pexels-photo-2294878.jpeg](https://i.loli.net/2019/09/11/sR9xEpuAhTYcFiw.jpg)
 
+### 如何搭建hexo博客
+#### 安装
+```bash
+新建一文件夹
+
+yarn add -D hexo-cli
+hexo -v
+hexo init xxx
+```
+
+#### 测试
+```
+hexo g
+hexo d
+hexo s
+```
+
+#### 与GitHub关联
+```
+创建 xxx.github.io仓库
+
+在根目录下的_config.yml下
+deploy: 
+  type: git
+  repository: https://github.com/LOUSANPANG/lousanpang.github.io.git
+  branch: master
+
+yarn add -S hexo-deployer-git // 安装git部署命令插件
+
+hexo clean
+hexo g
+hexo d
+```
+
+#### [关联主题(以heox-next为例)](https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md)
+```
+git clone https://github.com/theme-next/hexo-theme-next themes/next
+
+$ cd themes/next
+$ git tag -l
+…
+v6.0.0
+v6.0.1
+v6.0.2
+
+git checkout master
+
+在根目录下的站点_config.yml下修改主题：
+theme: next
+
+hexo g
+hexo d
+```
+
+
+
 ### 一、命令
 #### 1.1 安装前提
-* [Node.js (Should be at least nodejs 6.9)](https://nodejs.org/en/)
+* [Node.js <= 12.x (Should be at least nodejs 6.9)](https://nodejs.org/en/)
 * [Git](https://git-scm.com/)
 * `npm install -g hexo-cli@2.0.0`
 
