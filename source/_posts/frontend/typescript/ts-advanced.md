@@ -1,11 +1,11 @@
 ---
-title: TypeScript开发应用
+title: TypeScript进阶
 date: 2020-10-27
 tags: 
     - TypeScript
 categories: TypeScript
 keywords: [TypeScript]
-description: TypeScript开发应用
+description: TypeScript进阶
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s3.ax1x.com/2021/01/02/sS5tNn.png # 缩略图
