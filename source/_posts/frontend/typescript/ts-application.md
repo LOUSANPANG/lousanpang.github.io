@@ -15,19 +15,42 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 ### 常见使用
-对象数组
+#### 在window对象上显式设置属性
 ```ts
-type Dxx {
-    objArr: { id: string; }[];
+declare interface Window {
+    MyNamespace: any;
 }
+window.MyNamespace = window.MyNamespace || {};
+// => 等价于
+(window as any).MyNamespace = {};
 ```
 
-对象T的key为任意`string`
+
+#### 对象
+如何为对象动态分配属性
 ```ts
-type Dxx = Record<string, T>;
+// ts
+interface LooseObject {
+  name: string;
+  age?: number;
+  [key: string]: any
+}
+let developer: Developer = { name: "semlinker" };
+developer.age = 30;
+developer.city = "XiaMen";
+
+// 内置工具类型 Record
+// type Record<K extends string | number | symbol, T> = { [P in K]: T; }
+interface Developer extends Record<string, any> {
+  name: string;
+  age?: number;
+}
+let developer: Developer = { name: "semlinker" };
+developer.age = 30;
+developer.city = "XiaMen";
 ```
 
-函数类型
+#### 函数
 ```ts
 type Dxx = {
     // 常见的函数类型
