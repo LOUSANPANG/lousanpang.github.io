@@ -27,7 +27,76 @@ window.MyNamespace = window.MyNamespace || {};
 
 
 #### 1.2 对象
-如何为对象动态分配属性
+**object, Object 和 {} 之间有什么区别**
+
+**object类型,用于表示非原始类型**
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+interface ObjectConstructor {
+  create(o: object | null): any;
+  // ...
+}
+
+const proto = {};
+Object.create(proto);     // OK
+Object.create(null);      // OK
+Object.create(undefined); // Error
+Object.create(1337);      // Error
+Object.create(true);      // Error
+Object.create("oops");    // Error
+```
+
+**Object 类型：它是所有 Object 类的实例的类型，它由以下两个接口来定义：**
+
+**Object 接口定义了 Object.prototype 原型对象上的属性；**
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+interface Object {
+  constructor: Function;
+  toString(): string;
+  toLocaleString(): string;
+  valueOf(): Object;
+  hasOwnProperty(v: PropertyKey): boolean;
+  isPrototypeOf(v: Object): boolean;
+  propertyIsEnumerable(v: PropertyKey): boolean;
+}
+```
+
+**ObjectConstructor 接口定义了 Object 类的属性。**
+
+**Object 类的所有实例都继承了 Object 接口中的所有属性。**
+```ts
+// node_modules/typescript/lib/lib.es5.d.ts
+interface ObjectConstructor {
+  /** Invocation via `new` */
+  new(value?: any): Object;
+  /** Invocation via function calls */
+  (value?: any): any;
+  readonly prototype: Object;
+  getPrototypeOf(o: any): any;
+  // ···
+}
+declare var Object: ObjectConstructor;
+```
+
+**{} 类型**
+{} 类型描述了一个没有成员的对象。当你试图访问这样一个对象的任意属性时，TypeScript 会产生一个编译时错误。
+```ts
+// Type {}
+const obj = {};
+// Error: Property 'prop' does not exist on type '{}'.
+obj.prop = "semlinker";
+```
+
+但是，你仍然可以使用在 Object 类型上定义的所有属性和方法，这些属性和方法可通过 JavaScript 的原型链隐式地使用：
+```ts
+// Type {}
+const obj = {};
+// "[object Object]"
+obj.toString();
+```
+
+**如何为对象动态分配属性**
 ```ts
 // ts
 interface LooseObject {
@@ -51,7 +120,7 @@ developer.city = "XiaMen";
 ```
 
 #### 1.3 函数
-基础定义
+**基础定义**
 ```ts
 type Dxx = {
     // 常见的函数类型
@@ -63,7 +132,7 @@ type Dxx = {
 }
 ```
 
-函数重载
+**函数重载**
 ```ts
 function add(x, y) {
   return x + y;
