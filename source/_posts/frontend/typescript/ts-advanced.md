@@ -73,6 +73,13 @@ type Mutable<T> = {
 将`K`中的所有的属性的值转化为`T`类型
 ```ts
 type Record<K extends keyof any, T> = { [P in K]: T };
+
+应用：
+type a = Record<string, T>;
+// ==>
+type a = {
+    [key: string]: T;
+};
 ```
 
 
