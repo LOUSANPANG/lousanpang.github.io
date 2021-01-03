@@ -59,7 +59,26 @@ const App: React.FC<AppProps> = ({ message, children }) => {
 };
 ```
 
-### 三、Hooks
+
+### 三、class
+```ts
+type Props = {
+  className?: string
+   ...
+};
+
+type State = {
+  submitted?: bool
+   ...
+};
+
+class MyComponent extends React.Component<Props, State> {
+   ...
+}
+```
+
+
+### 四、Hooks
 
 useState
 ```ts
