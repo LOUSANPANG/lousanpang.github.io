@@ -1,5 +1,5 @@
 ---
-title: TypeScript开发应用
+title: TypeScript系列之开发应用
 date: 2020-09-27
 tags: 
     - TypeScript
