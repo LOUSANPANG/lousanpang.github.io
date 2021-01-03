@@ -14,8 +14,121 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 泛型
-#### T U
+
+### 一、interfaces 与 type 之间有什么区别
+#### 1.1 Objects/Functions
+接口和类型别名都可以用来描述对象的形状或函数签名
+
+接口
+```ts
+interface Point {
+  x: number;
+  y: number;
+}
+interface SetPoint {
+  (x: number, y: number): void;
+}
+```
+
+类型别名
+```ts
+type Point = {
+  x: number;
+  y: number;
+};
+type SetPoint = (x: number, y: number) => void;
+```
+
+#### 1.2 Other Types
+与接口类型不一样，类型别名可以用于一些其他类型，比如原始类型、联合类型和元组：
+```ts
+// primitive
+type Name = string;
+
+// object
+type PartialPointX = { x: number; };
+type PartialPointY = { y: number; };
+
+// union
+type PartialPoint = PartialPointX | PartialPointY;
+
+// tuple
+type Data = [number, string];
+```
+
+#### 1.3 Extend
+接口和类型别名都能够被扩展，但语法有所不同。此外，接口和类型别名不是互斥的。接口可以扩展类型别名，而反过来是不行的。
+
+`Interface extends interface`
+```ts
+interface PartialPointX { x: number; }
+interface Point extends PartialPointX { 
+  y: number; 
+}
+```
+
+`Type alias extends type alias`
+```ts
+type PartialPointX = { x: number; };
+type Point = PartialPointX & { y: number; };
+```
+
+`Interface extends type alias`
+```ts
+type PartialPointX = { x: number; };
+interface Point extends PartialPointX { y: number; }
+```
+
+`Type alias extends interface`
+```ts
+interface PartialPointX { x: number; }
+type Point = PartialPointX & { y: number; };
+```
+
+#### 1.4 Implements
+类可以以相同的方式实现接口或类型别名，但类不能实现使用类型别名定义的联合类型：
+```ts
+interface Point {
+  x: number;
+  y: number;
+}
+class SomePoint implements Point {
+  x = 1;
+  y = 2;
+}
+
+type Point2 = {
+  x: number;
+  y: number;
+};
+class SomePoint2 implements Point2 {
+  x = 1;
+  y = 2;
+}
+
+type PartialPoint = { x: number; } | { y: number; };
+// A class can only implement an object type or 
+// intersection of object types with statically known members.
+class SomePartialPoint implements PartialPoint { // Error
+  x = 1;
+  y = 2;
+}
+```
+
+#### 1.5 Declaration merging
+与类型别名不同，接口可以定义多次，会被自动合并为单个接口
+```ts
+interface Point { x: number; }
+interface Point { y: number; }
+const point: Point = { x: 1, y: 2 };
+```
+
+### 二、object, Object 和 {}
+#### 
+
+
+### 三、泛型
+#### 3.1 T U
 像传递参数一样，我们传递了我们想要用于特定函数调用的类型。
 
 其中 `T` 代表 `Type`，在定义泛型时通常用作第一个类型变量名称。但实际上 `T` 可以用任何有效名称代替。除了 `T` 之外，以下是常见泛型变量代表的意思：
@@ -32,8 +145,7 @@ function identity <T, U>(value: T, message: U) : T {
 identity(68, "Semlinker");
 ```
 
-
-#### Partial <P>
+#### 3.2 Partial <P>
 Partial 作用是将传入的属性变为可选项.
 
 `keyof`可以用来取得一个对象接口的所有`key`值.
@@ -60,7 +172,7 @@ type Partial<T> = { [P in keyof T]?: T[P] };
 意思是`keyof T`拿到`T`所有属性名，然后`in`进行遍历，将值赋给P，最后`T[P]`取得相应的属性的值，`?`就明白了`Partial`的含义了。
 
 
-### Required
+### 3.3 Required
 `Required`的作用是将传入的属性变为必须项，源码如下：
 ```ts
 type Required<T> = { [P in keyof T]-?: T[P] };
@@ -68,14 +180,14 @@ type Required<T> = { [P in keyof T]-?: T[P] };
 我们发现一个有意思的用法 `-?`, 这里很好理解就是将可选项代表的`?`去掉, 从而让这个类型变成必选项. 与之对应的还有个+`?`, 这个含义自然与`-?`之前相反, 它是用来把属性变成可选项的.
 
 
-### Readonly
+### 3.4 Readonly
 将传入的属性变为只读选项，源码如下：
 ```ts
 type Readonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 
-### Mutable
+### 3.5 Mutable
 未包含。
 
 类似地, 其实还有对 `+` 和 `-`, 这里要说的不是变量的之间的进行加减而是对 `readonly` 进行加减.
@@ -87,7 +199,7 @@ type Mutable<T> = {
 ```
 
 
-### Record
+### 3.6 Record
 将`K`中的所有的属性的值转化为`T`类型
 ```ts
 type Record<K extends keyof any, T> = { [P in K]: T };
@@ -101,14 +213,14 @@ type a = {
 ```
 
 
-### Pick
+### 3.7 Pick
 从 `T` 中取出一系列 `K` 的属性
 ```ts
 type Pick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 
-### Exclude
+### 3.8 Exclude
 ```ts
 T extends U ? X : Y
 ```
@@ -135,7 +247,7 @@ type T = Exclude<1 | 2, 1 | 3> // -> 2
 根据代码和示例我们可以推断出 `Exclude` 的作用是从 `T` 中找出 `U` 中没有的元素, 换种更加贴近语义的说法其实就是从`T` 中排除 `U`.
 
 
-### Extract
+### 3.9 Extract
 `Extract`源码：
 ```ts
 type Extract<T, U> = T extends U ? T : never;
@@ -143,7 +255,7 @@ type Extract<T, U> = T extends U ? T : never;
 根据源码我们推断出 `Extract` 的作用是提取出 `T `包含在 `U` 中的元素, 换种更加贴近语义的说法就是从 `T` 中提取出 `U`.
 
 
-### Omit
+### 3.10 Omit
 未包含.
 
 用之前的 `Pick` 和 `Exclude` 进行组合, 实现忽略对象某些属性功能, 源码如下
@@ -155,7 +267,7 @@ type Foo = Omit<{name: string, age: number}, 'name'> // -> { age: number }
 ```
 
 
-### ReturnType
+### 3.11 ReturnType
 在阅读源码之前我们需要了解一下 `infer` 这个关键字, 在条件类型语句中, 我们可以用 `infer` 声明一个类型变量并且对它进行使用,我们可以用它获取函数的返回类型， 源码如下:
 ```ts
 type ReturnType<T> = T extends (
@@ -173,7 +285,7 @@ type fn = ReturnType<typeof foo>;
 ```
 
 
-### AxiosReturnType
+### 3。12 AxiosReturnType
 未包含
 
 开发经常使用 `axios` 进行封装API层请求, 通常是一个函数返回一个 `AxiosPromise<Resp>`, 现在我想取到它的 `Resp` 类型, 根据上一个工具泛型的知识我们可以这样写.
@@ -186,7 +298,7 @@ type Resp = AxiosReturnType<Api> // 泛型参数中传入你的 Api 请求函数
 ```
 
 
-
+### 四、[装饰器](https://mp.weixin.qq.com/s?__biz=MzI2MjcxNTQ0Nw==&mid=2247484552&idx=1&sn=fe548e36a4fcda8e103ae6a5cb6cec41&chksm=ea47a5d0dd302cc6fef0c6eab2e585aed4563e90a97a21094ee00d871d9cddaa7a2ba881533c&scene=21#wechat_redirect)
 
 
 

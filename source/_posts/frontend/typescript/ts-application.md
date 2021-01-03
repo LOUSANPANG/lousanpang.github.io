@@ -14,8 +14,8 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 常见使用
-#### 在window对象上显式设置属性
+### 一、常见使用
+#### 1.1 在window对象上显式设置属性
 ```ts
 declare interface Window {
     MyNamespace: any;
@@ -26,7 +26,7 @@ window.MyNamespace = window.MyNamespace || {};
 ```
 
 
-#### 对象
+#### 1.2 对象
 如何为对象动态分配属性
 ```ts
 // ts
@@ -50,7 +50,8 @@ developer.age = 30;
 developer.city = "XiaMen";
 ```
 
-#### 函数
+#### 1.3 函数
+基础定义
 ```ts
 type Dxx = {
     // 常见的函数类型
@@ -62,9 +63,47 @@ type Dxx = {
 }
 ```
 
+函数重载
+```ts
+function add(x, y) {
+  return x + y;
+}
+add(1, 2); // 3
+add("1", "2"); //"12"
 
-### React
-#### 相关类型
+// 应用
+type Combinable = string | number;
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+// 缺陷： number类型的对象上并不存在split属性
+const result = add('semlinker', ' kakuqo');
+result.split(' ');
+
+// 需要函数重载
+class Calculator {
+  add(a: number, b: number): number;
+  add(a: string, b: string): string;
+  add(a: string, b: number): string;
+  add(a: number, b: string): string;
+  add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+    return a + b;
+  }
+}
+const calculator = new Calculator();
+const result = calculator.add('Semlinker', ' Kakuqo');
+```
+
+
+### 二、React
+#### 2.1 相关类型
 ```ts
 export declare interface AppProps {
     children: React.ReactNode;
@@ -79,7 +118,7 @@ export declare interface AppProps {
 }
 ```
 
-#### 函数式组件
+#### 2.2 函数式组件
 ```ts
 // 基础
 interface AppProps = { message: string };
@@ -107,7 +146,7 @@ const App: React.FC<AppProps> = ({ message, children }) => {
 };
 ```
 
-#### **Hooks**
+#### 2.3 Hooks
 
 useState
 ```ts
