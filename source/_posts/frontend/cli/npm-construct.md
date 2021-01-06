@@ -16,162 +16,190 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 [![npm webpack](https://s1.ax1x.com/2020/10/23/BE0IOg.jpg)](https://imgchr.com/i/BE0IOg)
 
+## 一、介绍
+技术：
+`npm webpack ts`
 
-## 一、⚒ 创建一个基础npm架子
+项目结构：
+```json
+|- .github // ISSUES模板
+|- .vscode // vscode配置
+|- build // webpack
+    |- webpack.base.conf.js
+    |- webpack.dev.conf.js
+    |- webpack.build.conf.js
+|- docs // 文档
+|- example // 示例
+|- packages // 源码目录
+    |- src
+    |- template
+    |- static
+    |- types
+    |- utils
+|- .babelrc
+|- .browerslistrc
+|- .editorconfig
+|- .eslintrc
+|- .gitgnore
+|- .prettierrc
+|- LICENSE
+|- LICENSE
+|- tsconfig.json
+``` 
 
-### 1.1 项目初始化，创建一个`package.json`
 
+## 二、模板构建
+
+### 2.1 项目初始化
+[构建`package.json`](https://docs.npmjs.com/cli/v6/configuring-npm/package-json)
 ```bash
 $ npm init
 ```
 
-- 关于版本制定 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)。
-- 关于`main`字段（指定打包的出口文件）`eg: lib/index.min.js`。
-- 关于`scripts`字段 （项目运行、打包、测试、链接等操作） `eg: "build": "webpack --config build/webpack.config.js --mode production"`。
 
-<br>
+### 2.1 创建项目文件
+- .browerslistrc 浏览器版本
+- .gitignore 代码提交忽略文件
+- LICENSE 版权
+- .github 关于GitHub ISSUES的模板等
+- .vscode vscode配置
+- build 打包配置文件夹
+- docs 文档描述文件夹
+- example 示例文件夹
+- packages 源码文件夹
+    - src 源码
+    - static 静态文件
+    - template 模板文件
+    - types ts类型文件
+    - utils 工具文件
 
-### 1.2 创建 `.gitignore`
 
-- 关于 [.gitignore](https://github.com/toptal/gitignore.io)
-
+### 2.2 配置webpack
 ```bash
-dist/
-node_modules/
-yarn.lock
-yarn-error.log
-package-lock.json
+$ yarn add -D webpack webpack-cli
 ```
 
-<br>
-
-### 1.3 创建 `.browserslistrc`
-
-- 关于浏览器兼容问题 [browserslistrc](https://github.com/browserslist/browserslist)
-
+配置webpack文件merge
 ```bash
-# Browsers that we support
-> 1%
+$ yarn add -D webpack-merge
 ```
 
-<br>
-
-### 1.4 文件目录结构
-
+配置webpack清除dist插件
 ```bash
-- build
-    - webpack.config.js
-- docs
-    - XX.md
-- lib
-    - index.min.js
-- src
-    - helpers
-    - instances
-    - services
-    - index.js
-- package.json
-- .....
+$ yarn add -D clean-webpack-plugin
 ```
 
-<br>
-
-### 1.5 配置 [webpack](https://webpack.js.org/configuration/)
-
-1. 安装依赖
-
+配置webpack添加html模板插件
 ```bash
-$ yarn add webpack webpack-cli -D
+$ yarn add -D html-webpack-plugin
 ```
 
-2. 基础的出入口配置
-
+应用
 ```js
+// /build/webpack.base.conf.js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 
 module.exports = {
-  entry: path.resolve(__dirname,'../src/index.js'),
-  output: {
-    filename: 'index.min.js',
-    path: path.resolve(__dirname,'../lib'),
-    libraryTarget: 'commonjs2'
+  entry : path.join(__dirname, '../packages/src/index.ts'),
+
+  output : {
+    filename : 'bundle.js',
+    path : path.join(__dirname, '../dist'),
+    libraryTarget: 'umd'
   },
+
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
+
   module: {
-    rules: []
+    rules: [
+      {
+        test: /\.(ts|js)?$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
   },
-  plugins: [ ]
-}
-```
 
-<br>
-
-### 1.6 配置`babel`
-
-- 需要注意转化 `ESNext` 新语法（@babel/preset-env）
-- 需要注意转化 `Promise Map Set` 等语法（@babel/plugin-transform-runtime）
-- 注意使用 `Class static` 语法（@babel/plugin-proposal-class-properties）
-- [presets](https://babeljs.io/docs/en/presets) [plugins](https://babeljs.io/docs/en/plugins)
-
-1. 安装`babel`相关依赖。
-
-```bash
-$ yarn add @babel/runtime @babel/runtime-corejs3 -S
-
-$ yarn add @babel/core @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime @babel/preset-env -D
-```
-
-2. 配置 `.babelrc` 文件。
-
-```
-{
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "browsers": "last 2 versions, not ie <= 9"
-      }
-    }]
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    [
-      "@babel/plugin-transform-runtime",
-      { "corejs": 3 }
-    ]
+  plugins: [
+    new CleanWebpackPlugin()
   ]
 }
-```
 
-3. [webpack添加babel-loader规则](https://webpack.docschina.org/loaders/babel-loader/)。
 
-- 安装依赖
+// /build/webpack.dev.conf.js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { merge } = require('webpack-merge')
+const path = require('path')
+const baseWebpackConfig = require('./webpack.base.conf')
 
-```bash
-$ yarn add babel-loader -D
-```
+const devWebpackConfig = {
+  mode: 'development',
+  devtool: 'source-map',
 
-```js
-  module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }]
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: path.join(__dirname, '../example/test.html'),
+      template: path.join(__dirname, '../packages/template/index.htm')
+    }),
+  ]
+}
+
+module.exports = merge(baseWebpackConfig, devWebpackConfig)
+
+
+// /build/webpack.prod.conf.js
+const { merge } = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+
+const prodWebpackConfig = {
+  mode: 'production',
+  devtool: false,
+
+  plugins: []
+}
+
+module.exports = merge(baseWebpackConfig, prodWebpackConfig)
+
+
+// package.json
+{
+  "main": "dist/bundle.js",
+  "scripts": {
+    "dev": "webpack --config build/webpack.dev.conf.js",
+    "build": "webpack --config build/webpack.prod.conf.js",
   },
+}
 ```
 
-<br>
 
-### 1.7 配置`eslint`
-
-1. 安装依赖
-
+### 2.3 配置ts的eslint、prettier
 ```bash
-yarn add eslint eslint-loader -D
+$ yarn add -D eslint eslint-config-prettier eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser 
+
+$ yarn add -D prettier
 ```
 
-2. [`.eslintrc` 配置文件](https://lousanpang.github.io/2018/07/05/other/use-eslint/)
+应用
+```json
+// .editorconfig
+# http://editorconfig.org
+root = true
 
-```bash
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+
+// .eslintrc
 {
   "env": {
     "browser": true,
@@ -179,93 +207,171 @@ yarn add eslint eslint-loader -D
     "commonjs": true,
     "node": true
   },
-  "extends": "eslint:recommended",
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier",
+    "@typescript-eslint"
+  ],
   "parserOptions": {
     "sourceType": "module"
   },
   "globals": {},
-  "rules": {
-    "no-console": 1,
-    "consistent-this": 1
-  }
-}
-```
-
-3. [webpack配置eslint](https://webpack.js.org/plugins/eslint-webpack-plugin/)
-
-```js
-module: {
-    rules: [
-        {
-            test: /\.js[x]?$/,
-            enforce: 'pre',
-            use: [{
-                loader: 'eslint-loader', 
-                options: { fix: true }
-            }],
-            include: path.resolve(__dirname, './src/**/*.js'),
-            exclude: /node_modules/
-        },
-    ]
-}
-```
-
-4. `package.json` 配置
-
-```bash
-"scripts": {
-    "lint": "eslint --ext .js src"
+  "rules": {}
 }
 
-npm run lint
-```
-
-5. 想要`babel-eslint` 检测`ES6`代码
-
-```bash
-$ yarn add babel-eslint -D
-```
-
-```bash
+// .prettierrc
 {
-    "parser": "babel-eslint",
-    "rules": {}
+  "endOfLine": "auto" ,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "semi": false
 }
+
+// package.json
+  "scripts": {
+    "lint": "eslint packages --fix --ext .ts,.tsx"
+  },
 ```
 
-## 二、webpack打包
 
+### 2.4 配置 git-commit
 ```bash
-// package.json
+$ yarn add -D commitizen cz-conventional-changelog
+```
+
+应用
+```json
+  "scripts": {
+    "commit": "git-cz",
+    "release": "standard-version"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+```
+
+
+### 2.5 配置babel+ts
+```bash
+$ yarn add -D @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread @babel/preset-env @babel/preset-typescript babel-loader
+
+$ yarn add -D @babel/plugin-transform-runtime
+$ yarn add -S @babel/runtime @babel/runtime-corejs3
+```
+
+-注意：
+  - 需要注意转化 `Promise Map Set` 等语法（@babel/plugin-transform-runtime）
+  - 需要注意转化 `ESNext` 新语法（@babel/preset-env）
+  - 注意使用 `Class static` 语法（@babel/plugin-proposal-class-properties）
+
+
+使用
+```js
+// packgage.json
 "scripts": {
-"dev": "webpack --config build/webpack.config.js --mode development",
-"build": "webpack --config build/webpack.config.js --mode production"
+  "check": "tsc -w"
 }
 
-$ npm run build
+
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist/",
+    "typeRoots": [
+      "node_modules/@types",
+      "global.d.ts"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false
+}
+
+
+// .babelrc
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "@babel/plugin-transform-runtime",
+      { "corejs": 3 }
+    ]
+  ]
+}
+
+
+// /build/webpack.base.conf.js
+module: {
+  rules: [
+    {
+      test: /\.(ts|js)?$/,
+      use: 'babel-loader',
+      exclude: /node_modules/,
+    },
+  ],
+},
 ```
 
 
 ## 三、测试
 
-### 3.1 在包项目内
+### 3.1 内部测试
+```bash
+$ npm run dev
 
+// example/tets.html
+测试
+```
+
+### 3.2 在项目中
+插件中
 ```bash
 $ npm run build
-
 $ npm link
 ```
 
-### 3.2 在测试项目中
-
+在项目中
 ```bash
 // xx 指的是 package.json内的 name 字段 （也就是发布包的的名称）
 $ npm link xx
 ```
 
 
-## 发布包
+## 四、发布包
 
 ```bash
 $ npm login
