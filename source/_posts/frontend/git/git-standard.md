@@ -19,17 +19,12 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 #### 1.1 Commitizen: 替代你的 git commit
 ```
-npm install -g commitizen cz-conventional-changelog
+yarn add -D commitizen cz-conventional-changelog
 
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
-#### 1.2 项目安装
-```
-npm install -D commitizen cz-conventional-changelog
-```
-
-#### 1.3 package.json中配置
+#### 1.2 package.json中配置
 ```
 "script": {
     "commit": "git-cz",
@@ -41,9 +36,9 @@ npm install -D commitizen cz-conventional-changelog
 }
 ```
 
-#### 1.4 自动生成CHANGELOG
+#### 1.3 自动生成CHANGELOG
 ```
-npm i -D standard-version
+yarn add -D standard-version
 ```
 
 ```
@@ -70,11 +65,11 @@ module.exports = {
 }
 ```
 
-#### 1.4 试运行
+#### 1.5 试运行
 - `git add --a`
 - `git cz`
 - `npm run release`
-- `git push`
+- `git push master --tags`
 
 
 ### 二、`git cz` 介绍
@@ -223,3 +218,56 @@ f96380b HEAD@{10}: checkout: moving from proxyOpt to test
 2. git reset --hard c920c31 通过gitreset命令回退到c920c31版本
 
 3. git push origin test --force 强制将分区内容推送到远程服务器
+
+
+### 五、子模块工程
+工程项目下包含了子工程项目
+
+#### 5.1 新建`.gitmodules`
+```json
+[submodule "src/geo-data-engine-service"]
+	path = src/geo-data-engine-service
+	# url = git@172.17.xxxx:xxxxxx.git // ip
+	# url = https:xxxxx.git // 或者域名
+```
+
+#### 5.2 clone该子工程
+```bash
+git submodule add http://xxxxx.git src/xxxx
+
+git submodule init
+
+git submodule update // 根据gitmodule下的路径clone到src下
+或者
+git submodule update src/xxxx
+```
+
+#### 5.3 如何更新该子工程
+- 在项目中切换到子模块工程，切换到master分支，git pull。
+- 在子模块工程中提交代码
+- 每次子模块工程有更新，总项目就会有变化
+
+
+#### 5.4 如何彻底删除掉子模块工程
+- 删除版本控制
+```bash
+git rm -r modules/subb
+```
+
+- 删除`.gitmodules`中的代码
+```bash
+ [submodule "modules/subb"]
+          path = modules/subb
+          url = https://xxxx.git
+          branch = dev
+```
+- `.git/config` 删除代码
+```bash
+ [submodule "modules/subb"]
+         url = https://xxxx.git
+         active = true
+```
+- 删除`.git`下的缓存模块
+```bash
+rm -rf .git/modules/subb
+```
