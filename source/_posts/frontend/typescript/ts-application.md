@@ -14,8 +14,205 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 一、常见使用
-#### 1.1 在window对象上显式设置属性
+
+
+### 一、类 class
+类接口会对类的属性和方法进行约束，类似非抽象类继承抽象类时必须实现某些方法和属性，但对属性和方法的类型的约束更加严格，除了方法void类型可被重新定义外，其他属性或方法的类型定义需要和接口保持一致。
+
+#### 1.1 类的类型接口
+```ts
+interface Animals {
+  name: string;
+  eat(): void;
+}
+
+class Dogs implements Animals {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  eat() {}
+}
+```
+
+#### 1.2 接口继承--接口可以继承接口
+```ts
+interface Dog {
+  eat(): void;
+}
+
+interface Persons extends Dog {
+  work(): void;
+}
+
+class Cat {
+  code() {
+    console.log("猫在敲代码");
+  }
+}
+
+//可继承类后再实现接口
+class SuperMan extends Cat implements Persons {
+  eat(): void {
+    console.log(1);
+  }
+  work(): void {
+    console.log(2);
+  }
+}
+let superMan = new SuperMan();
+superMan.code();
+```
+
+#### 1.3 类的泛型
+```ts
+class MinClass<T> {
+  public list: T[] = [];
+  //添加
+  add(value: T): void {
+    this.list.push(value);
+  }
+  
+  //求最小值
+  min(): T {
+    //假设这个值最小
+    let minNum = this.list[0];
+    for (let i = 0; i < this.list.length; i++) {
+    //比较并获取最小值
+    minNum = minNum < this.list[i] ? minNum : this.list[i];
+    }
+    return minNum;
+  }
+}
+//实例化类 并且指定了类的T的类型是number
+let minClass = new MinClass<number>();
+```
+
+#### 1.4 类-多态
+抽象类无法实例化。
+
+非抽象类继承抽象父类时不会自动实现来自父类的抽象成员,必须手动定义父类中的抽象成员，否则报错。
+
+抽象成员包括属性和方法
+```ts
+// 抽象父类
+abstract class Animal {
+  private name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  //抽象成员--方法
+  abstract eat(): any;
+  //抽象成员--属性
+  protected abstract ages: Number;
+  sleep(): void {
+    console.log("睡觉");
+  }
+}
+
+class cat extends Animal {
+  ages: Number = 2;
+  constructor(name: string) {
+    super(name);
+  }
+  //非抽象类“cat”不会自动实现继承自“Animal”类的抽象成员“eat”,  必须手动定义父类中的抽象方法--多态
+  eat(): string {
+    return "猫吃鱼";
+  }
+
+  //多态
+  sleep(): string {
+    return "猫在睡觉";
+  }
+}
+
+console.log(new cat("33").sleep());
+```
+
+
+#### 二、 命名空间
+在代码量较大的情况下，为了避免各种变量命名相冲突，可将相似功能的函数、类、接口等放置到命名空间内
+
+TypeScript的命名空间可以将代码包裹起来，只对外暴露需要在外部访问的对象。
+
+命名空间：内部模块，主要用于组织代码，避免命名冲突。
+
+```ts
+ // modules/Animal.ts
+export namespace A {
+  interface Animal {
+    name: String;
+    eat(): void;
+  }
+
+  export class Dog implements Animal {
+    name: String;
+    constructor(theName: string) {
+      this.name = theName;
+    }
+    eat() {
+      console.log("我是" + this.name);
+    }
+  }
+}
+
+export namespace B {
+  interface Animal {
+    name: String;
+    eat(): void;
+  }
+
+  export class Dog implements Animal {
+    name: String;
+    constructor(theName: string) {
+      this.name = theName;
+    }
+    eat() {}
+  }
+}
+```
+```ts
+ import { A, B } from "./modules/Animal";
+ let ee = new A.Dog("小贝");
+ ee.eat();
+```
+
+
+
+### 三、装饰器
+类装饰器：类装饰器在类申明之前被申明(紧靠着类申明)，类装饰器应用于类构造函数，可以用于监视，修改或者替换类定义。
+
+装饰器会覆盖被装饰的类中的方法。
+```ts
+function logClass(params: any) {
+  console.log(params);
+  //params 就是指代当前类--HttpClient
+  params.prototype.apiUrl = "动态扩展属性";
+  params.prototype.run = function () {
+    console.log("动态扩展方法");
+  };
+  params.prototype.getDate = function () {
+    console.log("动态扩展方法2");
+  };
+}
+
+@logClass
+class HttpClient {
+  constructor() {}
+  getDate() {
+    console.log(1);
+  }
+}
+
+let http: any = new HttpClient();
+console.log(http.apiUrl);
+http.run();
+http.getDate();
+```
+
+
+### 十、其他开发声明
+#### 11.1 在window对象上显式设置属性
 ```ts
 declare interface Window {
     MyNamespace: any;
@@ -26,7 +223,7 @@ window.MyNamespace = window.MyNamespace || {};
 ```
 
 
-#### 1.2 对象
+#### 11.2 对象
 **object, Object 和 {} 之间有什么区别**
 
 **object类型,用于表示非原始类型**
@@ -119,7 +316,7 @@ developer.age = 30;
 developer.city = "XiaMen";
 ```
 
-#### 1.3 函数
+#### 11.3 函数命名
 **基础定义**
 ```ts
 type Point = {
@@ -202,6 +399,8 @@ class Calculator {
 const calculator = new Calculator();
 const result = calculator.add('Semlinker', ' Kakuqo');
 ```
+
+
 
 
 
