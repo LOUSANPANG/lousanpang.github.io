@@ -165,13 +165,25 @@ a:active 必须位于 a:hover 之后！！
 ```
 
 #### 4.4 设置可拖动的div
-```
+```css
 div {
   resize:both;
   overflow:auto;
 }
 ```
 
+
+#### 4.5 使用currentColor来简化css
+设置border-color、background-color等颜色的时候，可以使用currentColor[与当前元素的字体颜色相同]来简化css。
+```css
+.div{
+    color: rgba(0,0,0,.85);
+    font-weight: 500;
+    text-align: left;
+    padding: 20px;
+    border: solid 1px currentColor;
+}
+```
 
 
 
