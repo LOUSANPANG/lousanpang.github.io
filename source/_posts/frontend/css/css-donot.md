@@ -172,7 +172,6 @@ div {
 }
 ```
 
-
 #### 4.5 使用currentColor来简化css
 设置border-color、background-color等颜色的时候，可以使用currentColor[与当前元素的字体颜色相同]来简化css。
 ```css
@@ -182,6 +181,14 @@ div {
     text-align: left;
     padding: 20px;
     border: solid 1px currentColor;
+}
+```
+
+#### 4.6 利用灰色滤镜做样式的disable效果
+灰色图可以直接加滤镜，不用切多一张图。
+```css
+.coupon_style .disable {
+  -webkit-filter: grayscale(1);
 }
 ```
 
