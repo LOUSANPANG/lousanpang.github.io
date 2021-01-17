@@ -115,6 +115,44 @@ text-align-last: justify;
 [object-fit](https://developer.mozilla.org/zh-CN/docs/Web/CSS/object-fit)
 
 
+#### 3.4 页面自适应最佳实践
+经过大型项目实践，下面这段CSS是最好的基于rem和vm和calc实践代码
+```css
+html {
+    font-size: 16px;
+}
+@media screen and (min-width: 375px) {
+    html {
+        /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
+        font-size: calc(100% + 2 * (100vw - 375px) / 39);
+        font-size: calc(16px + 2 * (100vw - 375px) / 39);
+    }
+}
+@media screen and (min-width: 414px) {
+    html {
+        /* 414px-1000px每100像素宽字体增加1px(18px-22px) */
+        font-size: calc(112.5% + 4 * (100vw - 414px) / 586);
+        font-size: calc(18px + 4 * (100vw - 414px) / 586);
+    }
+}
+@media screen and (min-width: 600px) {
+    html {
+        /* 600px-1000px每100像素宽字体增加1px(20px-24px) */
+        font-size: calc(125% + 4 * (100vw - 600px) / 400);
+        font-size: calc(20px + 4 * (100vw - 600px) / 400);
+    }
+}
+@media screen and (min-width: 1000px) {
+    html {
+        /* 1000px往后是每100像素0.5px增加 */
+        font-size: calc(137.5% + 6 * (100vw - 1000px) / 1000);
+        font-size: calc(22px + 6 * (100vw - 1000px) / 1000);
+    }
+}
+```
+
+
+
 ### 四、css好用的属性
 
 #### 4.1 background-attachment属性
@@ -189,6 +227,31 @@ div {
 ```css
 .coupon_style .disable {
   -webkit-filter: grayscale(1);
+}
+```
+
+#### 4.7 图片自适应占位方式
+给容器添加一个伪元素的子元素用于撑起内容，该子元素拥有一个padding-top:100%，同时给容器一个max-height尝试限制容器的高度，最后内容用绝对定位的方式添加即可
+```css
+#container{
+    width: 50%;
+    max-height:300px;
+    background-color:#ddd;
+    /*由于margin存在塌陷的问题，需要通过构建BFC来保证容器不会受到影响，因此这里可以给容器一个overflow:hidden来保证伪元素的margin不会塌陷。*/
+    overflow:hidden;
+    position: relative; /* 父容器相对定位 */
+}
+.placeholder::after{
+    content:"";
+    display:block;
+    margin-top:100%;
+}
+img{
+    position:absolute;  /* 内容绝对定位 */
+    left: 50%;
+    top: 50%;      
+    transform: translateX(-50%) translateY(-50%); /* 控制内容绝对定位位置 */
+    width:80%;   /* 控制图片不溢出，因此这里使用的图片实际宽度受父容器影响 */
 }
 ```
 
