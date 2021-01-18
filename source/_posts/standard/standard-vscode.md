@@ -14,20 +14,13 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-### 一. 关于彻底删除`vscode`
+### 一、 关于彻底删除`vscode`
 #### 1.1 c/{用户}/{用户}/.vscode 这是`vscode`放置安装的插件
 
 #### 1.2 c/{用户}/{用户}/AppData/Roaming/Code 这是`vscode`放置用户信息和缓存信息
 
 
-### 二. 配置`vscode`终端命令
-```
-// setting.json
-
-"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe" // 你放置git命令的存储地方
-```
-
-### 三. 快速生成代码
+### 二、 快速生成代码
 后代 >
 ```
 div>span>a
@@ -98,6 +91,110 @@ ul>li.item$@3*3
     <li class="item5">list 3</li>
 </ul>
 ```
+
+
+### 三、在根目录新建`.vscode`文件夹
+#### 3.1 launch.json
+```json
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+  {
+    "type": "node",
+    "request": "launch",
+    "name": "CLI debug",
+    "program": "${workspaceFolder}/packages/taro-cli/bin/taro",
+    // "cwd": "${project absolute path}",
+    // "args": [
+    //   "build",
+    //   "--type",
+    //   "weapp",
+    //   "--watch"
+    // ],
+    "skipFiles": [
+      "<node_internals>/**"
+    ]
+  },
+    {
+      "type": "node",
+      "name": "vscode-jest-tests",
+      "request": "launch",
+      "args": [
+        "--runInBand"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/index.js",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": [
+        "${workspaceFolder}/lib/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "E2E Test Current File",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/.bin/stencil",
+      "args": ["test", "--e2e", "${relativeFile}"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    },
+  ]
+}
+```
+
+#### 3.2 settings.json
+```json
+{
+    "workbench.colorTheme": "Atom One Dark",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.tabSize": 2,
+    "editor.fontWeight": "normal",
+    "editor.lineHeight": 24,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "terminal.integrated.shell.windows": "D:\\Git\\Git\\bin\\bash.exe",
+    "window.zoomLevel": 0,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    },
+    "todo-tree.tree.showScanModeButton": false
+}
+```
+
+
 
 
 
