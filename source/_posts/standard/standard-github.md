@@ -14,13 +14,24 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-## 一、最优美的README文档
+## 一、[最优美的README文档](https://github.com/kefranabg/readme-md-generator)
+```bash
+npx readme-md-generator
+```
+[![readme-md-generator](https://s3.ax1x.com/2021/01/18/sy6vi4.jpg)](https://imgchr.com/i/sy6vi4)
 
 
-## 二、醒目的版本小图标
+## 二、[醒目的项目小图标](https://github.com/badges/shields)
+[![醒目的版本小图标](https://s3.ax1x.com/2021/01/18/syc0mV.png)](https://imgchr.com/i/syc0mV)
 
 
-## 三、规范的提交日志、未来规划
+## 三、[规范的提交日志、未来规划](https://lousanpang.github.io/2019/11/01/frontend/git/git-standard/)
+- commitizen
+- standard
+- gitemoji
+- CHANGELOG.log
+- PLANS.md
+- TODO.md
 
 
 ## 四、[简便的issues模板](https://help.github.com/articles/manually-creating-a-single-issue-template-for-your-repository/)
