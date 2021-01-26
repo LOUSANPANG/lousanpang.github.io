@@ -597,6 +597,27 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 }
 ```
 
+#### 2.11 骨架屏动画
+```css
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}
+div {
+  background-color: #ededed;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, .5) 50%,
+    rgba(255, 255, 255, 0) 60%
+  ) #ededed;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1s loading ease-in-out infinite;
+}
+```
+
 #### 2.100 动画参考列表
 [动画参考列表loader](https://codepen.io/vineethtrv/pen/NWxZqMM?editors=1100)
 
