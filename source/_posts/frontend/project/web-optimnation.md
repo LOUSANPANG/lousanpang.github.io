@@ -14,16 +14,29 @@ toc_number: # 是否显示toc数字 除非特定文章设置，可以不写
 copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
-## 前言
-这次的性能优化从`webpack\babel`的角度去分析解决。
 
-比方说无用代码移除(tree-shaking)、作用域提升(scope hoisting)、按需加载(code-splitting)、代码分割(code split)、提取第三方库、代码压缩(gzip)、缓存、提高打包效率等等
+## 一、Webpack方面的优化配置
+### 1.1 GZIP
+1. 借助`compression webpack plugin`插件
+```bash
+yarn add -D compression-webpack-plugin
+```
+
+2. [webpack config 配置](https://www.webpackjs.com/plugins/compression-webpack-plugin/)
+```js
+const CompressionPlugin = require("compression-webpack-plugin")
+
+module.exports = {
+  plugins: [
+    new CompressionPlugin({
+        threshold: 10240 // 10K以上的进行压缩
+    })
+  ]
+}
+```
 
 
-## 一、Webpack方面的优化
-
-
-## 二、Babel方面的优化
+## 二、Babel方面的优化配置
 
 
 
