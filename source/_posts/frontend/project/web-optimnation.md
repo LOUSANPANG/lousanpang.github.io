@@ -56,7 +56,13 @@ import 'moment/locale/zh-cn'
 moment.locale('zh-cn')
 ```
 
-### 1.3 关闭`productionSourceMap`
+### 1.3 关闭生产环境的 `source map`
+`source map`资源地图。定位浏览器控制台输出语句在项目文件的位置。
+```js
+module.exports = {
+  productionSourceMap: false
+}
+```
 
 
 ## 二、Babel方面的优化配置
