@@ -65,7 +65,7 @@ module.exports = {
 ```
 
 
-### 1.4 webpack-bundle-analyzer
+### 1.4 打包树形图 webpack-bundle-analyzer
 将捆绑包内容表示为方便的交互式可缩放树形图
 ```js
 yarn add -D webpack-bundle-analyzer
@@ -82,15 +82,11 @@ module.exports = {
 // package.json
 {
   "scripts": {
-    "generateAnalyzFile": "webpack --profile --json > stats.json", // 生成分析文件
-    "analyz": "webpack-bundle-analyzer --port 8888 ./dist/stats.json", // 启动展示打包
-    // "analyz": "NODE_ENV=production npm_config_report=true npm run build" // 也可以打包时打印
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build" // 也可以打包时打印
   }
 }
 ```
 
-
-### 1.5 compression-webpack-plugin
 ### 1.6 image-webpack-loader
 ### 1.7 CommonsChunkPlugin
 ### 1.8 Tree-Shaking
