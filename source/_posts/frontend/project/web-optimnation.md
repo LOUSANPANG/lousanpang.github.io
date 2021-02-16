@@ -65,6 +65,57 @@ module.exports = {
 ```
 
 
+### 1.4 webpack-bundle-analyzer
+将捆绑包内容表示为方便的交互式可缩放树形图
+```js
+yarn add -D webpack-bundle-analyzer
+
+// webpack.config.js
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+}
+
+// package.json
+{
+  "scripts": {
+    "generateAnalyzFile": "webpack --profile --json > stats.json", // 生成分析文件
+    "analyz": "webpack-bundle-analyzer --port 8888 ./dist/stats.json", // 启动展示打包
+    // "analyz": "NODE_ENV=production npm_config_report=true npm run build" // 也可以打包时打印
+  }
+}
+```
+
+
+### 1.5 compression-webpack-plugin
+### 1.6 image-webpack-loader
+### 1.7 CommonsChunkPlugin
+### 1.8 Tree-Shaking
+### 1.9 SplitChunksPlugin
+### 2.0 mini-css-extract-plugin
+### 2.1 optimize-css-assets-webpack-plugin
+### 2.2 uglifyjs-webpack-plugin
+### 2.3 contenthash
+### 2.4 shimming ProvidePlugin
+### 2.5 代码分割code split
+### 2.6 tree shaking
+### 2.7 懒加载
+### 2.8 webpack-spritesmith
+### 2.9 noParse
+### 3.0 exclude
+### 3.1 cache-loader 提高打包效率
+### 3.2 speed-measure-webpack-plugin 打包时候每一个loader或者plugin花费了多少时间 1
+### 3.3 提取第三方库
+### 3.4 babel-loader 的 cacheDirectory
+### 3.5 HardSourceWebpackPlugin
+### 3.6 image-webpack-loader
+### 3.7 useless-files-webpack-plugin
+
+
+
 ## 二、Babel方面的优化配置
 
 
