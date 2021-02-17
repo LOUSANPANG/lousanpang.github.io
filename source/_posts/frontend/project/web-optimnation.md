@@ -87,16 +87,37 @@ module.exports = {
 }
 ```
 
-### 1.6 image-webpack-loader
-### 1.7 CommonsChunkPlugin
+### 1.5 自定义分割包 SplitChunksPlugin
+指定那些包单独分割还是公共抽取
+
+```js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'async', // 有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为async
+      minSize: 30000, // 表示在压缩前的最小模块大小，默认为30000
+      minChunks: 1, // 表示被引用次数，默认为1
+      maxAsyncRequests: 5, // 按需加载时候最大的并行请求数，默认为5
+      maxInitialRequests: 3, // 一个入口最大的并行请求数，默认为3
+      automaticNameDelimiter: '~', // 命名连接符
+      name: true, // 拆分出来块的名字，默认由块名和hash值自动生成
+      cacheGroups: { // 缓存组。缓存组的属性除上面所有属性外，还有test, priority, reuseExistingChunk
+        test: '', // 用于控制哪些模块被这个缓存组匹配到
+        priority: '', // 缓存组打包的先后优先级
+        reuseExistingChunk: '' // 如果当前代码块包含的模块已经有了，就不在产生一个新的代码块
+      }
+    }
+  }
+}
+```
+
+
 ### 1.8 Tree-Shaking
-### 1.9 SplitChunksPlugin
 ### 2.0 mini-css-extract-plugin
 ### 2.1 optimize-css-assets-webpack-plugin
 ### 2.2 uglifyjs-webpack-plugin
 ### 2.3 contenthash
 ### 2.4 shimming ProvidePlugin
-### 2.5 代码分割code split
 ### 2.6 tree shaking
 ### 2.7 懒加载
 ### 2.8 webpack-spritesmith
