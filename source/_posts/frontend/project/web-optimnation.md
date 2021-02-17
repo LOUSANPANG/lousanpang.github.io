@@ -177,8 +177,26 @@ initial 即原始的拆分，原则就是有共用的情况即发生拆分。动
 * 在开头的时候提到过一个原因为何默认情况下只优化 async 代码。所以，除了 all 之外的另外两个选项是有存在意义的。并且，具体的优化场景需要根据具体的需求而定，all 所产生的效果并非所有情况下都需要。
 
 
-### 1.6 [Tree Shaking](https://webpack.docschina.org/guides/tree-shaking/)
+### 1.6 [TreeShaking sideEffects ](https://webpack.docschina.org/guides/tree-shaking/)
 移除 JavaScript 上下文中的未引用代码(也就是移除文件中的未使用的代码)。
+
+1. sideEffects
+```json
+// package.json
+// 如果所有代码都不包含 side effect，我们就可以简单地将该属性标记为 false，来告知 webpack，它可以安全地删除未用到的 export。
+{
+  "name": "",
+  "sideEffects": false
+}
+
+// 如果你的代码确实有一些副作用，可以改为提供一个数组：
+"sideEffects": [
+  "**/*.css",
+  "**/*.scss",
+  "./src/index.js",
+  "./src/a.js"
+],
+```
 
 ### 1.7 mini-css-extract-plugin
 ### 1.8 optimize-css-assets-webpack-plugin
