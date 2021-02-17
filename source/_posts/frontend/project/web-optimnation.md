@@ -35,7 +35,7 @@ module.exports = {
 }
 ```
 
-### 1.2 忽略赘余的代码包`IgnorePlugin`
+### 1.2 IgnorePlugin
 使用`webpack`内置的`IgnorePlugin`插件来忽略项目中用不到的文件。
 
 1. 以`moment`为例，只用到了中文语言包，打包的时候把非中文语言包排除掉。
@@ -56,7 +56,7 @@ import 'moment/locale/zh-cn'
 moment.locale('zh-cn')
 ```
 
-### 1.3 关闭生产环境的 `source map`
+### 1.3 source map
 `source map`资源地图。定位浏览器控制台输出语句在项目文件的位置。
 ```js
 module.exports = {
@@ -65,7 +65,7 @@ module.exports = {
 ```
 
 
-### 1.4 打包树形图 webpack-bundle-analyzer
+### 1.4 webpack-bundle-analyzer
 将捆绑包内容表示为方便的交互式可缩放树形图
 ```js
 yarn add -D webpack-bundle-analyzer
@@ -87,7 +87,7 @@ module.exports = {
 }
 ```
 
-### 1.5 自定义分割包 SplitChunksPlugin
+### 1.5 SplitChunksPlugin
 你可以把应用中的特定部分移至不同文件。如果一个模块在不止一个chunk中被使用，那么利用代码分离，该模块就可以在它们之间很好地被共享。这是Webpack的默认行为。
 
 ```js
@@ -168,36 +168,35 @@ initial 即原始的拆分，原则就是有共用的情况即发生拆分。动
 * lodash 没变，形成单独一份两者共用。
 
 3. chunks模式为`all`
-从上面 initial 模式下我们似乎看出了问题，即 在 a 中同步引入在 b 中动态引入的 react，它其实可以被抽成文件供两者共用的，只是因为引入方式不同而没有这样做。
-
-所以 all 这种模式下，就会智能地进行判断以解决这个问题。此时不关心引入的模块是动态方式还是同步方式，只要能正确判断这段代码确实可以安全地进行拆分共用，那就干吧。
-
-需要注意的是这里需要设置 minSize 以使 react 能够正确被拆分，因为它小于 30k，在同步方式下，默认不会被拆分出来。
+* 从上面 initial 模式下我们似乎看出了问题，即 在 a 中同步引入在 b 中动态引入的 react，它其实可以被抽成文件供两者共用的，只是因为引入方式不同而没有这样做。
+* 所以 all 这种模式下，就会智能地进行判断以解决这个问题。此时不关心引入的模块是动态方式还是同步方式，只要能正确判断这段代码确实可以安全地进行拆分共用，那就干吧。
+* 需要注意的是这里需要设置 minSize 以使 react 能够正确被拆分，因为它小于 30k，在同步方式下，默认不会被拆分出来。
 
 **结论**
-看起来似乎 all 是最好的模式，因为它最大限度地生成了复用的代码，Webpack 默认就走这个模式打包不就得了。
+* 看起来似乎 all 是最好的模式，因为它最大限度地生成了复用的代码，Webpack 默认就走这个模式打包不就得了。
+* 在开头的时候提到过一个原因为何默认情况下只优化 async 代码。所以，除了 all 之外的另外两个选项是有存在意义的。并且，具体的优化场景需要根据具体的需求而定，all 所产生的效果并非所有情况下都需要。
 
-在开头的时候提到过一个原因为何默认情况下只优化 async 代码。所以，除了 all 之外的另外两个选项是有存在意义的。并且，具体的优化场景需要根据具体的需求而定，all 所产生的效果并非所有情况下都需要。
 
+### 1.6 [Tree Shaking](https://webpack.docschina.org/guides/tree-shaking/)
+移除 JavaScript 上下文中的未引用代码(也就是移除文件中的未使用的代码)。
 
-### 1.8 Tree-Shaking
-### 2.0 mini-css-extract-plugin
-### 2.1 optimize-css-assets-webpack-plugin
-### 2.2 uglifyjs-webpack-plugin
-### 2.3 contenthash
-### 2.4 shimming ProvidePlugin
-### 2.6 tree shaking
-### 2.7 懒加载
-### 2.8 webpack-spritesmith
-### 2.9 noParse
-### 3.0 exclude
-### 3.1 cache-loader 提高打包效率
-### 3.2 speed-measure-webpack-plugin 打包时候每一个loader或者plugin花费了多少时间 1
-### 3.3 提取第三方库
-### 3.4 babel-loader 的 cacheDirectory
-### 3.5 HardSourceWebpackPlugin
-### 3.6 image-webpack-loader
-### 3.7 useless-files-webpack-plugin
+### 1.7 mini-css-extract-plugin
+### 1.8 optimize-css-assets-webpack-plugin
+### 1.9 uglifyjs-webpack-plugin
+### 2.0 contenthash
+### 2.1 shimming ProvidePlugin
+### 2.2 tree shaking
+### 2.3 懒加载
+### 2.4 webpack-spritesmith
+### 2.5 noParse
+### 2.6 exclude
+### 2.7 cache-loader 提高打包效率
+### 2.8 speed-measure-webpack-plugin 打包时候每一个loader或者plugin花费了多少时间 1
+### 2.9 提取第三方库
+### 3.0 babel-loader 的 cacheDirectory
+### 3.1 HardSourceWebpackPlugin
+### 3.2 image-webpack-loader
+### 3.3 useless-files-webpack-plugin
 
 
 
