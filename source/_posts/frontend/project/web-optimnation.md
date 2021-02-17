@@ -88,7 +88,7 @@ module.exports = {
 ```
 
 ### 1.5 自定义分割包 SplitChunksPlugin
-指定那些包单独分割还是公共抽取
+你可以把应用中的特定部分移至不同文件。如果一个模块在不止一个chunk中被使用，那么利用代码分离，该模块就可以在它们之间很好地被共享。这是Webpack的默认行为。
 
 ```js
 module.exports = {
@@ -110,6 +110,74 @@ module.exports = {
   }
 }
 ```
+
+**下面通过示例看看chunks三种模式在对正常与动态加载的代码效果上有什么区别**
+准备了两个入口文件，都引入了三个 npm 库，jquery,react,lodash。
+* jquery 均同步引入
+* 其中 react 在 a 文件同步引入而 b 中动态加载，
+* lodash 在两者中均动态引入
+
+```js
+// a.js
+import "react";
+import("lodash");
+import "jquery";
+console.log("a");
+
+// b.js
+import("react");
+import("lodash");
+import "jquery";
+console.log("b");
+
+// webpack.config.js
+module.exports = {
+  entry: {
+    a: "./a.js",
+    b: "./b.js"
+  },
+  output: {
+    filename: "[name].bundle.js"
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "async",
+          priority: 1
+        }
+      }
+    }
+  },
+  plugins: [new BundleAnalyzerPlugin()]
+};
+```
+
+1. chunks模式为`async`
+* 在 a,b 中均同步引入的 jquery 被打包进了各自的 bundle 中没有拆分出来共用，因为这种模式下只会优化动态加载的代码。
+* react 打了两份:
+  * 一份在 a 自己的 bundle 中，因为它同步引入了 react，而我们只优化动态加载的代码，所以这里的 react 不会被优化拆分出去。
+  * 一份在单独的文件中，它是从 b 里面拆出来的，因为 b 中动态加载了 react。
+* lodash 因为在 a,b 中都是动态加载，形成了单独的 chunk 被 a, b 共用。
+
+2. chunks模式为`initial`
+initial 即原始的拆分，原则就是有共用的情况即发生拆分。动态引入的代码不受影响，它是无论如何都会走拆分逻辑的（毕竟你要动态引入嘛，不拆分成单独的文件怎么动态引入？！）。而对于同步引入的代码，如果有多处都在使用，则拆分出来共用。
+* jquery 在这种模式下发生了变化。形成了单独的 chunk 供 a,b 共用。
+* react 没有变，因为它在 a,b 中引用的方式不同，所以不会被当成同一个模块拆分出来共用，而是走各自的打包逻辑。在 a 中同步引用，被打入了 a 的 bundle。在 b 中动态引入所以拆分成了单独的文件供 b 使用。
+* lodash 没变，形成单独一份两者共用。
+
+3. chunks模式为`all`
+从上面 initial 模式下我们似乎看出了问题，即 在 a 中同步引入在 b 中动态引入的 react，它其实可以被抽成文件供两者共用的，只是因为引入方式不同而没有这样做。
+
+所以 all 这种模式下，就会智能地进行判断以解决这个问题。此时不关心引入的模块是动态方式还是同步方式，只要能正确判断这段代码确实可以安全地进行拆分共用，那就干吧。
+
+需要注意的是这里需要设置 minSize 以使 react 能够正确被拆分，因为它小于 30k，在同步方式下，默认不会被拆分出来。
+
+**结论**
+看起来似乎 all 是最好的模式，因为它最大限度地生成了复用的代码，Webpack 默认就走这个模式打包不就得了。
+
+在开头的时候提到过一个原因为何默认情况下只优化 async 代码。所以，除了 all 之外的另外两个选项是有存在意义的。并且，具体的优化场景需要根据具体的需求而定，all 所产生的效果并非所有情况下都需要。
 
 
 ### 1.8 Tree-Shaking
