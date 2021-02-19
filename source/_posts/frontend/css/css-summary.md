@@ -645,7 +645,22 @@ div {
      background-position: 100%;
   }
 }
+```
 
+#### 2.13 裁切路径
+![裁切棱形](https://ftp.bmp.ovh/imgs/2021/02/78c7b7381b205277.png)
+![裁切椭圆](https://ftp.bmp.ovh/imgs/2021/02/99682a2a7fc055bf.png)
+```html
+<img class="pic" src="images/pic.jpg">
+```
+```css
+.pic{
+   clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+}
+
+.pic{
+   clip-path: circle(50%);
+}
 ```
 
 #### 2.100 动画参考列表
