@@ -263,24 +263,109 @@ module.exports = {
   };
 ```
 
+### 2.0 Shimming预置全局变量
+```js
+const webpack = require('webpack');
 
-### 2.1 shimming ProvidePlugin
-### 2.2 tree shaking
-### 2.3 懒加载
-### 2.4 webpack-spritesmith
-### 2.5 noParse
-### 2.6 exclude
-### 2.7 cache-loader 提高打包效率
-### 2.8 speed-measure-webpack-plugin 打包时候每一个loader或者plugin花费了多少时间 1
-### 2.9 提取第三方库
-### 3.0 babel-loader 的 cacheDirectory
-### 3.1 HardSourceWebpackPlugin
-### 3.2 image-webpack-loader
-### 3.3 useless-files-webpack-plugin
+ module.exports = {
+  plugins: [
+    new webpack.ProvidePlugin({
+      _: 'lodash',
+    }),
+  ],
+ };
+
+function component() {
+  const element = document.createElement('div');
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   return element;
+}
+document.body.appendChild(component());
+```
+
+### 2.1 noParse
+过滤不需要解析的文件
+```js
+module.exports = {
+  module: {
+    noParse: '/jquery|lodash/', // 不去解析三方库
+    rules: []
+  }
+}
+```
+
+### 2.2 cache-loader 提高打包效率
+在一些性能开销较大的 loader 之前添加此 loader，以将结果缓存到磁盘里。
+```js
+yarn add cache-loader -D
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          'cache-loader',
+          'babel-loader'
+        ],
+        include: path.resolve('src')
+      }
+    ]
+  }
+}
+```
+
+### 2.3 speed-measure-webpack-plugin
+查看loader、plugin打包花费时间
+```js
+yarn add -D speed-measure-webpack-plugin
+
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+const webpackConfig = smp.wrap({
+  plugins: [new MyPlugin(), new MyOtherPlugin()],
+});
+```
 
 
+### 2.4 [HardSourceWebpackPlugin](https://github.com/mzgoddard/hard-source-webpack-plugin)
+用于为模块提供中间缓存步骤.第一次构建将花费正常时间。第二个版本将明显更快。
+```js
+yarn add --dev hard-source-webpack-plugin
 
-## 二、Babel方面的优化配置
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+module.exports = {
+  plugins: [
+    new HardSourceWebpackPlugin()
+  ]
+}
+```
+
+### 2.5 image-webpack-loader
+图片压缩优化操作
+```js
+yarn add --dev image-webpack-loader
+
+module.exports = {
+  module: {
+    rules: [{
+      test: /\.(gif|png|jpe?g|svg)$/i,
+      use: [
+        'file-loader',
+        {
+          loader: 'image-webpack-loader',
+          options: {},
+        },
+      ],
+    }]
+  }
+}
+```
+
+
+## 三、Babel方面的优化配置
+
+## 四、代码方面的优化
 
 
 
