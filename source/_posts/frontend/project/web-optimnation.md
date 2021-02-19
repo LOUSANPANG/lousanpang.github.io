@@ -198,8 +198,46 @@ initial 即原始的拆分，原则就是有共用的情况即发生拆分。动
 ],
 ```
 
-### 1.7 mini-css-extract-plugin
-### 1.8 optimize-css-assets-webpack-plugin
+### 1.7 [MiniCssExtractPlugin、OptimizeCssAssetsPlugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+用于提取、优化压缩CSS资源
+```js
+yarn add -D mini-css-extract-plugin optimize-css-assets-webpack-plugin cssnano
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.css\.*(?!.*map)/g,  //注意不要写成 /\.css$/g
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+            discardComments: { removeAll: true },
+            // 避免 cssnano 重新计算 z-index
+            safe: true,
+            // cssnano 集成了autoprefixer的功能
+            // 会使用到autoprefixer进行无关前缀的清理
+            // 关闭autoprefixer功能
+            // 使用postcss的autoprefixer功能
+            autoprefixer: false
+        },
+        canPrint: true
+    }),
+  ]
+};
+```
+
+
 ### 1.9 uglifyjs-webpack-plugin
 ### 2.0 contenthash
 ### 2.1 shimming ProvidePlugin
