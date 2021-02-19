@@ -1,5 +1,5 @@
 ---
-title: 前端性能优化Webpack\Babel篇
+title: 前端性能优化Webpack\Babel\编码篇
 date: 2021-01-01
 tags: 
     - 前端性能优化
@@ -237,9 +237,33 @@ module.exports = {
 };
 ```
 
+### 1.8 uglifyjs-webpack-plugin
+此插件使用 uglify-js 压缩你的 JavaScript。
+```js
+yarn add uglifyjs-webpack-plugin -D
 
-### 1.9 uglifyjs-webpack-plugin
-### 2.0 contenthash
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+module.exports = {
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+};
+```
+
+### 1.9 contenthash
+根据文件内容计算而来,打包后修改一个文件只改变文件的hash不会改变关联的文件hash。
+```js
+  module.exports = {
+    entry: './src/index.js',
+    plugins: [
+    output: {
+      filename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+```
+
+
 ### 2.1 shimming ProvidePlugin
 ### 2.2 tree shaking
 ### 2.3 懒加载
