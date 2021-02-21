@@ -49,7 +49,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 只有普通文档流中块框的垂直外边距才会发生外边距合并。 行内框、浮动框或绝对定位之间的外边距不会合并。
 
-#### 1.3 定位
 
 
 
@@ -252,6 +251,16 @@ img{
     top: 50%;      
     transform: translateX(-50%) translateY(-50%); /* 控制内容绝对定位位置 */
     width:80%;   /* 控制图片不溢出，因此这里使用的图片实际宽度受父容器影响 */
+}
+```
+
+#### 4.8 css动态变量
+```css
+:root {
+  --main-text-color: #ff4400;
+}
+.u-theme-text {
+  color: var(--main-text-color);
 }
 ```
 
