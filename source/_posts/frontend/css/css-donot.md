@@ -150,6 +150,142 @@ html {
 }
 ```
 
+#### 3.5 七种方式实现三栏布局
+```css
+.left {
+  width: 200px;
+  height: 300px;
+  background: olive;
+}
+.right {
+  width: 200px;
+  height: 300px;
+  background: olivedrab;
+}
+.center {
+  height: 300px;
+  background: red;
+}
+```
+
+flex、圣杯布局
+```html
+<div class="container">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+```
+```css
+/* flex */
+.container {
+  display: flex;
+}
+.center {
+  flex-grow: 1;
+}
+.left {
+  order: -1;
+}
+
+/* 圣杯布局 */
+.container {
+  padding: 0 200px;
+}
+.container div {
+  float: left;
+}
+.center {
+  width: 100%;
+}
+.left {
+  position: relative;
+  left: -200px;
+  margin-left: -100%;
+}
+.right {
+  position: relative;
+  left: 200px;
+  margin-left: -200px;
+}
+```
+
+双飞翼布局
+```html
+<div class="container">
+    <div class="center"></div>
+</div>-
+<div class="left"></div>
+<div class="right"></div>
+```
+```css
+.container {
+  float: left;
+  width: 100%;
+}
+.container .center {
+  margin: 0 200px;
+}
+.left {
+  float: left;
+  margin-left: -100%;
+}
+.right {
+  float: right;
+  margin-left: -200px;
+}
+```
+
+flot流体布局、bfc布局、position布局
+```html
+  <div class="container">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="center"></div>
+  </div>
+```
+```css
+/* flot 流体布局 */
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.center {
+  margin: 0 200px;
+}
+
+/* bfc布局 */
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.center {
+  overflow: hidden;
+}
+
+/* position */
+.left {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.center {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  right: 200px;
+}
+.right {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+```
+
 
 
 ### 四、css好用的属性
