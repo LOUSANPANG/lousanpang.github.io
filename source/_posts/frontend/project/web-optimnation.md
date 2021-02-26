@@ -366,6 +366,208 @@ module.exports = {
 ## 三、Babel方面的优化配置
 
 ## 四、代码方面的优化
+### 4.1 函数式组件
+- 在 patch 过程中，如果遇到一个节点是组件 vnode，会有递归执行子组件的初始化过程
+- 数式组件也不会有状态，不会有响应式数据、生命周期钩子函数这些东西
+```vue
+// 优化前
+<template>
+  <div class="cell">
+    <div v-if="value" class="on"></div>
+    <section v-else class="off"></section>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['value'],
+}
+</script>
+
+
+// 优化后
+<template functional>
+  <div class="cell">
+    <div v-if="props.value" class="on"></div>
+    <section v-else class="off"></section>
+  </div>
+</template>
+```
+
+### 4.2 子组件拆分
+```vue
+// 优化前
+<template>
+  <div :style="{ opacity: number / 300 }">
+    <div>{{ heavy() }}</div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['number'],
+  methods: {
+    heavy () {
+      const n = 100000
+      let result = 0
+      for (let i = 0; i < n; i++) {
+        result += Math.sqrt(Math.cos(Math.sin(42)))
+      }
+      return result
+    }
+  }
+}
+</script>
+
+// 优化后
+<template>
+  <div :style="{ opacity: number / 300 }">
+    <ChildComp/>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    ChildComp: {
+      methods: {
+        heavy () {
+          const n = 100000
+          let result = 0
+          for (let i = 0; i < n; i++) {
+            result += Math.sqrt(Math.cos(Math.sin(42)))
+          }
+          return result
+        },
+      },
+      render (h) {
+        return h('div', this.heavy())
+      }
+    }
+  },
+  props: ['number']
+}
+</script>
+```
+
+
+### 4.3 局部变量
+- 优化前的组件多次在计算过程中访问 this.base，而优化后的组件会在计算前先用局部变量 base，缓存 this.base，后面直接访问 base。
+- this.base 是一个响应式对象，所以会触发它的 getter，进而会执行依赖收集相关逻辑代码
+
+```vue
+// 优化前
+<template>
+  <div :style="{ opacity: start / 300 }">{{ result }}</div>
+</template>
+
+<script>
+export default {
+  props: ['start'],
+  computed: {
+    base () {
+      return 42
+    },
+    result () {
+      let result = this.start
+      for (let i = 0; i < 1000; i++) {
+        result += Math.sqrt(Math.cos(Math.sin(this.base))) + this.base * this.base + this.base + this.base * 2 + this.base * 3
+      }
+      return result
+    },
+  },
+}
+</script>
+
+// 优化后
+<template>
+  <div :style="{ opacity: start / 300 }">{{ result }}</div>
+</template>
+
+<script>
+export default {
+  props: ['start'],
+  computed: {
+    base () {
+      return 42
+    },
+    result ({ base, start }) {
+      let result = start
+      for (let i = 0; i < 1000; i++) {
+        result += Math.sqrt(Math.cos(Math.sin(base))) + base * base + base + base * 2 + base * 3
+      }
+      return result
+    },
+  },
+}
+</script>
+```
+
+
+### 4.4 v-show 复用 DOM
+- v-if渲染的节点，由于新旧节点 vnode 不一致，在核心 diff 算法比对过程中，会移除旧的 vnode 节点，创建新的 vnode 节点 
+- v-show 的开销要比 v-if 小的多，当其内部 DOM 结构越复杂，性能的差异就会越大
+
+```vue
+// 优化前
+<template functional>
+  <div class="cell">
+    <div v-if="props.value" class="on">
+      <Heavy :n="10000"/>
+    </div>
+    <section v-else class="off">
+      <Heavy :n="10000"/>
+    </section>
+  </div>
+</template>
+
+
+// 优化后
+<template functional>
+  <div class="cell">
+    <div v-show="props.value" class="on">
+      <Heavy :n="10000"/>
+    </div>
+    <section v-show="!props.value" class="off">
+      <Heavy :n="10000"/>
+    </section>
+  </div>
+</template>
+```
+
+### 4.5 KeepAlive组件缓存DOM
+- 在使用 KeepAlive 后，vnode 以及 DOM 都会被缓存起来。下一次再次渲染该组件的时候，直接从缓存中拿到对应的 vnode 和 DOM。
+- 并不需要再走一次组件初始化
+
+```vue
+// 优化前
+<template>
+  <div id="app">
+    <router-view/>
+  </div>
+</template>
+
+// 优化后
+<template>
+  <div id="app">
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
+  </div>
+</template>
+```
+
+### 4.6 使用Deferred组件延时分批渲染组件
+
+### 4.7 时间片切割技术
+
+### 4.8 非响应式数据
+- 不需要的响应数据可变成非响应数据
+
+
+### 4.9 虚拟滚动组件
+
+
 
 
 
