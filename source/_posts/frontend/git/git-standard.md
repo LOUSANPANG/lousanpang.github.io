@@ -19,6 +19,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 #### 1.1 Commitizen: 替代你的 git commit
 ```
+yarn global add commitizen
 yarn add -D commitizen cz-conventional-changelog
 
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
@@ -68,8 +69,9 @@ module.exports = {
 #### 1.5 试运行
 - `git add --a`
 - `git cz`
-- `npm run release`
-- `git push master --tags`
+- `npm run release` 一步步升级
+- `npm run release -- --release-as x.0.0` 升级到指定版本
+- `git push master --tags` || `git push --follow-tags origin master`
 
 
 ### 二、`git cz` 介绍
