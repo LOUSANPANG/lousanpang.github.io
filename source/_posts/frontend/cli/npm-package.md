@@ -1,10 +1,10 @@
 ---
-title: npm的package.json文档
+title: NPM的package.json文档
 date: 2020-2-6
 tags: 
-    - npm
-categories: cli
-keywords: [npm]
+    - NPM
+categories: CLI
+keywords: [NPM]
 description: npm的package.json文档
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写

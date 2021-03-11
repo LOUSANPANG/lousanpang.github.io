@@ -1,11 +1,11 @@
 ---
-title: Html5语义化你的文档
+title: HTML5语义化你的文档
 date: 2018-06-06
 tags: 
-    - Html5
-categories: Html5
-keywords: [Html5]
-description: Html5语义化
+    - HTML5
+categories: HTML5
+keywords: [HTML5]
+description: HTML5语义化
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s2.ax1x.com/2019/12/25/li1aGT.png # 缩略图

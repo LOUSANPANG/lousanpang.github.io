@@ -1,11 +1,11 @@
 ---
-title: rollup
+title: Rollup
 date: 2021-1-15
 tags: 
-    - rollup
-categories: cli
-keywords: [rollup]
-description: rollup打包工具
+    - Rollup
+categories: CLI
+keywords: [Rollup]
+description: Rollup打包工具
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://ftp.bmp.ovh/imgs/2021/02/c2e5aebd61f6b8ea.png # 缩略图
@@ -15,7 +15,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
-### [rollup](https://www.rollupjs.com/)
+### [Rollup](https://www.rollupjs.com/)
 - 使用ES模块比CommonJS更好
 - tree-shaking 自动编译移除无用代码片段
 
