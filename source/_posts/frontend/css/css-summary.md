@@ -2,10 +2,10 @@
 title: CSS记录篇
 date: 2019-05-01
 tags: 
-    - CSS
-categories: CSS
-keywords: [CSS]
-description: CSS记录总结
+    - CSS3
+categories: CSS3
+keywords: [CSS3]
+description: CSS3记录总结
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s1.ax1x.com/2020/08/11/aLklo8.th.png # 缩略图

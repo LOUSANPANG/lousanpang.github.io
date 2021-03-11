@@ -2,10 +2,10 @@
 title: 你不知道的CSS
 date: 2018-06-01
 tags: 
-    - CSS
-categories: CSS
-keywords: [CSS]
-description: 你不知道的CSS
+    - CSS3
+categories: CSS3
+keywords: [CSS3]
+description: 你不知道的CSS3
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
 cover: https://s2.ax1x.com/2019/12/06/QJAUW6.png # 缩略图
