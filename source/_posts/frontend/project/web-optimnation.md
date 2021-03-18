@@ -237,7 +237,7 @@ module.exports = {
 };
 ```
 
-### 1.8 uglifyjs-webpack-plugin
+### uglifyjs-webpack-plugin
 此插件使用 uglify-js 压缩你的 JavaScript。
 
 去除生产环境的警告和console
@@ -367,6 +367,38 @@ module.exports = {
   }
 }
 ```
+
+### require.context
+它会遍历文件夹中的指定文件,然后自动导入,使得不需要每次显式的调用import导入模块
+```js
+import a from './img/a.png'
+import a1 from './img/a1.png'
+import a2 from './img/a2.png'
+import a3 from './img/a3.png'
+import a4 from './img/a4.png'
+
+=>
+
+const files = require.context('./img', false, /\.png$/)
+const fileList = []
+files.keys().forEach(fileName => {
+  // 该文件的内容
+  // const filesConfig = files(fileName)
+  fileList.push(fileName)
+})
+```
+**用法**
+`require.context(directory, useSubdirectories, regExp)`
+1. 参数
+- directory 文件路径
+- useSubdirectories 是否遍历文件的子目录
+- regExp 匹配文件的正则
+2. 返回一个函数，并且有三个属性
+- `request`: request为utils文件夹下面匹配文件的相对路径,返回这个匹配文件相对于整个工程的相对路径
+- `keys`: 一个函数返回匹配成功模块的名字组成的数组
+- `id`: 执行的路径 App.vue?26cd:23 ./src/utils \.\/utils\/\.js$
+3. 返回一个函数接受一个参数
+- fileName 文件名
 
 
 ## 三、Babel方面的优化配置
