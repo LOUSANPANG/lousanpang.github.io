@@ -2,9 +2,9 @@
 title: Mapbox项目实践应用
 date: 2019-12-28
 tags: 
-    - Mabox
-categories: Mabox
-keywords: [Mabox]
+    - Mapbox
+categories: Mapbox
+keywords: [Mapbox]
 description: Mapbox项目实践应用
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写

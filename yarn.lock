@@ -1846,13 +1846,13 @@ hexo-renderer-marked@^1.0.1:
     marked "^0.6.1"
     strip-indent "^2.0.0"
 
-hexo-renderer-stylus@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.npm.taobao.org/hexo-renderer-stylus/download/hexo-renderer-stylus-0.3.3.tgz#c54ea27e1fd8e3c8a9a7a84cfba8ad354122ca7f"
-  integrity sha1-xU6ifh/Y48ipp6hM+6itNUEiyn8=
+hexo-renderer-stylus@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/hexo-renderer-stylus/download/hexo-renderer-stylus-2.0.1.tgz#c65566e97e9058a52e46c82b0c45cf561f4b94cb"
+  integrity sha1-xlVm6X6QWKUuRsgrDEXPVh9LlMs=
   dependencies:
     nib "^1.1.2"
-    stylus "^0.54.5"
+    stylus "^0.54.8"
 
 hexo-server@^0.3.3:
   version "0.3.3"
@@ -3905,9 +3905,9 @@ stylus@0.54.5:
     sax "0.5.x"
     source-map "0.1.x"
 
-stylus@^0.54.5:
+stylus@^0.54.8:
   version "0.54.8"
-  resolved "https://registry.npm.taobao.org/stylus/download/stylus-0.54.8.tgz?cache=0&sync_timestamp=1594902242703&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fstylus%2Fdownload%2Fstylus-0.54.8.tgz#3da3e65966bc567a7b044bfe0eece653e099d147"
+  resolved "https://registry.npm.taobao.org/stylus/download/stylus-0.54.8.tgz#3da3e65966bc567a7b044bfe0eece653e099d147"
   integrity sha1-PaPmWWa8Vnp7BEv+DuzmU+CZ0Uc=
   dependencies:
     css-parse "~2.0.0"
