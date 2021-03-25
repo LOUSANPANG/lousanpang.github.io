@@ -78,12 +78,17 @@ sidebar: {
 ```
 
 ### [关于GitHub自动部署](https://neveryu.github.io/2019/02/05/travis-ci/)
+
+#### [使用GitHub Action自动部署](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
+
+#### 使用`travis-ci`部署
 流程按照文档构建就可以了。关于token的问题：
 1. 在[`travis`](https://travis-ci.org/)文档选择自己仓库。
 2. 设置token
 3. 在`deploy.sh`设置`git push -f https://${xxx}@github.com/xxx.git main:gh-pages`
-
 xxx就是在`travis`中设置token的变量。
+
+
 
 
 
