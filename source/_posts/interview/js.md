@@ -1,6 +1,6 @@
 ---
-title: 浏览器篇
-date: 2019-08-26
+title: JavaScript篇
+date: 2019-09-03
 tags: 
     - 面试篇
 categories: 面试篇
@@ -15,8 +15,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
-### 浏览器
-- [关键路径渲染优化](https://github.com/fi3ework/blog/issues/16)
+### 工具
+- [前端模块化]](https://github.com/ljianshu/Blog/issues/48)
 
 
 <br>
