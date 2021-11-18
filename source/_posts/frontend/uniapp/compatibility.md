@@ -3,8 +3,8 @@ title: uniapp跨端兼容性总结
 date: 2021-11-17
 tags: 
     - uniapp
-categories: uniapp
-keywords: [ uniapp ]
+categories: 跨端
+keywords: [多端开发]
 description: uniapp跨端兼容性总结
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
