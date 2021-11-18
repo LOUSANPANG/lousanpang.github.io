@@ -24,7 +24,7 @@
     "hexo-renderer-marked": "^1.0.1",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^0.3.3",
-    "standard-version": "^7.0.1"
+    "standard-version": "^8.0.1"
   },
   "resolutions": {
     "stylus": "^0.54.8"
