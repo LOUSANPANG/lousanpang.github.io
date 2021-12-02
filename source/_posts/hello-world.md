@@ -191,6 +191,14 @@ git rm --cached themes/Butterfly
 只需要clone下来新建一个branch，用来自己用，每次官方更新pull到另一个分支，merge一下就行。
 相当于把一个大项目分成多个小项目，尽可能减少项目之间的关联，方便调试和修改
 
+#### 5.2 部署失败
+
+>切换node版本为12
+
+```bash
+nvm use v12.22.7
+```
+
 
 ### 六、详细文档
 [Butterfly主题文档](https://jerryc.me/posts/21cfbf15/#%E5%BF%AB%E9%80%9F%E9%96%8B%E5%A7%8B)
