@@ -31,8 +31,17 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 
 ## [Vue SSR 指南](https://ssr.vuejs.org/zh/guide/)
->[Nuxt.js提供了平滑开箱即用体验的更高层次解决方案](https://nuxtjs.org/docs/get-started/installation)
+>[Nuxt.js提供了平滑开箱即用体验的更高层次解决方案](https://www.nuxtjs.cn/)
 
+### Nuxtjs特点
+* 服务端渲染
+* 强大的路由功能、支持异步数据
+* 静态文件服务
+* ES6/7
+* 打包压缩js、css
+* HTML头部标签管理
+* 本地开发热加载
+* 集成各种预处理、语法规范等
 
 
 <br>
