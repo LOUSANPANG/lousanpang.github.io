@@ -2,9 +2,9 @@
 title: Hexo腻了，试试VuePress
 date: 2021-01-24
 tags: 
-    - 关于写作
-categories: 关于写作
-keywords: [写作]
+    - 静态文档
+categories: 静态文档
+keywords: [静态文档]
 description: VuePress搭建静态文档
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
