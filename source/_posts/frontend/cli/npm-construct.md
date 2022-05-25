@@ -2,9 +2,9 @@
 title: 构建一个NPM包管理工具
 date: 2020-12-31
 tags: 
-    - NPM
+    - CLI
 categories: CLI
-keywords: [NPM]
+keywords: [CLI]
 description: 如何整合一个共享的代码库
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写

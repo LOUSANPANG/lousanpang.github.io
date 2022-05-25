@@ -2,9 +2,9 @@
 title: 最后一次回顾下Webpack4.x
 date: 2020-12-31
 tags: 
-    - Webpack
+    - CLI
 categories: CLI
-keywords: [Webpack]
+keywords: [CLI]
 description: 由浅入深配置webpack4
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写

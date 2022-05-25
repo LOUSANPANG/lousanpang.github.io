@@ -4,7 +4,7 @@ date: 2018-04-16
 tags: 
     - JavaScript
 categories: JavaScript
-keywords: [JavaScript]
+keywords: [defineProperty]
 description: defineProperty
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
