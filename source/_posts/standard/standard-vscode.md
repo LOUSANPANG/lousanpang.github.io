@@ -94,7 +94,7 @@ ul>li.item$@3*3
 
 
 ### 三、在根目录新建`.vscode`文件夹
-#### 3.1 launch.json
+#### 3.1 /.vscode/launch.json
 ```json
 {
   // Use IntelliSense to learn about possible attributes.
@@ -156,7 +156,7 @@ ul>li.item$@3*3
 }
 ```
 
-#### 3.2 settings.json
+#### 3.2 /.vscode/settings.json
 ```json
 {
     "workbench.colorTheme": "Atom One Dark",
@@ -195,6 +195,9 @@ ul>li.item$@3*3
 ```
 
 
+### 四、终端`code .`快速启动vscode
+#### 4.1 `command` + `shift` + `p` 打开配置命令行
+#### 4.2 输入`shell command` 点击安装
 
 
 
