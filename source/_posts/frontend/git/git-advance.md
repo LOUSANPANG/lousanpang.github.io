@@ -27,6 +27,9 @@ git config --global --edit
 配置commit编辑器
 git config --global core.editor vim
 
+删除git全局配置
+git config --unset core.hooksPath
+
 配置命令别名
 git config --global alias.ci commit
 // git ci === git commit 

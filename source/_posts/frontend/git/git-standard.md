@@ -15,21 +15,35 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
-### 一、[部署Angular 团队Git的规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+## 一、Angular团队Git的规范[conventional-changelog + standard-version]
 
-#### 1.1 Commitizen: 替代你的 git commit
+
+### 介绍Commit message写法规范【Header必须 Body可忽略 Footer可忽略】
+#### Header包括`<type, 必填>(<scope，可省略>): <subject，必填>`
+- type: 类别表示(feat、fix、docs、style...)
+- scope: 说明 commit 影响的范围，比如某个模块、某个功能
+- subject: 是 commit 目的的简短描述，不超过50个字符
+#### Body部分是对本次 commit 的详细描述，可以分成多行
+#### Footer部分只用于两种情况：不兼容变动、关闭 Issue
+
+
+### 部署[conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)方案
+#### 1.1 规范commit命令行工具[commitizen] node>=14
 ```
-yarn global add commitizen
-yarn add -D commitizen cz-conventional-changelog
+yarn add -D commitizen
+```
 
+#### 1.2 通过命令来初始化项目以使用cz-conventional-changelog适配器
+#### git cz 替代你的 git commit
+```
+// 第一种方法
+commitizen init cz-conventional-changelog --save-dev --save-exact
+
+// 第二种方法 如果安装慢的话可以使用依赖代替上行命令
+yarn add -D cz-conventional-changelog
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
-```
 
-#### 1.2 package.json中配置
-```
-"script": {
-    "commit": "git-cz",
-},
+// packagejson配置
 "config": {
   "commitizen": {
     "path": "node_modules/cz-conventional-changelog"
@@ -37,41 +51,69 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 }
 ```
 
-#### 1.3 自动生成CHANGELOG
+#### 1.2 强制执行commit规范 [commitlint+husky]
 ```
-yarn add -D standard-version
+yarn add -D @commitlint/config-conventional @commitlint/cli
 ```
 
+#### 1.3 新增 .commitlintrc.js 配置官方规范
 ```
-"script": {
-  "release": "standard-version"
+module.exports = {
+  extends: ['@commitlint/config-conventional']
 }
 ```
 
-#### 1.4 配置commitlint
-```bash
-yarn add husky @commitlint/config-conventional @commitlint/cli -D
+#### 1.4 [配置husky钩子检测commit msg](https://typicode.github.io/husky/#/?id=install)
 ```
-``` js
-// package,json
-"husky": {
-  "hooks": {
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+pnpm add -D husky
+// 启动husky（启动失败可以尝试全局再次安装）
+npx husky install
+// 添加commit-msg文件并且添加命令（添加命令无效可以手动添加）
+npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+```
+
+
+#### 1.4 自动生成 CHANGELOG [conventional-changelog-cli]
+```
+yarn add -D conventional-changelog-cli
+```
+
+#### 1.5 配置packagejson，生成 CHANGELOG.md 文件
+```
+{
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   }
 }
+```
 
-// .commitlintrc.js
-module.exports = {
-    extends: ['@commitlint/config-conventional']
+#### 1.6 自动化版本控制和包发布 【release-it】
+```
+yarn add -D release-it
+```
+
+#### 1.7 配置packagejson
+```
+"scripts": {
+  "release": "release-it"
 }
 ```
 
-#### 1.5 试运行
-- `git add --a`
-- `git cz`
-- `npm run release` 一步步升级
-- `npm run release -- --release-as x.0.0` 升级到指定版本
-- `git push master --tags` || `git push --follow-tags origin master`
+#### 1.8 试运行命令
+```
+git add file
+
+git cz
+
+yarn release // minor + 1
+yarn release  -- --release-as x.0.0 // 升级到指定版本
+yarn release -r minor
+yarn release -r major
+yarn release -r 2.0.0
+yarn release -r 2.0.0-test
+yarn release -p alpha // 2.0.0-alpha.0
+yarn release -t "rc-" // rc-v2.0.0
+```
 
 
 ### 二、`git cz` 介绍
@@ -273,3 +315,7 @@ git rm -r modules/subb
 ```bash
 rm -rf .git/modules/subb
 ```
+
+### 参考
+* [《Commit message 和 Change log 编写指南》](https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+* [《git commit 、CHANGELOG 和版本发布的标准自动化》](https://zhuanlan.zhihu.com/p/51894196)
