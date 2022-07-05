@@ -1,10 +1,10 @@
 ---
-title: Git规范
+title: 开发规范之Git规范
 date: 2019-11-01
 tags:
-    - Git
-categories: Git
-keywords: [Git]
+    - 开发规范
+categories: 开发规范
+keywords: [开发规范]
 description: Git规范
 top_img: # 除非特定需要，可以不写
 comments: # 是否显示评论 除非设置false,可以不写
