@@ -47,9 +47,6 @@ MM（已追踪已暂存又再次修改；需要git commit;MM->M）
 
 #### 高级基础常用
 ```
-撤销移除暂存清单
-git rm --cached xxx
-
 重命名文件(无需手动变更文件名称)
 git mv a.js b.js
     => mv a.js b.js
@@ -58,10 +55,10 @@ git mv a.js b.js
 
 查看提交记录
 git log
-
+查看简约记录
+git reflog
 查看提交记录显示补丁输出
 git log -p
-
 查看近2条提交记录显示补丁简约版
 git log --stat -2
 
@@ -72,8 +69,14 @@ git commit --amend
     => git add newfile.md
     => git commit --amend // newfile.md reademe.md具有一样的暂存commit
 
-取消暂存文件
-git reset HEAD reademe.md
+撤销移除暂存清单
+git rm --cached xxx
+取消撤回暂存文件
+git reset --hard HEAD~0 // 撤销上一次commit记录
+git revert HEAD~0 // 撤销上次记录但是会记录这次revert
+撤回错了想恢复
+git reset 1234abcd // 查看log恢复
+
 
 远程分支更新 == git pull
 git fetch origin + git merge FETCH_HEAD
