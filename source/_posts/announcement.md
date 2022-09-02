@@ -19,7 +19,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 大家好，
 
-技术博文已迁移到 [LOUSANPANG/fe-workflow](https://lousanpang.github.io/fe-workflow/fe-workflow/) 站点上。
+技术博文已迁移到 [LOUSANPANG/fe-workflow](https://lousanpang.github.io/fe-workflow) 站点上。
 
 该 [LOUSANPANG/lousanpang.github.io](https://lousanpang.github.io/) 站点以面试、生活日记为主。
 
