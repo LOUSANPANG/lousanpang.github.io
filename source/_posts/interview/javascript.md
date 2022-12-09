@@ -15,6 +15,35 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
+## JS中的数据类型及区别
+
+**基本类型(值类型)：**
+  - Number(数字)、String(字符串)、Boolean(布尔)、null(空)、undefined(未定义)、Symbol(符号)、BigInt(精度整数)
+
+**引用类型(复杂数据类型)：**
+  - Object(对象)、Function(函数)、Array(数组)、Date(日期)、RegExp(正则表达式)、Global、Math(单体内置对象)
+
+
+
+
+## JS中的数据类型检测方案
+
+**typeof**
+  - 优点：可以区分基本类型
+  - 缺点：不能详细区分引用类型，`Null` 被认为 `Object` 类型
+
+**instanceof**
+  - 用于判断一个引用类型是否属于某构造函数
+  - 还可以在继承关系中用来判断一个实例是否属于它的父类型
+  - 优点：能够区分Array、Object和Function，适合用于判断自定义的类实例对象
+  - 缺点：Number，Boolean，String基本数据类型不能判断
+
+**Object.prototype.toString.call()**
+  - 优点：精准判断任何数据类型
+
+
+
+
 ## 暂时性死区
 
 在块作用域内，let声明的变量只是**创建时被提升**，初始化并没有被提升，在初始化之前使用变量，就会形成一个暂时性死区。
@@ -27,45 +56,54 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ```
 
 
-## Symbol
 
-**应用场景**
 
-  - 对象属性名
-  - 替代常量
-  - 定义类的私有属性
+#### 闭包
 
-  ```js
-  // 正常枚举遍历不到，可以通过 Reflect.ownKeys(obj)
-  const gender = Symbol('gender')
-  const obj = {
-    name: 'ZhangSan',
-    [gender]: '男'
-  }
 
-  // 充当不同常量
-  const one = Symbol()
-  const two = Symbol()
 
-  // 定义的 Symbol 无法在实例里获取到
-  class Login {
-    constructor(username, password) {
-      const PASSWORD = Symbol()
-      this.username = username
-      this[PASSWORD] = password
-    }
-  }
-  ```
+
+#### JS 中 this 的情况
+
+- 普通函数调用：通过函数名()直接调用：this指向全局对象window（注意let定义的变量不是window属性，只有window.xxx定义的才是。即let a =’aaa’; this.a是undefined）
+- 构造函数调用：函数作为构造函数，用new关键字调用时：this指向新new出的对象
+- 对象函数调用：通过对象.函数名()调用的：this指向这个对象
+- 箭头函数调用：箭头函数里面没有 this ，所以永远是上层作用域this（上下文）
+- apply和call调用：函数体内 this 的指向的是 call/apply 方法第一个参数，若为空默认是指向全局对象window。
+- 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
+- 函数作为window内置函数的回调函数调用：this指向window（如setInterval setTimeout 等）
+
+
+
+
+#### call/apply/bind 的区别
+- fn.call(obj, 1, 2) 函数立即调用
+- fn.apply(obj, [1, 2]) 函数立即调用
+- fn.bind(obj, 1, 2) 返回对应函数
+
+
+
+
+#### 箭头函数的特性
+- 没有自己的this，会捕获其所在的上下文的this值，作为自己的this值
+- 没有constructor，是匿名函数，不能作为构造函数，不能通过new 调用
+- 没有原型属性 Fn.prototype 值为 undefined
+- 不能当做Generator函数,不能使用yield关键字
 
 
 
 
 ## 作用域及作用域链
 
-  - 即函数或变量可见的作用域
+**作用域**
+  - 当前创建函数或变量所处的上下文
   - ES6之前有全局作用域、函数作用域，现在又有了块级作用域
-  - 内部作用域可访问外部作用域，外部作用域访问不了内部作用域
+  - 内部作用域可访问外部作用域，外部作用域访问不了内部作用域，起到隔离保护作用
+
+**作用域链**
   - 变量取值，如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，查找过程形成的链条就叫做作用域链
+
+
 
 
 ## new操作符的实例化过程
@@ -110,7 +148,22 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
   ```
 
 
+
+
 ## 原型及原型链
+
+**原型关系：**
+  - 每个 class都有显示原型 prototype
+  - 每个实例都有隐式原型 __proto__
+  - 实例的 __proto__ 指向对应 class 的 prototype
+
+**原型：**
+
+在 JS 中，每当定义一个对象（函数也是对象）时，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象。
+
+**原型链：**
+
+函数的原型链对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__,该指针是指向上一层的原型对象，而上一层的原型对象的结构依然类似。因此可以利用__proto__一直指向Object的原型对象上，而Object原型对象用Object.prototype.__ proto__ = null表示原型链顶端。如此形成了js的原型链继承。同时所有的js对象都有Object的基本防范
 
 
 
@@ -161,6 +214,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
   // 1，4，5，8 6 2 3 7
   ```
+
+
 
 
 ## 模块化的理解
@@ -228,6 +283,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
   - this是undefined
   - 浏览器加载 ESM，使用 `<script>` 标签，要加入 type="module" 属性
   - 具有更好的可摇树性
+
+
 
 
 ## JavaScript的设计模式
