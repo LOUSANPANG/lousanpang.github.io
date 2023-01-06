@@ -53,6 +53,84 @@ type PartPerson = {
 ```
 
 
+**abstract** 抽象类
+
+```ts
+// 抽象类不能用来创建对象，只能专门用来被继承类
+abstract class Animal {
+  name: string;
+  constructor(name) {
+    this.name = name
+  }
+
+  // 定义一个抽象方法
+  // 不需要方法体，子类继承后必须实现该抽象方法
+  abstract say(): void
+}
+
+class Dog extends Animal {
+  constructor(name) {
+    super(name)
+  }
+
+  say() {
+    console.log()
+  }
+}
+
+new Aniaml('Mike') // error
+new Dog('Mike') // success
+```
+
+
+**implements** 使类满足接口要求
+
+```ts
+interface MyInter {
+  name: string;
+  say(): void;
+}
+
+class MyClass implements MyInter {
+  name: string;
+  say() {
+    console.log()
+  }
+}
+```
+
+
+**public protected private getter setter** 类的属性修饰符
+
+```ts
+class Person {
+  // 任意关系访问和修改
+  public name: string;
+  // 仅类及类的子类可访问修改
+  protected like: string;
+  // 仅类内部访问和修改
+  private age: number;
+
+  // 下边这种方式是定义加复制的简写
+  // 等于 this.paramA = paramA
+  constrctor(public paramA: string, protected paramB: string, private paramC: string) {
+  }
+  
+  // new Person().name
+  get name() {
+    return this.name
+  }
+
+  // new Person().name = 'Mike'
+  set name(val) {
+    this.name = val
+  }
+}
+```
+
+
+
+
 ## 内置工具类型
 
 
@@ -225,8 +303,6 @@ type User = {
 type UserWithoutEmail = Omit<User, "email"> // UserWithoutEmail ={id: string;name: string;}
 
 ```
-
-
 
 
 

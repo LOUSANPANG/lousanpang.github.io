@@ -15,6 +15,130 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
+## 什么是面向对象
+
+  - 面向对象简而言之就是程序中所有的操作都是通过对象来完成。主要是对对象单词的理解，在计算机当中一种事物到了程序中就变成对象，一条狗就是一个事物。程序中所有的对象被分为两部分属性、方法，以一条狗为例，属性一只动物、性别公、毛色黑这是它的数据，它会叫这是它的功能，同样在程序中，数据是属性、功能是方法。
+  - 如何创建对象就要先定义类，可以理解为对象模型，Dog类创建狗的模型，不同的类用来创建不同的对象。
+
+
+
+
+## 类、构造函数
+
+  - 类 class
+
+  ```ts
+    class Dog {
+      name;
+      age;
+      say() {}
+    }
+    const dog = new Dog()
+    const dog1 = new Dog()
+  ```
+
+  - 构造函数 constructor
+
+  ```ts
+    class Dog {
+      name: string;
+      age: number;
+      constructor(name: string, age: number) {
+        // this -> dog dog1
+        this.name = name
+        this.age = age
+      }
+      say() {}
+    }
+    const dog = new Dog('Mike', 1)
+    const dog1 = new Dog('Joi', 2)
+  ```
+
+
+
+
+## new操作符的实例化过程
+
+  - 创建空对象
+  - 空对象隐式原型__proto__指向构造函数的原型
+  - 将空对象作为构造函数的上下文
+  - 判断构造函数返回值是否为对象，如果为对象就使用构造函数返回的值，否则使用 obj
+
+  ```js
+  /**
+   * new Create() 的过程，可以通过该函数来模拟
+   * @params {Function} fn new操作符的目标函数
+   * @params {Array} args 参数
+   */
+  function create(fn, ...args) {
+      let obj = Object.create({})
+
+      // obj.__proto__ = fn.prototype
+      Object.setPrototypeOf(obj, fn.prototype)
+
+      // 改变构造函数指向 并 执行
+      let result = fn.apply(obj, args)
+
+      // 如果构造函数返回值为对象则返回对象，否则返回 obj
+      return result instanceof Object ? result : obj
+  }
+  ```
+
+  ```js
+  function Car(name) {
+      this.name = name
+      return 1
+  }
+  new Car('BMW').name // 'BMW'
+
+  function Car(name) {
+      this.name = name
+      return { name: 'mercedes-benz' }
+  }
+  new Car('BMW').name // 'mercedes-benz'
+  ```
+
+
+
+
+## 作用域及作用域链
+
+**作用域**
+  - 当前创建函数或变量所处的上下文
+  - ES6之前有全局作用域、函数作用域，现在又有了块级作用域
+  - 内部作用域可访问外部作用域，外部作用域访问不了内部作用域，起到隔离保护作用
+
+**作用域链**
+  - 变量取值，如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，查找过程形成的链条就叫做作用域链
+
+
+
+
+## 原型及原型链
+
+**原型关系：**
+  - 每个 class都有显示原型 prototype
+  - 每个实例都有隐式原型 __proto__
+  - 实例的 __proto__ 指向对应 class 的 prototype
+
+**原型：**
+
+在 JS 中，每当定义一个对象（函数也是对象）时，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象。
+
+**原型链：**
+
+函数的原型链对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__,该指针是指向上一层的原型对象，而上一层的原型对象的结构依然类似。因此可以利用__proto__一直指向Object的原型对象上，而Object原型对象用Object.prototype.__ proto__ = null表示原型链顶端。如此形成了js的原型链继承。同时所有的js对象都有Object的基本防范
+
+
+
+
+## 继承
+
+  - 
+
+
+
+
 ## JS中的数据类型及区别
 
 **基本类型(值类型)：**
@@ -92,82 +216,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 
 
-
-## 作用域及作用域链
-
-**作用域**
-  - 当前创建函数或变量所处的上下文
-  - ES6之前有全局作用域、函数作用域，现在又有了块级作用域
-  - 内部作用域可访问外部作用域，外部作用域访问不了内部作用域，起到隔离保护作用
-
-**作用域链**
-  - 变量取值，如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，查找过程形成的链条就叫做作用域链
-
-
-
-
-## new操作符的实例化过程
-
-  - 创建空对象
-  - 空对象隐式原型__proto__指向构造函数的原型
-  - 将空对象作为构造函数的上下文
-  - 判断构造函数返回值是否为对象，如果为对象就使用构造函数返回的值，否则使用 obj
-
-  ```js
-  /**
-   * new Create() 的过程，可以通过该函数来模拟
-   * @params {Function} fn new操作符的目标函数
-   * @params {Array} args 参数
-   */
-  function create(fn, ...args) {
-      let obj = Object.create({})
-
-      // obj.__proto__ = fn.prototype
-      Object.setPrototypeOf(obj, fn.prototype)
-
-      // 改变构造函数指向 并 执行
-      let result = fn.apply(obj, args)
-
-      // 如果构造函数返回值为对象则返回对象，否则返回 obj
-      return result instanceof Object ? result : obj
-  }
-  ```
-
-  ```js
-  function Car(name) {
-      this.name = name
-      return 1
-  }
-  new Car('BMW').name // 'BMW'
-
-  function Car(name) {
-      this.name = name
-      return { name: 'mercedes-benz' }
-  }
-  new Car('BMW').name // 'mercedes-benz'
-  ```
-
-
-
-
-## 原型及原型链
-
-**原型关系：**
-  - 每个 class都有显示原型 prototype
-  - 每个实例都有隐式原型 __proto__
-  - 实例的 __proto__ 指向对应 class 的 prototype
-
-**原型：**
-
-在 JS 中，每当定义一个对象（函数也是对象）时，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象。
-
-**原型链：**
-
-函数的原型链对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__,该指针是指向上一层的原型对象，而上一层的原型对象的结构依然类似。因此可以利用__proto__一直指向Object的原型对象上，而Object原型对象用Object.prototype.__ proto__ = null表示原型链顶端。如此形成了js的原型链继承。同时所有的js对象都有Object的基本防范
-
-
-
-
 ## Event Loop
 
   - 微任务：Promise.then/catch/finally、Object.observe
@@ -217,8 +265,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 
 
-
-## 模块化的理解
+  ## 模块化的理解
 
 **namespace**
   - 优点：通过对象的形式对变量进行包裹，避免命名冲突
