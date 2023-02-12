@@ -16,6 +16,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ![pexels-photo-2294878.jpeg](https://i.loli.net/2019/09/11/sR9xEpuAhTYcFiw.jpg)
 
+
 ### 如何搭建hexo博客
 #### 安装
 ```bash
@@ -69,6 +70,7 @@ git checkout master
 hexo g
 hexo d
 ```
+
 
 
 
