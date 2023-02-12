@@ -138,7 +138,7 @@ hexo d
 rm -rf .git # 主题目录清除clone主题的git文件
 git init # 主目录
 git add --a
-git commit -a -m ''
+git commit -m ''
 git branch lgh
 git checkout lgh
 git remote add origin https://github.com/LOUSANPANG/lousanpang.github.io.git # 建立连接
@@ -158,11 +158,11 @@ deploy: # 主目录的_config.yml
  hexo g
  hexo d
  git add --a
- git commit -a -m 'feat: :art: pull md'
+ git commit -m 'feat: :art: pull md'
  git push
  
  // git push --set-upstream origin lgh
- // hexo g && hexo d && git add --a && git commit -a -m 'docs: :memo: xxx' && git push
+ // hexo g && hexo d && git add --a && git commit -m 'docs: :memo: xxx' && git push
 ```
 
 ### 四、[常见命令](https://hexo.io/zh-cn/docs/commands)
