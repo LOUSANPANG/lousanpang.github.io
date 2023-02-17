@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>前端面试复习计划之JavaScript | Lou Guanghao</title><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端面试复习计划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试复习计划之JavaScript">
+<meta property="og:url" content="http://example.com/2020/01/01/interview/javascript/index.html">
+<meta property="og:site_name" content="Lou Guanghao">
+<meta property="og:description" content="前端面试复习计划">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/10/26/7643dd8ec8d69755.png">
+<meta property="article:published_time" content="2019-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-17T07:33:06.072Z">
+<meta property="article:author" content="Lou Guanghao">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/10/26/7643dd8ec8d69755.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2020/01/01/interview/javascript/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面试复习计划之JavaScript',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-17 15:33:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.bmp.ovh/imgs/2022/10/26/7643dd8ec8d69755.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Lou Guanghao"><span class="site-name">Lou Guanghao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前端面试复习计划之JavaScript</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-12-31T16:00:00.000Z" title="Created 2020-01-01 00:00:00">2020-01-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-02-17T07:33:06.072Z" title="Updated 2023-02-17 15:33:06">2023-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="什么是面向对象"><a href="#什么是面向对象" class="headerlink" title="什么是面向对象"></a>什么是面向对象</h2><ul>
+<li>面向对象简而言之就是程序中所有的操作都是通过对象来完成。主要是对对象单词的理解，在计算机当中一种事物到了程序中就变成对象，一条狗就是一个事物。程序中所有的对象被分为两部分属性、方法，以一条狗为例，属性一只动物、性别公、毛色黑这是它的数据，它会叫这是它的功能，同样在程序中，数据是属性、功能是方法。</li>
+<li>如何创建对象就要先定义类，可以理解为对象模型，Dog类创建狗的模型，不同的类用来创建不同的对象。</li>
+</ul>
+<h2 id="类、构造函数"><a href="#类、构造函数" class="headerlink" title="类、构造函数"></a>类、构造函数</h2><ul>
+<li>类 class</li>
+</ul>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">  name;</span><br><span class="line">  age;</span><br><span class="line">  <span class="title function_">say</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> <span class="title class_">Dog</span>()</span><br><span class="line"><span class="keyword">const</span> dog1 = <span class="keyword">new</span> <span class="title class_">Dog</span>()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>构造函数 constructor</li>
+</ul>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name: <span class="built_in">string</span>, age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="comment">// this -&gt; dog dog1</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">say</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&#x27;Mike&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">const</span> dog1 = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&#x27;Joi&#x27;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="new操作符的实例化过程"><a href="#new操作符的实例化过程" class="headerlink" title="new操作符的实例化过程"></a>new操作符的实例化过程</h2><ul>
+<li>创建空对象</li>
+<li>空对象隐式原型__proto__指向构造函数的原型</li>
+<li>将空对象作为构造函数的上下文</li>
+<li>判断构造函数返回值是否为对象，如果为对象就使用构造函数返回的值，否则使用 obj</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * new Create() 的过程，可以通过该函数来模拟</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">Function</span>&#125; fn new操作符的目标函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">Array</span>&#125; args 参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// obj.__proto__ = fn.prototype</span></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(obj, fn.<span class="property"><span class="keyword">prototype</span></span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 改变构造函数指向 并 执行</span></span><br><span class="line">    <span class="keyword">let</span> result = fn.<span class="title function_">apply</span>(obj, args)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果构造函数返回值为对象则返回对象，否则返回 obj</span></span><br><span class="line">    <span class="keyword">return</span> result <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? result : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Car</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&#x27;BMW&#x27;</span>).<span class="property">name</span> <span class="comment">// &#x27;BMW&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Car</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">name</span>: <span class="string">&#x27;mercedes-benz&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&#x27;BMW&#x27;</span>).<span class="property">name</span> <span class="comment">// &#x27;mercedes-benz&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="作用域及作用域链"><a href="#作用域及作用域链" class="headerlink" title="作用域及作用域链"></a>作用域及作用域链</h2><p><strong>作用域</strong></p>
+<ul>
+<li>当前创建函数或变量所处的上下文</li>
+<li>ES6之前有全局作用域、函数作用域，现在又有了块级作用域</li>
+<li>内部作用域可访问外部作用域，外部作用域访问不了内部作用域，起到隔离保护作用</li>
+</ul>
+<p><strong>作用域链</strong></p>
+<ul>
+<li>变量取值，如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，查找过程形成的链条就叫做作用域链</li>
+</ul>
+<h2 id="原型及原型链"><a href="#原型及原型链" class="headerlink" title="原型及原型链"></a>原型及原型链</h2><p><strong>原型关系：</strong></p>
+<ul>
+<li>每个 class都有显示原型 prototype</li>
+<li>每个实例都有隐式原型 <strong>proto</strong></li>
+<li>实例的 <strong>proto</strong> 指向对应 class 的 prototype</li>
+</ul>
+<p><strong>原型：</strong></p>
+<p>在 JS 中，每当定义一个对象（函数也是对象）时，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象。</p>
+<p><strong>原型链：</strong></p>
+<p>函数的原型链对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__,该指针是指向上一层的原型对象，而上一层的原型对象的结构依然类似。因此可以利用__proto__一直指向Object的原型对象上，而Object原型对象用Object.prototype.__ proto__ &#x3D; null表示原型链顶端。如此形成了js的原型链继承。同时所有的js对象都有Object的基本防范</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>  - </p>
+<h2 id="JS中的数据类型及区别"><a href="#JS中的数据类型及区别" class="headerlink" title="JS中的数据类型及区别"></a>JS中的数据类型及区别</h2><p><strong>基本类型(值类型)：</strong></p>
+<ul>
+<li>Number(数字)、String(字符串)、Boolean(布尔)、null(空)、undefined(未定义)、Symbol(符号)、BigInt(精度整数)</li>
+</ul>
+<p><strong>引用类型(复杂数据类型)：</strong></p>
+<ul>
+<li>Object(对象)、Function(函数)、Array(数组)、Date(日期)、RegExp(正则表达式)、Global、Math(单体内置对象)</li>
+</ul>
+<h2 id="JS中的数据类型检测方案"><a href="#JS中的数据类型检测方案" class="headerlink" title="JS中的数据类型检测方案"></a>JS中的数据类型检测方案</h2><p><strong>typeof</strong></p>
+<ul>
+<li>优点：可以区分基本类型</li>
+<li>缺点：不能详细区分引用类型，<code>Null</code> 被认为 <code>Object</code> 类型</li>
+</ul>
+<p><strong>instanceof</strong></p>
+<ul>
+<li>用于判断一个引用类型是否属于某构造函数</li>
+<li>还可以在继承关系中用来判断一个实例是否属于它的父类型</li>
+<li>优点：能够区分Array、Object和Function，适合用于判断自定义的类实例对象</li>
+<li>缺点：Number，Boolean，String基本数据类型不能判断</li>
+</ul>
+<p><strong>Object.prototype.toString.call()</strong></p>
+<ul>
+<li>优点：精准判断任何数据类型</li>
+</ul>
+<h2 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h2><p>在块作用域内，let声明的变量只是<strong>创建时被提升</strong>，初始化并没有被提升，在初始化之前使用变量，就会形成一个暂时性死区。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// Cannot access &#x27;a&#x27; before initialization</span></span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><h4 id="JS-中-this-的情况"><a href="#JS-中-this-的情况" class="headerlink" title="JS 中 this 的情况"></a>JS 中 this 的情况</h4><ul>
+<li>普通函数调用：通过函数名()直接调用：this指向全局对象window（注意let定义的变量不是window属性，只有window.xxx定义的才是。即let a &#x3D;’aaa’; this.a是undefined）</li>
+<li>构造函数调用：函数作为构造函数，用new关键字调用时：this指向新new出的对象</li>
+<li>对象函数调用：通过对象.函数名()调用的：this指向这个对象</li>
+<li>箭头函数调用：箭头函数里面没有 this ，所以永远是上层作用域this（上下文）</li>
+<li>apply和call调用：函数体内 this 的指向的是 call&#x2F;apply 方法第一个参数，若为空默认是指向全局对象window。</li>
+<li>函数作为数组的一个元素，通过数组下标调用的：this指向这个数组</li>
+<li>函数作为window内置函数的回调函数调用：this指向window（如setInterval setTimeout 等）</li>
+</ul>
+<h4 id="call-x2F-apply-x2F-bind-的区别"><a href="#call-x2F-apply-x2F-bind-的区别" class="headerlink" title="call&#x2F;apply&#x2F;bind 的区别"></a>call&#x2F;apply&#x2F;bind 的区别</h4><ul>
+<li>fn.call(obj, 1, 2) 函数立即调用</li>
+<li>fn.apply(obj, [1, 2]) 函数立即调用</li>
+<li>fn.bind(obj, 1, 2) 返回对应函数</li>
+</ul>
+<h4 id="箭头函数的特性"><a href="#箭头函数的特性" class="headerlink" title="箭头函数的特性"></a>箭头函数的特性</h4><ul>
+<li>没有自己的this，会捕获其所在的上下文的this值，作为自己的this值</li>
+<li>没有constructor，是匿名函数，不能作为构造函数，不能通过new 调用</li>
+<li>没有原型属性 Fn.prototype 值为 undefined</li>
+<li>不能当做Generator函数,不能使用yield关键字</li>
+</ul>
+<h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><ul>
+<li>微任务：Promise回调 mutation回调</li>
+<li>宏任务：DOM事件回调 Ajax回调 定时器回调</li>
+</ul>
+<p><strong>同步及异步执行循序</strong></p>
+<ul>
+<li>代码自上而下执行</li>
+<li>遇到同步代码，执行同步代码</li>
+<li>遇到异步代码，将它的回调函数存到事件队列中</li>
+<li>同步代码执行完，从事件队列中将异步回调函数按顺序执行</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>), <span class="number">0</span>) <span class="comment">// 异步</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>) <span class="comment">// 同步</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出： 1 3 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>异步在事件队列中的执行顺序</strong></p>
+<ul>
+<li>事件队列中先执行 微任务 再执行 宏任务</li>
+<li>执行宏任务时，遇到微任务，就将它添加到微任务的任务队列中</li>
+<li>宏任务执行完毕后，立即执行当前宏任务的微任务队列</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>) <span class="comment">// 异步：宏任务 setTimeout1</span></span><br><span class="line">  <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步：微任务 then1</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>) <span class="comment">// 同步</span></span><br><span class="line">  <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步：微任务 then2</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">6</span>)</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">7</span>) <span class="comment">// 异步：宏任务 setTimeout2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">8</span>) <span class="comment">// 同步</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1，4，5，8 6 2 3 7</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块化的理解"><a href="#模块化的理解" class="headerlink" title="模块化的理解"></a>模块化的理解</h2><p><strong>namespace</strong></p>
+<ul>
+<li>优点：通过对象的形式对变量进行包裹，避免命名冲突</li>
+<li>缺点：定义的命名空间可以被外部任意修改</li>
+</ul>
+<p><strong>IIFE立即执行函数式</strong></p>
+<ul>
+<li>函数内的变量不会造成全局污染</li>
+<li>函数执行完后就会立即销毁，不会造成资源浪费</li>
+<li>缺点：很难对模块进行拆分并完成相互通讯，不可复用</li>
+</ul>
+<p><strong>AMD 异步模块定义</strong></p>
+<ul>
+<li>它采用异步的方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在回调函数中，等到加载完成之后，这个回调函数才会运行。</li>
+<li>引入模块需要用到 RequireJS</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1 引入require.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2 moduleA.js 导出</span></span><br><span class="line"><span class="title function_">define</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> name = <span class="string">&quot;module A&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="title function_">getName</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3 引入</span></span><br><span class="line"><span class="built_in">require</span>([<span class="string">&quot;moduleA&quot;</span>], <span class="keyword">function</span>(<span class="params">moduleA</span>)&#123;</span><br><span class="line">  moduleA.<span class="title function_">getName</span>()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>CMD 按需加载</strong></p>
+<ul>
+<li>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出</li>
+<li>依赖就近，用的时候再require</li>
+<li>相对于 AMD，对依赖模块的执行时机处理不同</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">define</span>(<span class="keyword">function</span>(<span class="params"><span class="built_in">require</span>, <span class="built_in">exports</span>, <span class="variable language_">module</span></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> clock = <span class="built_in">require</span>(<span class="string">&#x27;clock&#x27;</span>);</span><br><span class="line">  clock.<span class="title function_">start</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>CJS</strong></p>
+<ul>
+<li>CommonJs是Nodejs内置的同步加载的模块化机制</li>
+<li>导出值为简单类型是复制，导出值为复杂类型是浅拷贝输出，模块会被缓存，可修改导出的值</li>
+<li>可写在函数体中使用require引入</li>
+<li>this是当前模块</li>
+<li>运行时进行加载模块</li>
+</ul>
+<p><strong>UMD</strong></p>
+<ul>
+<li>通用模块定义，兼容了CmmonJS和AMD规范</li>
+<li>判断全局是否存在exports和define，如果存在exports，那么以CommonJS的方式暴露模块，如果存在define那么以AMD的方式暴露模块</li>
+</ul>
+<p><strong>ESM</strong></p>
+<ul>
+<li>存在提升行为，会提升到整个模块的头部，首先执行</li>
+<li>不允许修改引入的值，属于只读引用</li>
+<li>编译时输出</li>
+<li>对于动态 import().then 来说，原始值发生变化，import加载的值也会发生变化</li>
+<li>this是undefined</li>
+<li>浏览器加载 ESM，使用 <code>&lt;script&gt;</code> 标签，要加入 type&#x3D;”module” 属性</li>
+<li>具有更好的可摇树性</li>
+</ul>
+<h2 id="JavaScript的设计模式"><a href="#JavaScript的设计模式" class="headerlink" title="JavaScript的设计模式"></a>JavaScript的设计模式</h2><p><strong>解决某个特定场景下对某种问题的解决方案</strong></p>
+<table>
+<thead>
+<tr>
+<th>设计模式</th>
+<th>特点</th>
+<th>案例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单例模式</td>
+<td>只有一个实例可以全局访问</td>
+<td>弹框组件（先创建再隐藏，需要时显示创建；对应模式只有一个实例）</td>
+</tr>
+<tr>
+<td>策略模式</td>
+<td>根据不同参数可以命中不同的策略</td>
+<td>if else 根据不同参数做出处理</td>
+</tr>
+<tr>
+<td>代理模式</td>
+<td>代理对象和本体对象具有一致的接口</td>
+<td>虚拟代理（图片预加载）；缓存代理（累积计算）</td>
+</tr>
+<tr>
+<td>中介者模式</td>
+<td>对象和对象之间借助第三方中介者进行通信</td>
+<td>测试结束告知结果</td>
+</tr>
+<tr>
+<td>装饰者模式</td>
+<td>动态地给函数赋能</td>
+<td>天冷了穿衣服，热了脱衣服</td>
+</tr>
+<tr>
+<td>发布-订阅模式</td>
+<td>事件发布&#x2F;订阅模式</td>
+<td>微信小程序的 emit&#x2F;on 监听事件</td>
+</tr>
+<tr>
+<td>观察者模式</td>
+<td>当观察对象发生变化时自动调用相关函数</td>
+<td>vue 双向绑定 Proxy</td>
+</tr>
+</tbody></table>
+<br />
+<br />
+<br />
+<br /></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">什么是面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E3%80%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">类、构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="toc-text">new操作符的实例化过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-text">作用域及作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E5%8F%8A%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型及原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%8C%BA%E5%88%AB"><span class="toc-text">JS中的数据类型及区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B%E6%96%B9%E6%A1%88"><span class="toc-text">JS中的数据类型检测方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="toc-text">暂时性死区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS-%E4%B8%AD-this-%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">JS 中 this 的情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#call-x2F-apply-x2F-bind-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">call&#x2F;apply&#x2F;bind 的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">箭头函数的特性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event-Loop"><span class="toc-text">Event Loop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">模块化的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">JavaScript的设计模式</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2023 By Lou Guanghao</div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div></div></body></html>

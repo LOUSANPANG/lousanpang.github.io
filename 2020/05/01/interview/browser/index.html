@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>前端面试复习计划之浏览器 | Lou Guanghao</title><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端面试复习计划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试复习计划之浏览器">
+<meta property="og:url" content="http://example.com/2020/05/01/interview/browser/index.html">
+<meta property="og:site_name" content="Lou Guanghao">
+<meta property="og:description" content="前端面试复习计划">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/12/01/747b6f3901a2bdcf.jpg">
+<meta property="article:published_time" content="2020-04-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-17T07:33:06.070Z">
+<meta property="article:author" content="Lou Guanghao">
+<meta property="article:tag" content="浏览器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.uuu.ovh/imgs/2022/12/01/747b6f3901a2bdcf.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2020/05/01/interview/browser/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面试复习计划之浏览器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-17 15:33:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.uuu.ovh/imgs/2022/12/01/747b6f3901a2bdcf.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lou Guanghao"><span class="site-name">Lou Guanghao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前端面试复习计划之浏览器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-04-30T16:00:00.000Z" title="Created 2020-05-01 00:00:00">2020-05-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-02-17T07:33:06.070Z" title="Updated 2023-02-17 15:33:06">2023-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="从输入URL到页面加载的全过程"><a href="#从输入URL到页面加载的全过程" class="headerlink" title="从输入URL到页面加载的全过程"></a>从输入URL到页面加载的全过程</h2><ul>
+<li>1、首先在浏览器输入URL</li>
+<li>2、查找缓存：浏览器先查看浏览器缓存-系统缓存-路由缓存中是否有该地址页面，如果有则显示页面内容。如果没有则进行下一步。<ul>
+<li>浏览器缓存：浏览器会记录DNS一段时间，因此，只是第一个地方解析DNS请求；</li>
+<li>操作系统缓存:如果在浏览器缓存中不包含这个记录，则会使系统调用操作系统， 获取操作系统的记录(保存最近的DNS查询缓存)；</li>
+<li>路由器缓存：如果上述两个步骤均不能成功获取DNS记录，继续搜索路由器缓存；</li>
+<li>ISP缓存：若上述均失败，继续向ISP搜索。</li>
+</ul>
+</li>
+<li>3、DNS域名解析：浏览器向DNS服务器发起请求，解析该URL中的域名对应的IP地址。DNS服务器是基于UDP的，因此会用到UDP协议。</li>
+<li>4、建立TCP连接：解析出IP地址后，根据IP地址和默认80端口，和服务器建立TCP连接</li>
+<li>5、发起HTTP请求：浏览器发起读取文件的HTTP请求，，该请求报文作为TCP三次握手的第三次数据发送给服务器</li>
+<li>6、服务器响应请求并返回结果：服务器对浏览器请求做出响应，并把对应的html文件发送给浏览器</li>
+<li>7、关闭TCP连接：通过四次挥手释放TCP连接</li>
+<li>8、浏览器渲染：客户端（浏览器）解析HTML内容并渲染出来，浏览器接收到数据包后的解析流程为：<ul>
+<li>构建DOM树：词法分析然后解析成DOM树（dom tree），是由dom元素及属性节点组成，树的根是document对象</li>
+<li>构建CSS规则树：生成CSS规则树（CSS Rule Tree）</li>
+<li>构建render树：Web浏览器将DOM和CSSOM结合，并构建出渲染树（render tree）</li>
+<li>布局（Layout）：计算出每个节点在屏幕中的位置</li>
+<li>绘制（Painting）：即遍历render树，并使用UI后端层绘制每个节点。</li>
+</ul>
+</li>
+<li>9、JS引擎解析过程：调用JS引擎执行JS代码（JS的解释阶段，预处理阶段，执行阶段生成执行上下文，VO，作用域链、回收机制等等）<ul>
+<li>创建window对象：window对象也叫全局执行环境，当页面产生时就被创建，所有的全局变量和函数都属于window的属性和方法，而DOM Tree也会映射在window的doucment对象上。当关闭网页或者关闭浏览器时，全局执行环境会被销毁。</li>
+<li>加载文件：完成js引擎分析它的语法与词法是否合法，如果合法进入预编译</li>
+<li>预编译：在预编译的过程中，浏览器会寻找全局变量声明，把它作为window的属性加入到window对象中，并给变量赋值为’undefined’；寻找全局函数声明，把它作为window的方法加入到window对象中，并将函数体赋值给他（匿名函数是不参与预编译的，因为它是变量）。而变量提升作为不合理的地方在ES6中已经解决了，函数提升还存在。</li>
+<li>解释执行：执行到变量就赋值，如果变量没有被定义，也就没有被预编译直接赋值，在ES5非严格模式下这个变量会成为window的一个属性，也就是成为全局变量。string、int这样的值就是直接把值放在变量的存储空间里，object对象就是把指针指向变量的存储空间。函数执行，就将函数的环境推入一个环境的栈中，执行完成后再弹出，控制权交还给之前的环境。JS作用域其实就是这样的执行流机制实现的。</li>
+</ul>
+</li>
+</ul>
+<h2 id="在浏览器中输入URL到显示页面经历哪些过程，涉及到哪些协议？"><a href="#在浏览器中输入URL到显示页面经历哪些过程，涉及到哪些协议？" class="headerlink" title="在浏览器中输入URL到显示页面经历哪些过程，涉及到哪些协议？"></a>在浏览器中输入URL到显示页面经历哪些过程，涉及到哪些协议？</h2><p>浏览器要将URL解析为IP地址，解析域名就要用到DNS协议，首先主机会查询DNS的缓存，如果没有就给本地DNS发送查询请求。DNS查询分为两种方式，一种是递归查询，一种是迭代查询。如果是迭代查询，本地的DNS服务器，向根域名服务器发送查询请求，根域名服务器告知该域名的一级域名服务器，然后本地服务器给该一级域名服务器发送查询请求，然后依次类推直到查询到该域名的IP地址。DNS服务器是基于UDP的，因此会用到UDP协议。</p>
+<p>得到IP地址后，浏览器就要与服务器建立一个http连接。因此要用到http协议。http生成一个get请求报文，将该报文传给TCP层处理，所以还会用到TCP协议。如果采用https还会使用https协议先对http数据进行加密。TCP层如果有需要先将HTTP数据包分片，分片依据路径MTU和MSS。TCP的数据包然后会发送给IP层，用到IP协议。IP层通过路由选路，一跳一跳发送到目的地址。当然在一个网段内的寻址是通过以太网协议实现(也可以是其他物理层协议，比如PPP，SLIP)，以太网协议需要直到目的IP地址的物理地址，有需要ARP协议。</p>
+<p><code>1、DNS协议，http协议，https协议属于应用层</code></p>
+<p>应用层是体系结构中的最高层。应用层确定进程之间通信的性质以满足用户的需要。这里的进程就是指正在运行的程序。应用层不仅要提供应用进程所需要的信息交换和远地操作，而且还要作为互相作用的应用进程的用户代理，来完成一些为进行语义上有意义的信息交换所必须的功能。应用层直接为用户的应用进程提供服务。</p>
+<p><code>2、TCP/UDP属于传输层</code></p>
+<p>传输层的任务就是负责主机中两个进程之间的通信。因特网的传输层可使用两种不同协议：即面向连接的传输控制协议TCP，和无连接的用户数据报协议UDP。面向连接的服务能够提供可靠的交付，但无连接服务则不保证提供可靠的交付，它只是“尽最大努力交付”。这两种服务方式都很有用，备有其优缺点。在分组交换网内的各个交换结点机都没有传输层。</p>
+<p><code>3、IP协议，ARP协议属于网络层</code></p>
+<p>网络层负责为分组交换网上的不同主机提供通信。在发送数据时，网络层将运输层产生的报文段或用户数据报封装成分组或包进行传送。在TCP&#x2F;IP体系中，分组也叫作IP数据报，或简称为数据报。网络层的另一个任务就是要选择合适的路由，使源主机运输层所传下来的分组能够交付到目的主机。</p>
+<p><code>4、数据链路层</code></p>
+<p>当发送数据时，数据链路层的任务是将在网络层交下来的IP数据报组装成帧，在两个相邻结点间的链路上传送以帧为单位的数据。每一帧包括数据和必要的控制信息（如同步信息、地址信息、差错控制、以及流量控制信息等）。控制信息使接收端能够知道—个帧从哪个比特开始和到哪个比特结束。控制信息还使接收端能够检测到所收到的帧中有无差错。</p>
+<p><code>5、物理层</code></p>
+<p>物理层的任务就是透明地传送比特流。在物理层上所传数据的单位是比特。传递信息所利用的一些物理媒体，如双绞线、同轴电缆、光缆等，并不在物理层之内而是在物理层的下面。因此也有人把物理媒体当做第0层。</p>
+<h2 id="浏览器的工作原理"><a href="#浏览器的工作原理" class="headerlink" title="浏览器的工作原理"></a>浏览器的工作原理</h2><ul>
+<li>渲染引擎将开始解析 HTML 文档，并将各标记逐个转化成“内容树”上的 DOM 节点。同时也会解析外部 CSS 文件以及样式元素中的样式数据。HTML 中这些带有视觉指令的样式信息将用于创建另一个树结构：渲染树。</li>
+<li>渲染树包含多个带有视觉属性（如颜色和尺寸）的矩形。这些矩形的排列顺序就是它们将在屏幕上显示的顺序。</li>
+<li>渲染树构建完毕之后，进入“布局”处理阶段，也就是为每个节点分配一个应出现在屏幕上的确切坐标。下一个阶段是绘制 - 渲染引擎会遍历渲染树，由用户界面后端层将每个节点绘制出来。</li>
+<li>这是一个渐进的过程。为达到更好的用户体验，渲染引擎会力求尽快将内容显示在屏幕上。它不必等到整个 HTML 文档解析完毕之后，就会开始构建呈现树和设置布局。在不断接收和处理来自网络的其余内容的同时，渲染引擎会将部分内容解析并显示出来。</li>
+</ul>
+<h2 id="浏览器是如何渲染UI的？"><a href="#浏览器是如何渲染UI的？" class="headerlink" title="浏览器是如何渲染UI的？"></a>浏览器是如何渲染UI的？</h2><ul>
+<li>浏览器获取HTML文件，然后对文件进行解析，形成DOM Tree;</li>
+<li>与此同时，进行CSS解析，生成Style Rules;</li>
+<li>接着将DOM Tree与Style Rules合成为 Render Tree;</li>
+<li>接着进入布局（Layout）阶段，也就是为每个节点分配一个应出现在屏幕上的确切坐标;</li>
+<li>随后调用GPU进行绘制（Paint），遍历Render Tree的节点，并将元素呈现出来;</li>
+</ul>
+<h2 id="DOM-Tree是如何构建的？"><a href="#DOM-Tree是如何构建的？" class="headerlink" title="DOM Tree是如何构建的？"></a>DOM Tree是如何构建的？</h2><ul>
+<li>转码: 浏览器将接收到的二进制数据按照指定编码格式转化为HTML字符串</li>
+<li>生成Tokens: 之后开始parser，浏览器会将HTML字符串解析成Tokens</li>
+<li>构建Nodes: 对Node添加特定的属性，通过指针确定 Node 的父、子、兄弟关系和所属 treeScope</li>
+<li>生成DOM Tree: 通过node包含的指针确定的关系构建出DOM Tree</li>
+</ul>
+<h2 id="浏览器重绘与重排的区别？"><a href="#浏览器重绘与重排的区别？" class="headerlink" title="浏览器重绘与重排的区别？"></a>浏览器重绘与重排的区别？</h2><ul>
+<li>重排&#x2F;回流（Reflow）：当DOM的变化影响了元素的几何信息，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排。表现为重新生成布局，重新排列元素;</li>
+<li>重绘(Repaint): 当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程，叫做重绘。表现为某些元素的外观被改变;</li>
+<li>单单改变元素的外观，肯定不会引起网页重新生成布局，但当浏览器完成重排之后，将会重新绘制受到此次重排影响的部分;</li>
+<li>重排和重绘代价是高昂的，它们会破坏用户体验，并且让UI展示非常迟缓，而相比之下重排的性能影响更大，在两者无法避免的情况下，一般我们宁可选择代价更小的重绘;</li>
+<li>重绘不一定会出现重排，重排必然会出现重绘;</li>
+</ul>
+<h2 id="如何触发重排和重绘？"><a href="#如何触发重排和重绘？" class="headerlink" title="如何触发重排和重绘？"></a>如何触发重排和重绘？</h2><p>任何改变用来构建渲染树的信息都会导致一次重排或重绘：</p>
+<ul>
+<li>添加、删除、更新DOM节点;</li>
+<li>通过display: none隐藏一个DOM节点-触发重排和重绘;</li>
+<li>通过visibility: hidden隐藏一个DOM节点-只触发重绘，因为没有几何变化;</li>
+<li>移动或者给页面中的DOM节点添加动画;</li>
+<li>添加一个样式表，调整样式属性;</li>
+<li>用户行为，例如调整窗口大小，改变字号，或者滚动;</li>
+</ul>
+<h2 id="如何避免重绘或者重排？"><a href="#如何避免重绘或者重排？" class="headerlink" title="如何避免重绘或者重排？"></a>如何避免重绘或者重排？</h2><ul>
+<li>集中改变样式，不要一条一条地修改 DOM 的样式。</li>
+<li>不要把 DOM 结点的属性值放在循环里当成循环里的变量。</li>
+<li>为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的。</li>
+<li>不使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。</li>
+<li>尽量只修改position：absolute或fixed元素，对其他元素影响不大</li>
+<li>动画开始GPU加速，translate使用3D变化</li>
+<li>提升为合成层,将元素提升为合成层有以下优点：<ul>
+<li>合成层的位图，会交由 GPU 合成，比 CPU 处理要快;</li>
+<li>当需要 repaint 时，只需要 repaint 本身，不会影响到其他的层;</li>
+<li>对于 transform 和 opacity 效果，不会触发 layout 和 paint;  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 提升合成层的最好方式是使用 CSS 的 <span class="attribute">will-change</span> 属性： --&gt;</span><br><span class="line"><span class="selector-id">#target</span> &#123;</span><br><span class="line">    <span class="attribute">will-change</span>: transform;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="JS垃圾回收机制"><a href="#JS垃圾回收机制" class="headerlink" title="JS垃圾回收机制"></a>JS垃圾回收机制</h2><ul>
+<li>项目中，如果存在大量不被释放的内存（堆&#x2F;栈&#x2F;上下文），页面性能会变得很慢。当某些代码操作不能被合理释放，就会造成内存泄漏。我们尽可能减少使用闭包，因为它会消耗内存;</li>
+<li>浏览器垃圾回收机制&#x2F;内存回收机制: 浏览器的Javascript具有自动垃圾回收机制(GC:Garbage Collecation)，垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存;<ul>
+<li>标记清除:在js中，最常用的垃圾回收机制是标记清除：当变量进入执行环境时，被标记为“进入环境”，当变量离开执行环境时，会被标记为“离开环境”。垃圾回收器会销毁那些带标记的值并回收它们所占用的内存空间;</li>
+<li>谷歌浏览器：“查找引用”，浏览器不定时去查找当前内存的引用，如果没有被占用了，浏览器会回收它；如果被占用，就不能回收;</li>
+<li>IE浏览器：“引用计数法”，当前内存被占用一次，计数累加1次，移除占用就减1，减到0时，浏览器就回收它;</li>
+</ul>
+</li>
+<li>优化手段：内存优化 ; 手动释放：取消内存的占用即可;<ul>
+<li>堆内存：fn &#x3D; null 【null：空指针对象】;</li>
+<li>栈内存：把上下文中，被外部占用的堆的占用取消即可;</li>
+</ul>
+</li>
+<li>内存泄漏<ul>
+<li>在 JS 中，常见的内存泄露主要有 4 种,全局变量、闭包、DOM 元素的引用、定时器;</li>
+</ul>
+</li>
+</ul>
+<br />
+<br />
+<br />
+<br /></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">从输入URL到页面加载的全过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E8%BE%93%E5%85%A5URL%E5%88%B0%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%BB%8F%E5%8E%86%E5%93%AA%E4%BA%9B%E8%BF%87%E7%A8%8B%EF%BC%8C%E6%B6%89%E5%8F%8A%E5%88%B0%E5%93%AA%E4%BA%9B%E5%8D%8F%E8%AE%AE%EF%BC%9F"><span class="toc-text">在浏览器中输入URL到显示页面经历哪些过程，涉及到哪些协议？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">浏览器的工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93UI%E7%9A%84%EF%BC%9F"><span class="toc-text">浏览器是如何渲染UI的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-Tree%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%EF%BC%9F"><span class="toc-text">DOM Tree是如何构建的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8D%E7%BB%98%E4%B8%8E%E9%87%8D%E6%8E%92%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">浏览器重绘与重排的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A6%E5%8F%91%E9%87%8D%E6%8E%92%E5%92%8C%E9%87%8D%E7%BB%98%EF%BC%9F"><span class="toc-text">如何触发重排和重绘？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E9%87%8D%E7%BB%98%E6%88%96%E8%80%85%E9%87%8D%E6%8E%92%EF%BC%9F"><span class="toc-text">如何避免重绘或者重排？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">JS垃圾回收机制</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2023 By Lou Guanghao</div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div></div></body></html>

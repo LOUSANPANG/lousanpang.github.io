@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>前端面试复习计划之网络 | Lou Guanghao</title><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端面试复习计划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试复习计划之网络">
+<meta property="og:url" content="http://example.com/2020/10/01/interview/network/index.html">
+<meta property="og:site_name" content="Lou Guanghao">
+<meta property="og:description" content="前端面试复习计划">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/11/02/aa3441b06b937568.jpeg">
+<meta property="article:published_time" content="2020-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-17T07:33:06.073Z">
+<meta property="article:author" content="Lou Guanghao">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/11/02/aa3441b06b937568.jpeg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2020/10/01/interview/network/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面试复习计划之网络',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-17 15:33:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.bmp.ovh/imgs/2022/11/02/aa3441b06b937568.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lou Guanghao"><span class="site-name">Lou Guanghao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前端面试复习计划之网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-09-30T16:00:00.000Z" title="Created 2020-10-01 00:00:00">2020-10-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-02-17T07:33:06.073Z" title="Updated 2023-02-17 15:33:06">2023-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="HTTP-基本概念"><a href="#HTTP-基本概念" class="headerlink" title="HTTP 基本概念"></a>HTTP 基本概念</h2><p>互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。</p>
+<h2 id="HTTP-工作原理"><a href="#HTTP-工作原理" class="headerlink" title="HTTP 工作原理"></a>HTTP 工作原理</h2><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。客户端向服务器发送一个请求报文，服务器以一个状态行作为响应。</p>
+<h2 id="HTTP请求-x2F-响应步骤"><a href="#HTTP请求-x2F-响应步骤" class="headerlink" title="HTTP请求&#x2F;响应步骤"></a>HTTP请求&#x2F;响应步骤</h2><ul>
+<li>客户端连接到Web服务器</li>
+<li>发送HTTP请求</li>
+<li>服务器接受请求并返回HTTP响应</li>
+<li>释放TCP连接</li>
+<li>客户端解析HTML内容</li>
+</ul>
+<h2 id="GET与POST区别"><a href="#GET与POST区别" class="headerlink" title="GET与POST区别"></a>GET与POST区别</h2><ul>
+<li>安全性：GET参数通过URL传递会暴露、不安全，而POST放在RequestBody中，相对更安全</li>
+<li>针对数据操作的类型不同：GET对数据进行查询，POST主要对数据进行增删改，GET是读，POST是改</li>
+<li>参数大小不同：GET请求在URL中传达的参数是有长度限制，而POST没有限制</li>
+<li>浏览器回退表现不同：GET在浏览器回退时是无害的，而POST会再次提交请求</li>
+<li>浏览器对请求地址的处理不同：GET请求地址会被浏览器主动缓存，而POST不会，除非手动设置</li>
+<li>浏览器对响应的处理不同：GET请求参数会被完整的保留在历览器历史记录里，而POST中的参数不会被保留</li>
+</ul>
+<h2 id="什么是SSL"><a href="#什么是SSL" class="headerlink" title="什么是SSL"></a>什么是SSL</h2><ul>
+<li>SSL是一种安全套接层协议，是Web浏览器与Web服务器之间安全交换信息的协议，提供两个基本的安全服务：鉴别与保密；</li>
+<li>保密：在握手协议中定义了会话密钥后，所有的消息都被加密；</li>
+<li>鉴别：可选的客户端认证，和强制的服务器端认证；</li>
+<li>完整性：传送的消息包括消息完整性检查（使用MAC）；</li>
+<li>SSL介于应用层和TCP层之间，应用层数据不再直接传递给传输层，而是传递给SSL层，SSL层对从应用层收到的数据进行加密，并增加自己的SSL头；</li>
+</ul>
+<h2 id="HTTPS的基本概念"><a href="#HTTPS的基本概念" class="headerlink" title="HTTPS的基本概念"></a>HTTPS的基本概念</h2><ul>
+<li>HTTPS是以安全为目的HTTP通道，即HTTP下加入SSL层进行加密。</li>
+<li>HTTPS协议作用：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。</li>
+</ul>
+<h2 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h2><ul>
+<li>HTTP 是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的 ssl 加密传输协议</li>
+<li>HTTPS 协议需要认证机构（ca）证书，费用较高。</li>
+<li>使用不同的链接方式，端口也不同，一般，HTTP 协议的端口为 80，HTTPS 的端口为 443。</li>
+<li>HTTP 的连接很简单，是无状态的。</li>
+</ul>
+<h2 id="客户端HTTPS与Web服务器通信时的步骤"><a href="#客户端HTTPS与Web服务器通信时的步骤" class="headerlink" title="客户端HTTPS与Web服务器通信时的步骤"></a>客户端HTTPS与Web服务器通信时的步骤</h2><ul>
+<li>客户端使用 https url 访问服务器，则要求 web 服务器建立 ssl 链接。</li>
+<li>web 服务器接收到客户端的请求之后，会将网站的证书（证书中包含了公钥），传输给客户端。</li>
+<li>客户端和 web 服务器端开始协商 SSL 链接的安全等级，也就是加密等级。</li>
+<li>客户端浏览器通过双方协商一致的安全等级，建立会话密钥，然后通过网站的公钥来加密会话密钥，并传送给网站。</li>
+<li>web 服务器通过自己的私钥解密出会话密钥。</li>
+<li>web 服务器通过会话密钥加密与客户端之间的通信。</li>
+</ul>
+<h2 id="HTTPS协议的优缺点"><a href="#HTTPS协议的优缺点" class="headerlink" title="HTTPS协议的优缺点"></a>HTTPS协议的优缺点</h2><ul>
+<li>HTTPS 协议要比 http 协议安全，可防止数据在传输过程中被窃取、改变，确保数据的完整性。</li>
+<li>https 握手阶段比较费时，会使页面加载时间延长 50%，增加 10%~20%的耗电。</li>
+<li>https 缓存不如 http 高效，会增加数据开销。</li>
+<li>SSL 证书也需要钱，功能越强大的证书费用越高。</li>
+<li>SSL 证书需要绑定 IP，不能再同一个 ip 上绑定多个域名，ipv4 资源支持不了这种消耗。</li>
+</ul>
+<h2 id="什么是TCP-x2F-IP网络模型"><a href="#什么是TCP-x2F-IP网络模型" class="headerlink" title="什么是TCP&#x2F;IP网络模型"></a>什么是TCP&#x2F;IP网络模型</h2><p>TCP&#x2F;IP模型是互联网的基础，它是一系列网络协议的总称。这些协议可以划分为四层，分别为链路层、网络层、传输层和应用层。</p>
+<ul>
+<li>链路层：负责封装和解封装IP报文，发送和接受ARP&#x2F;RARP报文等。</li>
+<li>网络层：负责路由以及把分组报文发送给目标网络或主机。</li>
+<li>传输层：负责对报文进行分组和重组，并以TCP或UDP协议格式封装报文。</li>
+<li>应用层：负责向用户提供应用程序，比如HTTP、FTP、Telnet、DNS、SMTP等。</li>
+</ul>
+<h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><ul>
+<li>TCP是面向连接的，而UDP是面向无连接的。</li>
+<li>TCP仅支持单播传输，UDP 提供了单播，多播，广播的功能。</li>
+<li>TCP的三次握手保证了连接的可靠性; UDP是无连接的、不可靠的一种数据传输协议，首先不可靠性体现在无连接上，通信都不需要建立连接，对接收到的数据也不发送确认信号，发送端不知道数据是否会正确接收。</li>
+<li>UDP的头部开销比TCP的更小，数据传输速率更高，实时性更好。</li>
+</ul>
+<h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。</p>
+<ul>
+<li>【你好，我想和你聊一聊？】第一次握手：建立连接时，客户端发送syn包（syn&#x3D;j）到服务器，并进入SYN_SENT状态，等待服务器确认；SYN：同步序列编号。</li>
+<li>【好的，我有空。】第二次握手：服务器收到syn包并确认客户的SYN（ack&#x3D;j+1），同时也发送一个自己的SYN包（syn&#x3D;k），即SYN+ACK包，此时服务器进入SYN_RECV状态；</li>
+<li>【好的，我们开始吧。】第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack&#x3D;k+1），此包发送完毕，客户端和服务器进入ESTABLISHED（TCP连接成功）状态，完成三次握手。</li>
+</ul>
+<h2 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h2><ul>
+<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN&#x3D;1，其序列号为seq&#x3D;u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</li>
+<li>服务器收到连接释放报文，发出确认报文，ACK&#x3D;1，ack&#x3D;u+1，并且带上自己的序列号seq&#x3D;v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</li>
+<li>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最 后的数据）。</li>
+<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN&#x3D;1，ack&#x3D;u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq&#x3D;w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</li>
+<li>客户端收到服务器的连接释放报文后，必须发出确认，ACK&#x3D;1，ack&#x3D;w+1，而自己的序列号是seq&#x3D;u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</li>
+<li>服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。</li>
+</ul>
+<h2 id="HTTP-请求跨域问题"><a href="#HTTP-请求跨域问题" class="headerlink" title="HTTP 请求跨域问题"></a>HTTP 请求跨域问题</h2><ul>
+<li><p>跨域的原理</p>
+<ul>
+<li>跨域，是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的。</li>
+<li>同源策略,是浏览器对 JavaScript 实施的安全限制，只要协议、域名、端口有任何一个不同，都被当作是不同的域。</li>
+<li>跨域原理，即是通过各种方式，避开浏览器的安全限制。</li>
+</ul>
+</li>
+<li><p>解决方案<br>  最初使用的是jsonp，但存在一些问题，使用get请求不安全，携带数据较小，后来也用过iframe，但只有主域相同才行，也是存在些问题，后来通过了解和学习发现使用代理和proxy代理配合起来使用比较方便，就引导后台按这种方式做下服务器配置，在开发中使用proxy，在服务器上使用nginx代理，这样开发过程中彼此都方便，效率也高；现在h5新特性还有 windows.postMessage()。</p>
+<ul>
+<li>JSONP：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">原理：</span><br><span class="line"></span><br><span class="line">ajax 请求受同源策略影响，不允许进行跨域请求，而 script 标签 src 属性中的链接却可以访问跨域的 js 脚本，</span><br><span class="line">利用这个特性，服务端不再返回 JSON 格式的数据，而是 返回一段调用某个函数的 js 代码，在 src 中进行了调用，这样实现了跨域。</span><br><span class="line"></span><br><span class="line">步骤：</span><br><span class="line"></span><br><span class="line">1 去创建一个script标签</span><br><span class="line">2 script的src属性设置接口地址</span><br><span class="line">3 接口参数，必须要带一个自定义函数名，要不然后台无法返回数据</span><br><span class="line">4 通过定义函数名去接受返回的数据</span><br><span class="line">5 缺点：JSON 只支持 get，因为 script 标签只能使用 get 请求； JSONP 需要后端配合返回指定格式的数据。</span><br><span class="line"></span><br><span class="line">//动态创建 script</span><br><span class="line">var script = document.createElement(&#x27;script&#x27;);</span><br><span class="line"></span><br><span class="line">// 设置回调函数</span><br><span class="line">function getData(data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//设置 script 的 src 属性，并设置请求地址</span><br><span class="line">script.src = &#x27;http://localhost:3000/?callback=getData&#x27;;</span><br><span class="line"></span><br><span class="line">// 让 script 生效</span><br><span class="line">document.body.appendChild(script);</span><br></pre></td></tr></table></figure></li>
+<li>document.domain 基础域名相同 子域名不同。</li>
+<li>window.name 利用在一个浏览器窗口内，载入所有的域名都是共享一个 window.name。</li>
+<li>CORS 跨域资源共享 是一种机制，是目前主流的跨域解决方案，它使用额外的 HTTP 头来告诉浏览器 让运行在一个 origin (domain) 上的Web应用被准许访问来自不同源服务器上的指定的资源。服务器设置对CORS的支持原理：服务器设置Access-Control-Allow-Origin HTTP响应头之后，浏览器将会允许跨域请求。</li>
+<li>proxy代理 目前常用方式。</li>
+<li>window.postMessage() 利用h5新特性 window.postMessage()。</li>
+<li>Websocket。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Cookie、sessionStorage、localStorage-的区别"><a href="#Cookie、sessionStorage、localStorage-的区别" class="headerlink" title="Cookie、sessionStorage、localStorage 的区别"></a>Cookie、sessionStorage、localStorage 的区别</h2><p><strong>相同点：</strong></p>
+<ul>
+<li>存储在客户端</li>
+</ul>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>cookie数据大小不能超过4k；sessionStorage和localStorage的存储比cookie大得多，可以达到5M+</li>
+<li>cookie设置的过期时间之前一直有效；localStorage永久存储，浏览器关闭后数据不丢失除非主动删除数据；sessionStorage数据在当前浏览器窗口关闭后自动删除</li>
+<li>cookie的数据会自动的传递到服务器；sessionStorage和localStorage数据保存在本地</li>
+</ul>
+<h2 id="HTTP状态码及常见状态码"><a href="#HTTP状态码及常见状态码" class="headerlink" title="HTTP状态码及常见状态码"></a>HTTP状态码及常见状态码</h2><p><strong>HTTP状态码</strong></p>
+<ul>
+<li>1xx：指示信息类，表示请求已接受，继续处理</li>
+<li>2xx：指示成功类，表示请求已成功接受</li>
+<li>3xx：指示重定向，表示要完成请求必须进行更近一步的操作</li>
+<li>4xx：指示客户端错误，请求有语法错误或请求无法实现</li>
+<li>5xx：指示服务器错误，服务器未能实现合法的请求</li>
+</ul>
+<p><strong>常见状态码</strong></p>
+<p>2xx（成功）表示成功处理了请求的状态码</p>
+<ul>
+<li>200 - 成功 服务器已经成功处理了请求。通常，这表示服务器提供了请求的网页</li>
+</ul>
+<p>3xx（重定向）表示要完成请求，需要进一步操作；通常，这些状态代码用来重定向</p>
+<ul>
+<li>301 - 永久移动 请求的网页已永久移动到新位置。服务器返回此响应（对GET或HEAD请求的响应）时，会自动将请求者转到新位置</li>
+<li>304 - 未修改 自上次请求后，请求的网页未修改过。服务器返回此响应，不会返回网页的内容</li>
+</ul>
+<p>4xx（请求错误）这些状态码表示请求可能出错，妨碍了服务器的处理</p>
+<ul>
+<li>401 - 未授权 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应</li>
+<li>403 - 禁止 服务器拒绝请求</li>
+<li>404 - 未找到 服务器找不到请求的网页</li>
+</ul>
+<p>5xx（服务器错误）这些状态码表示服务器在尝试处理请求时发生内部错误。这些错误可能是服务器本身的错误，而不是请求出错</p>
+<ul>
+<li>500 - 服务器内部错误 服务器遇到错误，无法完成请求</li>
+<li>501 - 尚未实施 服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码</li>
+<li>502 - 错误网关 服务器作为网关或代理，从上游服务器无法收到无效响应</li>
+<li>503 - 服务器不可用 服务器目前无法使用（由于超载或者停机维护）。通常，这只是暂时状态</li>
+<li>504 - 网关超时 服务器作为网关代理，但是没有及时从上游服务器收到请求</li>
+</ul>
+<h2 id="浏览器的缓存机制-强制缓存-amp-amp-协商缓存"><a href="#浏览器的缓存机制-强制缓存-amp-amp-协商缓存" class="headerlink" title="浏览器的缓存机制 强制缓存 &amp;&amp; 协商缓存"></a>浏览器的缓存机制 强制缓存 &amp;&amp; 协商缓存</h2><h2 id="客户端与服务端长连接的几种方式"><a href="#客户端与服务端长连接的几种方式" class="headerlink" title="客户端与服务端长连接的几种方式"></a>客户端与服务端长连接的几种方式</h2><ul>
+<li>ajax 轮询<ul>
+<li>ajax 轮询指客户端每间隔一段时间向服务端发起请求，保持数据的同步。</li>
+<li>优点：可实现基础（指间隔时间较短）的数据更新。</li>
+<li>缺点：这种方法也只是尽量的模拟即时传输，但并非真正意义上的即时通讯，很有可能出现客户端请求时，服务端数据并未更新。或者服务端数据已更新，但客户端未发起请求。导致多次请求资源浪费，效率低下。</li>
+</ul>
+</li>
+<li>long poll 长轮询<ul>
+<li>实现原理： long poll 指的是客户端发送请求之后，如果没有数据返回，服务端会将请求挂起放入队列（不断开连接）处理其他请求，直到有数据返回给客户端。然后客户端再次发起请求，以此轮询。在 HTTP1.0 中客户端可以设置请求头 Connection:keep-alive，服务端收到该请求头之后知道这是一个长连接，在响应报文头中也添加 Connection:keep-alive。客户端收到之后表示长连接建立完成，可以继续发送其他的请求。在 HTTP1.1 中默认使用了 Connection:keep-alive 长连接。</li>
+<li>优点：减少客户端的请求，降低无效的网络传输，保证每次请求都有数据返回，不会一直占用线程。</li>
+<li>缺点：无法处理高并发，当客户端请求量大，请求频繁时对服务器的处理能力要求较高。服务器一直保持连接会消耗资源，需要同时维护多个线程，服务器所能承载的 TCP 连接数是有上限的，这种轮询很容易把连接数顶满。每次通讯都需要客户端发起，服务端不能主动推送。</li>
+</ul>
+</li>
+<li>iframe 长连接<ul>
+<li>实现原理：在网页上嵌入一个 iframe 标签，该标签的 src 属性指向一个长连接请求。这样服务端就可以源源不断地给客户端传输信息。保障信息实时更新。</li>
+<li>优点：消息及时传输。</li>
+<li>缺点：消耗服务器资源。</li>
+</ul>
+</li>
+<li>WebSocket<ul>
+<li>实现原理： Websocket 实现了客户端与服务端的双向通信，只需要连接一次，就可以相互传输数据，很适合实时通讯、数据实时更新等场景。</li>
+<li>Websocket 协议与 HTTP 协议没有关系，它是一个建立在 TCP 协议上的全新协议，为了兼容 HTTP 握手规范，在握手阶段依然使用 HTTP 协议，握手完成之后，数据通过 TCP 通道进行传输。</li>
+<li>Websoket 数据传输是通过 frame 形式，一个消息可以分成几个片段传输。这样大数据可以分成一些小片段进行传输，不用考虑由于数据量大导致标志位不够的情况。也可以边生成数据边传递消息，提高传输效率。</li>
+<li>优点： 双向通信。客户端和服务端双方都可以主动发起通讯。 没有同源限制。客户端可以与任意服务端通信，不存在跨域问题。 数据量轻。第一次连接时需要携带请求头，后面数据通信都不需要带请求头，减少了请求头的负荷。 传输效率高。因为只需要一次连接，所以数据传输效率高。</li>
+<li>缺点：需要后端代码稳定，受网络限制大，兼容性差，维护成本高，生态圈小。</li>
+</ul>
+</li>
+</ul>
+<h2 id="非对称加密RSA"><a href="#非对称加密RSA" class="headerlink" title="非对称加密RSA"></a>非对称加密RSA</h2><ul>
+<li>非对称加密算法需要两个密钥：公开密钥(publickey) 和私有密(privatekey) 。</li>
+<li>与对称加密算法的对比：对称加密只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。非对称加密有两种密钥，其中一个是公开的。</li>
+<li>RSA应用场景：由于RSA算法的加密解密速度要比对称算法速度慢很多，在实际应用中，通常采取数据本身的加密和解密使用对称加密算法(AES)。 用RSA算法加密并传输对称算法所需的密钥。</li>
+</ul>
+<h2 id="HTTP1、HTTP2、HTTP3"><a href="#HTTP1、HTTP2、HTTP3" class="headerlink" title="HTTP1、HTTP2、HTTP3"></a>HTTP1、HTTP2、HTTP3</h2><p>HTTP&#x2F;2 相比于 HTTP&#x2F;1.1，可以说是大幅度提高了网页的性能，只需要升级到该协议就可以减少很多之前需要做的性能优化工作，虽如此但HTTP&#x2F;2并非完美的，HTTP&#x2F;3 就是为了解决 HTTP&#x2F;2 所存在的一些问题而被推出来的。</p>
+<br />
+<br />
+<br />
+<br />
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">HTTP 基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">HTTP 工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82-x2F-%E5%93%8D%E5%BA%94%E6%AD%A5%E9%AA%A4"><span class="toc-text">HTTP请求&#x2F;响应步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET%E4%B8%8EPOST%E5%8C%BA%E5%88%AB"><span class="toc-text">GET与POST区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSSL"><span class="toc-text">什么是SSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">HTTPS的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E5%92%8CHTTPS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">HTTP和HTTPS的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AFHTTPS%E4%B8%8EWeb%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1%E6%97%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">客户端HTTPS与Web服务器通信时的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">HTTPS协议的优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTCP-x2F-IP%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-text">什么是TCP&#x2F;IP网络模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">TCP和UDP的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-text">TCP四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E8%AF%B7%E6%B1%82%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="toc-text">HTTP 请求跨域问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E3%80%81sessionStorage%E3%80%81localStorage-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Cookie、sessionStorage、localStorage 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">HTTP状态码及常见状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6-%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98-amp-amp-%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-text">浏览器的缓存机制 强制缓存 &amp;&amp; 协商缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%95%BF%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">客户端与服务端长连接的几种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86RSA"><span class="toc-text">非对称加密RSA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP1%E3%80%81HTTP2%E3%80%81HTTP3"><span class="toc-text">HTTP1、HTTP2、HTTP3</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2023 By Lou Guanghao</div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div></div></body></html>
