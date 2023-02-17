@@ -218,8 +218,8 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ## Event Loop
 
-  - 微任务：Promise.then/catch/finally、Object.observe
-  - 宏任务：script(整体代码)、UI交互事件、setTimeout、setInterval、postMessage、MessageChannel
+  - 微任务：Promise回调 mutation回调
+  - 宏任务：DOM事件回调 Ajax回调 定时器回调 
 
 **同步及异步执行循序**
   - 代码自上而下执行
