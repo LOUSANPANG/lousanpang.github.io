@@ -1,72 +1,93 @@
 #algolia-search
-  .ais-search-box
-    margin: 0 auto
-    max-width: 100%
-    width: 100%
+  .search-dialog
+    .ais-SearchBox
+      input
+        padding: 5px 14px
+        width: 100%
+        outline: none
+        border: 2px solid $search-color
+        border-radius: 40px
+        background: var(--search-bg)
+        color: var(--search-input-color)
 
-    input
-      padding: 0.25rem 0.7rem
-      outline: none
-      border: 2px solid $light-blue
-      border-radius: 2rem
-      font-size: 14px
-
-  .ais-hits--item.algolia-hit-item
-    position: relative
-    padding-left: 1.5rem
-
-    &:hover
-      &:before
-        border-color: $ruby
-
-    &:before
-      $w = 0.3rem
-      position: absolute
-      top: 0.4rem
-      left: 0
-      width: w = $w
-      height: h = w
-      border: 0.5 * w solid $light-blue
-      border-radius: w
-      background: $white
-      content: ""
-      line-height: h
-      transition: all 0.2s ease-in-out
-
-    a
-      display: block
-      color: $font-black
-      text-decoration: none
-      font-size: 14px
-      cursor: pointer
-
-      &:hover
-        color: $light-blue
-
-  .ais-pagination.pagination
-    margin: 0.8rem 0 0 0
-    padding: 0
-    text-align: center
-
-    .ais-pagination--item
-      margin: 0 0.2rem
+    .ais-Hits-list
+      margin: 0
       padding: 0
+      @extend .list-beauty
 
       a
-        display: inline-block
-        min-width: 1.2rem
-        height: 1.2rem
-        text-align: center
-        line-height: 1.2rem
+        color: var(--search-result-title)
 
-    .ais-pagination--item.current
-      a
-        background: $cyan
-        color: $white
-        text-decoration: none
-        cursor: default
+        &:hover
+          color: $search-color
 
-  .algolia-logo
-    padding-top: 2px
-    width: 4rem
-    height: 1.5rem
+      mark
+        background: transparent
+        color: $search-keyword-highlight
+        font-weight: bold
+
+    .algolia-hit-item-content
+      margin: 0 0 8px
+      word-break: break-word
+
+    .ais-Pagination
+      margin: 20px 0 0
+      padding: 0
+      text-align: center
+
+      .ais-Pagination-list
+        margin: 0
+        padding: 0
+        list-style: none
+
+      .ais-Pagination-item
+        display: inline
+        margin: 0 4px
+        padding: 0
+
+        .ais-Pagination-link
+          display: inline-block
+          min-width: 24px
+          height: 24px
+          text-align: center
+          line-height: 24px
+
+      .ais-Pagination-item--selected
+        a
+          background: $theme-paginator-color
+          color: #eee
+          cursor: default
+
+      .ais-Pagination-item--disabled
+        visibility: hidden
+
+    .algolia-logo
+      padding-top: 2px
+      width: 80px
+      height: 30px
+
+    #algolia-hits
+      > div
+        overflow-y: scroll
+        margin: 0 -20px
+        padding: 0 22px
+
+        +minWidth768()
+          max-height: calc(80vh - 240px)
+
+        +maxWidth768()
+          height: calc(100vh - 260px)
+
+    #algolia-info
+      div
+        display: inline
+
+      .algolia-poweredBy
+        float: right
+
+.apple
+  #algolia-search
+    #algolia-hits
+      > div
+        +maxWidth768()
+          height: calc(90vh - 260px)

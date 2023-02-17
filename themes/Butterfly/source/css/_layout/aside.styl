@@ -1,312 +1,410 @@
-#aside_content
-  width: 25%
+#aside-content
+  width: 26%
 
-  .card_widget
-    -webkit-box-shadow: 0 4px 8px 6px rgba(7,17,27,.06)
-    box-shadow: 0 4px 8px 6px rgba(7,17,27,.06)
-    border-radius: 8px
-    -webkit-transition: all .3s
-    -moz-transition: all .3s
-    -o-transition: all .3s
-    -ms-transition: all .3s
-    transition: all .3s
-    background: #fff
-    margin-top: 20px
+  +minWidth900()
+    if hexo-config('aside.position') == 'right'
+      padding-left: 15px
+    else
+      padding-right: 15px
+
+  +maxWidth900()
+    width: 100%
+
+  > .card-widget:first-child
+    margin-top: 0
+
+    +maxWidth900()
+      margin-top: 20px
+
+  .card-widget
+    @extend .cardHover
+    position: relative
     overflow: hidden
+    margin-top: 20px
+    padding: 20px 24px
 
-    &:hover
-      -webkit-box-shadow: 0 4px 12px 12px rgba(7,17,27,0.15)
-      box-shadow: 0 4px 12px 12px rgba(7,17,27,0.15)
+    if hexo-config('aside.mobile') == false
+      +maxWidth768()
+        &:not(#card-toc)
+          display: none
 
-  .card-author
-    img
-      height: 128px
-      width: 128px
-      display: inline-block
-      vertical-align: top
-      border-radius: 70px
-      transition: all .3s
-
-      &:hover
-        -moz-transform: rotate(540deg)
-        -o-transform: rotate(540deg)
-        -webkit-transform: rotate(540deg)
-        transform: rotate(540deg)
+  .card-info
     .author-info
       &__name
-        font-size: 1.1rem
-        display: block
-        margin: -0.1rem auto
         font-weight: 500
+        font-size: 1.57em
 
       &__description
-        display: block
-        margin: -0.1rem auto
+        margin-top: -.42em
 
-    .data_link 
-      a
-        text-decoration: none
+    .card-info-data
+      margin: 14px 0 4px
 
-      .length_num 
-        font-size: 1rem
-        color: #000
+    .card-info-social-icons
+      margin: 6px 0 -6px
 
-      .headline 
-        display: block
-        font-size: 0.7rem
-        // letter-spacing: 1px
-        margin-bottom: -21px
-        text-transform: uppercase
-        color:#4c4948
+      .social-icon
+        margin: 0 10px
+        color: var(--font-color)
+        font-size: 1.4em
 
-    #aside-social-icons
-      margin: 0.5rem auto -0.7rem
-      width: 15rem
-      text-align: center
-
-      .social-icon 
-        margin: 0 0.5rem
-        color: #4c4948
-        /* text-shadow: 0.1rem 0.1rem 0.2rem rgba(0,0,0,0.15) */
-        font-size: 1rem
-        cursor: pointer
-      
       i
-        transition: all 0.3s
-        
+        transition: all .3s
+
         &:hover
-          -moz-transform: rotate(540deg)
-          -o-transform: rotate(540deg)
-          -webkit-transform: rotate(540deg)
           transform: rotate(540deg)
-        
 
-    a#bookmark-it
-      display: inline-block
-      margin-top: .2rem
-      padding: 0 1rem
-      height: 1.6rem
-      background: $light-blue
-      color: #fff
-      text-decoration: none
-      line-height: 1.6rem
-      position: relative
-      text-transform: uppercase
-      z-index: 1
-
-    .toggle_change--primary,.bookmark--primary 
-      color: $ruby
-    
-    .toggle_change--animated,.bookmark--animated 
-      transition-property: color
-      transition-duration: 1s
-
-      &:before {
-        content: ""
-        position: absolute
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-        background: $ruby
-        transform: scaleX(0)
-        transform-origin: 0 50%
-        transition-property: transform
-        transition-duration: 0.5s
-        transition-timing-function: ease-out
-        z-index: -1
-      }
-
-      &:hover {
-        color: white
-
-        &:before {
-          transform: scaleX(1)
-          transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66)
-        }
-      }
-      
-
-
-  .card-content 
-    padding: 1rem 1.2rem
-  
-  .post_data
-    display: flex
-
-  .data-item
-    flex-grow: 1
-    align-items: center
-    flex-basis: auto
-    justify-content: center
-
-
-  .item_headline 
-    font-size: 0.8rem
-    
-    span 
-      margin-left: 10px
-
-  .card-tag-cloud a
-    text-decoration: none
-    position: relative
-    padding-bottom: 0.3rem
-    word-break: keep-all
-
-    &::after
-      position: absolute
-      bottom: 0
-      left: 0
-      z-index: -1
-      width: 0
-      height: 3px
-      background-color: lighten($theme-color, 30%)
-      content: ""
-      transition: all 0.3s ease-in-out
-
-    &:hover
-      color: $light-blue !important
-
-      &::after
-        width: 100%
-
-
-
-  .aside_recent_item 
-      margin: 10px 0 -15px 0
-    
-    .aside_recent_post 
-      a
-        text-decoration: none
-        color: #4c4948
-
-    .aside_recent_post
-      margin-bottom: 10px
-      width: 100%
-
-    .aside_post_cover
-      height: 70px
-      width: 70px
-      float: left
-    .aside_post_bg
-      object-fit: cover
-      width: 100%
-      height: 100%
-      max-width: 100%
+    #card-info-btn
+      display: block
+      margin-top: 14px
+      background-color: var(--btn-bg)
+      color: var(--btn-color)
+      text-align: center
+      line-height: 2.4
 
       &:hover
-        box-shadow: none
-    
-    #aside_title
-      padding-top: 4px
-    
-      .aside_post_meta
-        font-size: 0.6rem
-        padding-left: 5px
+        background-color: var(--btn-hover-color)
 
-      .aside_post_title
-        line-height: 1rem
-        display: -webkit-box
-        -webkit-line-clamp: 2
-        -webkit-box-orient: vertical
-        overflow: hidden
-        height: 41px
-        padding-left: 5px
+      span
+        padding-left: 10px
 
-        &:hover
-          color: $light-blue !important
+  .item-headline
+    padding-bottom: 6px
+    font-size: 1.2em
 
+    span
+      margin-left: 6px
 
+  .sticky_layout
+    +minWidth900()
+      position: sticky
+      position: -webkit-sticky
+      top: 20px
+      transition: top .3s
 
-  .aside_category_item,.archive-list
-    list-style: none
-    margin-bottom: -3px
-    margin-block-start: 0.2rem
-  
-  .aside_category_item.child
-    margin-bottom: -3px
-    margin-block-start: 0rem
-
-    .aside_category_list
-      margin-left: -50px
-
-  .aside_category_list,.archive-list-item
-    margin-left: -40px
-    padding: 0.2rem 1rem
-
-    &:hover
-      background-color: $light-blue
-      color: #363636
+  .card-tag-cloud
     a
-      text-decoration: none
-      color: #4c4948
-  
-  .aside_category_list_name,.archive-list-link
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    flex: auto
+      display: inline-block
+      padding: 0 4px
 
-  .aside_category_list_link,.archive-list-item
-    display: flex
-  
+      &:hover
+        color: $text-hover !important
 
+  .aside-list
+    & > span
+      display: block
+      margin-bottom: 10px
+      text-align: center
 
+    & > .aside-list-item
+      display: flex
+      align-items: center
+      padding: 6px 0
 
-  .aside_category_list_length,.archive-list-count
-    float: right 
-  
-  .card-archives
-    margin-bottom: 20px
-  
+      &:first-child
+        padding-top: 0
+
+      &:not(:last-child)
+        border-bottom: 1px dashed #f5f5f5
+
+      &:last-child
+        padding-bottom: 0
+
+      .thumbnail
+        overflow: hidden
+        width: w = 4.2em
+        height: w
+
+        :first-child
+          @extend .imgHover
+
+      .content
+        flex: 1
+        padding-left: 10px
+        word-break: break-all
+
+        & > .name
+          @extend .limit-more-line
+          -webkit-line-clamp: 1
+
+        & > time,
+        & > .name
+          display: block
+          color: $theme-meta-color
+          font-size: 85%
+
+        & > .title,
+        & > .comment
+          @extend .limit-more-line
+          color: var(--font-color)
+          font-size: 95%
+          line-height: 1.5
+          -webkit-line-clamp: 2
+
+          &:hover
+            color: $text-hover
+
+      &.no-cover
+        min-height: 4.4em
+
+  .card-archives ul.card-archive-list,
+  .card-categories ul.card-category-list
+    margin: 0
+    padding: 0
+    list-style: none
+
+  .card-archives ul.card-archive-list > .card-archive-list-item,
+  .card-categories ul.card-category-list > .card-category-list-item
+    a
+      display: flex
+      flex-direction: row
+      padding: 3px 10px
+      color: var(--font-color)
+      transition: all .4s
+
+      &:hover
+        padding: 3px 17px
+        background-color: var(--text-bg-hover)
+
+      span
+        @extend .limit-one-line
+
+        &:first-child
+          flex: 1
+
+  .card-categories
+    .card-category-list
+      &.child
+        padding: 0 0 0 16px
+
+      > .parent
+        > a
+          .card-category-list
+            &-name
+              width: 70% !important
+
+            &-count
+              width: calc(100% - 70% - 20px)
+              text-align: right
+
+        i
+          float: right
+          margin-right: -.5em
+          padding: .5em
+          transition: transform .3s
+          transform: rotate(0)
+
+          &.expand
+            transform: rotate(-90deg)
+
+        if hexo-config('aside.card_categories.expand') == false
+          > .child
+            display: none
+
   .card-webinfo
     .webinfo
-      padding: 0.2rem 1rem
+      .webinfo-item
+        display: flex
+        align-items: center
+        padding: 2px 10px 0
 
-      .webinfo_item
+        div
+          &:first-child
+            flex: 1
+            padding-right: 20px
+
+  // toc
+  #card-toc
+    +minWidth901()
+      right: 0 !important
+
+    +maxWidth900()
+      position: fixed
+      right: -100%
+      bottom: 30px
+      z-index: 100
+      max-width: $toc-mobile-maxWidth
+      max-height: calc(100% - 60px)
+      width: $toc-mobile-width
+      opacity: 0
+      transition: initial
+      transform-origin: right bottom
+
+    .toc-percentage
+      float: right
+      margin-top: -9px
+      color: #a9a9a9
+      font-style: italic
+      font-size: 140%
+
+    .toc-content
+      overflow-y: scroll
+      overflow-y: overlay
+      margin: 0 -24px
+      max-height: calc(100vh - 120px)
+
+      +maxWidth900()
+        max-height: calc(100vh - 140px)
+
+      & > *
+        margin: 0 20px !important
+
+        & > .toc-item > .toc-child
+          margin-left: 10px
+          padding-left: 10px
+          border-left: 1px solid var(--dark-grey)
+
+      &:not(.is-expand)
+        .toc-child
+          display: none
+
+          +maxWidth900()
+            display: block !important
+
+        .toc-item
+          &.active
+            .toc-child
+              display: block
+
+      ol,
+      li
+        list-style: none
+
+      > ol
+        padding: 0 !important
+
+      ol
+        margin: 0
+        padding-left: 18px
+
+      .toc-link
         display: block
-        padding: 4px 0 0
+        margin: 4px 0
+        padding: 1px 6px
+        color: var(--toc-link-color)
+        transition: all .2s ease-in-out
 
-        .webinfo_article_name,
-        .webinfo_runtime_name,
-        .webinfo_site_uv_name,
-        .webinfo_site_name
-          display: inline-block
-        
-        .webinfo_article_count,
-        .webinfo_runtime_count,
-        .webinfo_site_uv_count,
-        .webinfo_site_pv_count
-          float: right
-          display: inline-block
+        &:hover
+          color: $theme-color
 
+        &.active
+          background: $theme-toc-color
+          color: $toc-active-color
 
-@keyframes announ_animation{
-  0%,to{
-    color: #4c4948
-}
-  50%{
-    color: #FF0000
-    }
-    }
+  :only-child
+    > .card-widget
+      margin-top: 0
 
+  .card-more-btn
+    float: right
+    color: inherit
 
-@media screen and (max-width: 900px) 
-  .layout_page
+    &:hover
+      animation: more-btn-move 1s infinite
+
+  .card-announcement
+    .item-headline
+      i
+        color: #FF0000
+
+.avatar-img
+  overflow: hidden
+  margin: 0 auto
+  width: 110px
+  height: 110px
+  border-radius: 70px
+
+  img
+    width: 100%
+    height: 100%
+    transition: filter 375ms ease-in .2s, transform .3s
+    object-fit: cover
+
+    &:hover
+      transform: rotate(360deg)
+
+.site-data
+  display: table
+  width: 100%
+  table-layout: fixed
+
+  & > a
+    display: table-cell
+
+    div
+      transition: all .3s
+
+    &:hover
+      div
+        color: $theme-color !important
+
+    .headline
+      @extend .limit-one-line
+      color: var(--font-color)
+
+    .length-num
+      margin-top: -.32em
+      color: var(--text-highlight-color)
+      font-size: 1.4em
+
+@keyframes more-btn-move
+  0%,
+  100%
+    transform: translateX(0)
+
+  50%
+    transform: translateX(3px)
+
+@keyframes toc-open
+  0%
+    transform: scale(.7)
+
+  100%
+    transform: scale(1)
+
+@keyframes toc-close
+  0%
+    transform: scale(1)
+
+  100%
+    transform: scale(.7)
+
++minWidth900()
+  html.hide-aside
+    .layout
+      justify-content: center
+
+      > .aside-content
+        display: none
+
+      > div:first-child
+        width: 80%
+
+.page
+  .sticky_layout
+    display: flex
     flex-direction: column
-  
-  #recent-posts,#aside_content
-    width: 100% !important
-  
-  .card_widget
-    margin-left: 0 
-    margin-right: 0 
 
+  if hexo-config('aside.card_recent_post.sort_order')
+    .card-recent-post
+      order: hexo-config('aside.card_recent_post.sort_order')
 
-@media screen and (min-width: 900px) 
-  #aside_content    
-    .card_widget
-        if hexo-config("aside.position") == "right"
-          margin-left: 15px
-        else 
-          margin-right: 15px
+  if hexo-config('newest_comments.sort_order')
+    #card-newest-comments
+      order: hexo-config('newest_comments.sort_order')
+
+  if hexo-config('aside.card_categories.sort_order')
+    .card-categories
+      order: hexo-config('aside.card_categories.sort_order')
+
+  if hexo-config('aside.card_tags.sort_order')
+    .card-tags
+      order: hexo-config('aside.card_tags.sort_order')
+
+  if hexo-config('aside.card_archives.sort_order')
+    .card-archives
+      order: hexo-config('aside.card_archives.sort_order')
+
+  if hexo-config('aside.card_webinfo.sort_order')
+    .card-webinfo
+      order: hexo-config('aside.card_webinfo.sort_order')

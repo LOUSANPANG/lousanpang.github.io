@@ -1,41 +1,27 @@
-.card_widget.card-author
-  .card-content
-    .post_data
-      .data-item.text-center
-        img.lozad.avatar_img(src=theme.avatar || url_for('/img/avatar.png') onerror=`onerror=null;src='${theme.lodding_bg.flink}'`)
-        p.author-info__name.text-center= config.author
-        p.author-info__description.text-center= config.description
+if theme.aside.card_author.enable
+  .card-widget.card-info
+    .is-center
+      .avatar-img
+        img(src=url_for(theme.avatar.img) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt="avatar")
+      .author-info__name= config.author
+      .author-info__description!= theme.aside.card_author.description || config.description
 
-    .post_data.data_config
-      if site.posts.length
-        .data-item.text-center
-          .data_link
-            a(href=url_for(config.archive_dir) + '/')
-              p.headline= _p('aside.articles') 
-              p.length_num= site.posts.length
+    .card-info-data.site-data.is-center
+      a(href=url_for(config.archive_dir) + '/')
+        .headline= _p('aside.articles')
+        .length-num= site.posts.length
+      a(href=url_for(config.tag_dir) + '/')
+        .headline= _p('aside.tags')
+        .length-num= site.tags.length
+      a(href=url_for(config.category_dir) + '/')
+        .headline= _p('aside.categories') 
+        .length-num= site.categories.length
 
-      if site.tags.length
-        .data-item.text-center       
-          .data_link
-            a(href=url_for(config.tag_dir) + '/' )
-              p.headline= _p('aside.tags')
-              p.length_num= site.tags.length
-
-      if site.categories.length
-        .data-item.text-center      
-          .data_link
-            a(href=url_for(config.category_dir) + '/')
-              p.headline= _p('aside.categories') 
-              p.length_num= site.categories.length
-
-    .post_data.text-center
-      a#bookmark-it.data-item.bookmark.bookmarke--primary.bookmark--animated(href="javascript:;" title= _p('aside.card_bookmark') )=  _p('aside.card_bookmark') || 'Follow Me'
-      
-  
+    if theme.aside.card_author.button.enable
+      a#card-info-btn(href=theme.aside.card_author.button.link)
+        i(class=theme.aside.card_author.button.icon)
+        span=theme.aside.card_author.button.text
   
     if(theme.social)
-      .post_data.data_config
-        #aside-social-icons 
-          each url, icon in theme.social
-            a.social-icon.data-item(href=url target="_blank")
-              i(class=icon)
+        .card-info-social-icons.is-center
+          !=fragment_cache('social', function(){return partial('includes/header/social')}) 

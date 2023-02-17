@@ -1,59 +1,68 @@
 #sidebar
-  position: fixed
-  top: 0
-  left: -300px
-  z-index: 10
-  overflow-y: auto
-  padding: 1rem 0 2rem 0.5rem
-  width: $sidebar-width
-  height: 100%
-  background: $sidebar-background
-  box-shadow: -0.25rem 0 0.25rem rgba(232, 237, 250, 0.6) inset
-  opacity:  0.9
-  
-  .sidebar-toc
-    ol,
-    li
-      list-style: none
+  #menu-mask
+    position: fixed
+    z-index: 102
+    display: none
+    width: 100%
+    height: 100%
+    background: alpha($dark-black, .8)
 
-    ol
-      margin-top: 0.2rem
-      padding-left: 0.4rem
+  #sidebar-menus
+    position: fixed
+    top: 0
+    right: -($sidebar-width)
+    z-index: 103
+    overflow-x: hidden
+    overflow-y: auto
+    width: $sidebar-width
+    height: 100%
+    background: var(--sidebar-bg)
+    transition: all .5s
 
-    &__title
-      padding-right: 0.5rem
-      text-align: center
-      font-size: unit(0.9 * $rem, "px")
+    &.open
+      transform: translate3d(-100%, 0, 0)
 
-    .toc-link
-      display: block
-      padding-left: 0.2rem
-      border-right: 3px solid transparent
-      text-decoration: none
-      transition: all 0.2s ease-in-out
+    & > .avatar-img
+      margin: 20px auto
 
-      &.active
-        border-right-color: darken($cyan, 20%)
-        background: $cyan
-        color: $white
+    .sidebar-site-data
+      padding: 0 10px
 
-    &__progress
-      position: relative
-      margin-top: -0.3rem
-      padding-left: 0.6rem
-      color: $cyan
+    hr
+      margin: 20px auto
 
-      .progress-notice
-        margin-right: 0.4rem
+    .menus_items
+      padding: 0 10px 40px
 
-      .progress-num
-        display: inline-block
-        min-width: 0.9rem
+      .site-page
+        @extend .limit-one-line
+        position: relative
+        display: block
+        padding: 6px 30px 6px 22px
+        color: var(--font-color)
+        font-size: 1.15em
 
-      &-bar
-        width: 0
-        height: 1px
-        background: $cyan
+        &:hover
+          background: var(--text-bg-hover)
 
+        i:first-child
+          width: 15%
+          text-align: left
 
+        &.group
+          & > i:last-child
+            position: absolute
+            top: .78em
+            right: 18px
+            transition: transform .3s
 
+          &.hide
+            & > i:last-child
+              transform: rotate(90deg)
+
+            & + .menus_item_child
+              display: none
+
+      .menus_item_child
+        margin: 0
+        list-style: none

@@ -1,62 +1,41 @@
 -
   var options = {
-    prev_text: '<i class="fa fa-chevron-left"></i>',
-    next_text: '<i class="fa fa-chevron-right"></i>',
-    mid_size: 1
+    prev_text: '<i class="fas fa-chevron-left fa-fw"></i>',
+    next_text: '<i class="fas fa-chevron-right fa-fw"></i>',
+    mid_size: 1,
+    escape: false
   }
 
-if(!is_post())
-  nav#pagination
-    div.pagination
-      !=paginator(options)
-else
-  nav#pagination.pagination_post
-    if(page.prev)
-      if(page.next)
-        .prev-post.pull-left
-          - var pagination_cover = page.prev.cover || random_cover()
-          a(href=url_for(page.prev.path))
-            if theme.lazyload.enable
-              img.prev_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'` )
-            else
-              img.prev_cover(src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'` )
-
+if is_post()
+  - let prev = theme.post_pagination === 1 ? page.prev : page.next
+  - let next = theme.post_pagination === 1 ? page.next : page.prev
+  nav#pagination.pagination-post
+    if(prev)
+      - var hasPageNext = next ? 'pull-left' : 'pull-full'
+      .prev-post(class=hasPageNext)
+        a(href=url_for(prev.path) title=prev.title)
+          if prev.cover_type === 'img'
+            img.cover(src=url_for(prev.cover) onerror=`onerror=null;src='${url_for(theme.error_img.post_page)}'` alt='cover of previous post')
+          else
+            .cover(style=`background: ${prev.cover || 'var(--default-bg-color)'}`)
+          .pagination-info
             .label=_p('pagination.prev')
-            .prev_info
-              span=page.prev.title
-      else
-        .prev-post.pull-full
-          - var pagination_cover = page.prev.cover || random_cover()
-          a(href=url_for(page.prev.path))
-            if theme.lazyload.enable
-              img.prev_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            else
-              img.prev_cover(src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            .label=_p('pagination.prev')
-            .prev_info
-              span=page.prev.title
+            .prev_info=prev.title
           
-    if(page.next)
-      if(page.prev)
-        .next-post.pull-right
-          - var pagination_cover = page.next.cover || random_cover()
-          a(href=url_for(page.next.path))
-            if theme.lazyload.enable
-              img.next_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            else
-              img.next_cover(src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)            
+    if(next)
+      - var hasPagePrev = prev ? 'pull-right' : 'pull-full'
+      .next-post(class=hasPagePrev)
+        a(href=url_for(next.path) title=next.title)
+          if next.cover_type === 'img'
+            img.cover(src=url_for(next.cover) onerror=`onerror=null;src='${url_for(theme.error_img.post_page)}'` alt='cover of next post')
+          else
+            .cover(style=`background: ${next.cover || 'var(--default-bg-color)'}`)
+          .pagination-info
             .label=_p('pagination.next')
-            .next_info
-              span=page.next.title 
-      else
-        .next-post.pull-full
-          - var pagination_cover = page.next.cover || random_cover()
-          a(href=url_for(page.next.path))
-            if theme.lazyload.enable
-              img.next_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            else
-              img.next_cover(src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            .label=_p('pagination.next')
-            .next_info
-              span=page.next.title      
-
+            .next_info=next.title
+else
+  nav#pagination
+    .pagination
+      if is_home()
+        - options.format = 'page/%d/#content-inner'
+      !=paginator(options)

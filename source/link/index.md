@@ -1,5 +1,5 @@
 ---
-title: 关于
-date: 2019-09-11
+title: 友情链接
+date: 2018-01-01
 type: "link"
 ---
