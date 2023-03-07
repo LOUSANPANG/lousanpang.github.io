@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>前端面试复习计划之项目实战 | Lou Guanghao</title><meta name="author" content="Lou Guanghao"><meta name="copyright" content="Lou Guanghao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端面试复习计划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试复习计划之项目实战">
+<meta property="og:url" content="http://lousanpang.github.io/2023/03/06/interview/project/index.html">
+<meta property="og:site_name" content="Lou Guanghao">
+<meta property="og:description" content="前端面试复习计划">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/03/06/2ae30bde0c33a18f.jpg">
+<meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-05T16:00:00.000Z">
+<meta property="article:author" content="Lou Guanghao">
+<meta property="article:tag" content="项目实战">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/03/06/2ae30bde0c33a18f.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://lousanpang.github.io/2023/03/06/interview/project/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面试复习计划之项目实战',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-06 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.bmp.ovh/imgs/2023/03/06/2ae30bde0c33a18f.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lou Guanghao"><span class="site-name">Lou Guanghao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/LOUSANPANG"><i class="fa-fw fab fa-github"></i><span> GitHub</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前端面试复习计划之项目实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-05T16:00:00.000Z" title="Created 2023-03-06 00:00:00">2023-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-05T16:00:00.000Z" title="Updated 2023-03-06 00:00:00">2023-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="10种鉴权方法"><a href="#10种鉴权方法" class="headerlink" title="10种鉴权方法"></a>10种鉴权方法</h2><h4 id="HTTP-基本鉴权"><a href="#HTTP-基本鉴权" class="headerlink" title="HTTP 基本鉴权"></a>HTTP 基本鉴权</h4><pre><code>- 账号密码通过加密的方式调取服务认证
+- 缺点：请求过于暴露会被重放攻击
+</code></pre>
+<h4 id="Seesion-Cookie鉴权"><a href="#Seesion-Cookie鉴权" class="headerlink" title="Seesion-Cookie鉴权"></a>Seesion-Cookie鉴权</h4><pre><code>- 利用服务端的 Session（会话）和 浏览器的 Cookie 来实现的前后端通信认证模式
+- 客户端发送请求到服务器，服务器生成 SessionId 存储在 Session 服务器中，并返回客户端并设置 Cookie 存储 SessionId
+- 客户端拿 SessionId 发送请求，服务器校验 Session
+- 缺点：过于依赖 Cookie、移动端对 Cookie 支持不友好、用户量大服务器开销大
+</code></pre>
+<h4 id="Token鉴权"><a href="#Token鉴权" class="headerlink" title="Token鉴权"></a>Token鉴权</h4><pre><code>- Token 组成：uid (用户唯一的身份标识) + time (当前时间的时间戳) + sign (签名，Token 的前几位以哈希算法压缩成的一定长度的十六进制字符串)
+- 客户端发送请求，请求通过服务端生成一个加密后的 Token 令牌
+- 客户端存储 Token 至缓存中，下次发送请求将 Token 放至请求头 Authorization 字段
+- 服务端拿到请求令牌后，进行解密和签名校验，如果验证不成功返回 401
+- 为了避免 Token 时效期短，采用 AccessToken 和 RefreshToken，先用 AccessToken 请求，如果过期再用 RefreshToken 请求
+- RefreshToken 过期就重新登录，如果没有过期，服务器返回新的 AccessToken，用于下次请求
+</code></pre>
+<h4 id="JWT（JSON-WEB-TOKEN）鉴权"><a href="#JWT（JSON-WEB-TOKEN）鉴权" class="headerlink" title="JWT（JSON WEB TOKEN）鉴权"></a>JWT（JSON WEB TOKEN）鉴权</h4><pre><code>- JWT 组成： Header 头部、 Payload 负载 和 Signature 签名
+- 客户端发送请求至服务器，服务器校验通过后使用密钥创建 JWT，发送给客户端
+- 客户端存储到本地，请求时设置请求头 Authorization 为 JWT
+- 服务端拿到 JWT，检验是否过期，解析用户信息，处理相关数据
+- 想比于 Token，降低服务端查询数据库的次数，减少查询用户信息的次数
+</code></pre>
+<h4 id="单点登录-SSO"><a href="#单点登录-SSO" class="headerlink" title="单点登录 SSO"></a>单点登录 SSO</h4><pre><code>- 1同域名下的 SSO，采用 Seesion-Cookie 的方式，附加在响应头的 Set-Cookie 字段中，设置 Cookie 的 Domain 为 .主域.com
+- 客户端发送请求，携带主域名 Domain 下的 Cookie 给服务器，通过 Cookie 来验证登录状态
+- 2不同域名下的 SSO，通过中间方式进行颁布令牌
+- 通过 CAS 认证服务中心，生成 TGC 放入自己的 Session 中，同时以 Set-Cookie 形式写入 Domain 为 sso.com 的域下 ；同时生成一个授权令牌 ST（类似Token）
+- 客户端再发送请求需要拿着 ST 向 CAS 认证服务发送请求，CAS 认证服务验证票据 (ST) 的有效性
+</code></pre>
+<h4 id="OAuth-2-0"><a href="#OAuth-2-0" class="headerlink" title="OAuth 2.0"></a>OAuth 2.0</h4><pre><code>- 允许用户授权第三方网站 
+- 授权码模式（微信登录）：客户端跳转第三方网站授权登录换取授权码 - 客户端使用授权码调用服务端获取token - 客户端使用token访问资源
+- 授权码隐藏式：跳过授权码直接返回token - 前端将本地存储的 client_secret 与 token 进行校验
+- 用户名密码式模式：用户在客户端提交账号密码换token - 客户端使用token访问资源
+- 客户端模式：客户端使用自己的标识换token - 客户端使用token访问资源
+</code></pre>
+<h4 id="联合登录和信任登录"><a href="#联合登录和信任登录" class="headerlink" title="联合登录和信任登录"></a>联合登录和信任登录</h4><pre><code>- 联合登录：APP内嵌H5，登录态Token附加在URL参数上或者采用通信协议
+</code></pre>
+<h4 id="唯一登录"><a href="#唯一登录" class="headerlink" title="唯一登录"></a>唯一登录</h4><pre><code>- 客户端A与服务端产生对应的 Token，同时也保存登录状态
+- 客户端B在次登录，检测有登录状态，重新生成Token
+</code></pre>
+<h4 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h4><pre><code>- PC端请求二维码 - 生成二维码UUID、关联UUID和设备信息、设置过期时间 - 前端展示二维码、定时轮询刷新
+- 手机扫码获取UUID - 将设备信息和UUID发送给服务端 - 服务端将ID和用户信息绑定生成临时token - 二维码更新为待确认
+- 手机携带临时token登录 - 服务端将临时token转成真实token - 二维码状态更新为已确认
+</code></pre>
+<h4 id="一键登录"><a href="#一键登录" class="headerlink" title="一键登录"></a>一键登录</h4><pre><code>- SKD初始化，调用 SDK 方法，参数 AppKey 和 AppSecret
+- 唤起授权页，授权页会显示手机号掩码以及运营商协议给用户确认。
+- 同意授权并登录，客户端获取到token
+- 携带 token 调用服务一键登录
+</code></pre>
+<br />
+<br />
+<br />
+<br /></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">项目实战</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E7%A7%8D%E9%89%B4%E6%9D%83%E6%96%B9%E6%B3%95"><span class="toc-text">10种鉴权方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-%E5%9F%BA%E6%9C%AC%E9%89%B4%E6%9D%83"><span class="toc-text">HTTP 基本鉴权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Seesion-Cookie%E9%89%B4%E6%9D%83"><span class="toc-text">Seesion-Cookie鉴权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Token%E9%89%B4%E6%9D%83"><span class="toc-text">Token鉴权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT%EF%BC%88JSON-WEB-TOKEN%EF%BC%89%E9%89%B4%E6%9D%83"><span class="toc-text">JWT（JSON WEB TOKEN）鉴权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95-SSO"><span class="toc-text">单点登录 SSO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OAuth-2-0"><span class="toc-text">OAuth 2.0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%99%BB%E5%BD%95%E5%92%8C%E4%BF%A1%E4%BB%BB%E7%99%BB%E5%BD%95"><span class="toc-text">联合登录和信任登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E7%99%BB%E5%BD%95"><span class="toc-text">唯一登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95"><span class="toc-text">扫码登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E9%94%AE%E7%99%BB%E5%BD%95"><span class="toc-text">一键登录</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2023 By Lou Guanghao</div><div class="footer_custom_text">If you know me please follow me or leave me a message.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div></div></body></html>
