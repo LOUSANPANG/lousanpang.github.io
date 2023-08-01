@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>从不考勤制度探讨自律</title>
+      <link href="/2023/03/29/story/%E6%95%85%E4%BA%8B%E4%BC%9A-%E4%B8%8D%E8%80%83%E5%8B%A4%E6%8E%A2%E8%AE%A8%E8%87%AA%E5%BE%8B/"/>
+      <url>/2023/03/29/story/%E6%95%85%E4%BA%8B%E4%BC%9A-%E4%B8%8D%E8%80%83%E5%8B%A4%E6%8E%A2%E8%AE%A8%E8%87%AA%E5%BE%8B/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://wx.zsxq.com/dweb2/index/topic_detail/814251121181482">https://wx.zsxq.com/dweb2/index/topic_detail/814251121181482</a></p><br /><br /><br /><br />]]></content>
+      
+      
+      <categories>
+          
+          <category> 故事会 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 故事会 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>前端面试复习计划之项目实战</title>
       <link href="/2023/03/06/interview/project/"/>
       <url>/2023/03/06/interview/project/</url>
       
-        <content type="html"><![CDATA[<h2 id="10种鉴权方法"><a href="#10种鉴权方法" class="headerlink" title="10种鉴权方法"></a>10种鉴权方法</h2><h4 id="HTTP-基本鉴权"><a href="#HTTP-基本鉴权" class="headerlink" title="HTTP 基本鉴权"></a>HTTP 基本鉴权</h4><pre><code>- 账号密码通过加密的方式调取服务认证- 缺点：请求过于暴露会被重放攻击</code></pre><h4 id="Seesion-Cookie鉴权"><a href="#Seesion-Cookie鉴权" class="headerlink" title="Seesion-Cookie鉴权"></a>Seesion-Cookie鉴权</h4><pre><code>- 利用服务端的 Session（会话）和 浏览器的 Cookie 来实现的前后端通信认证模式- 客户端发送请求到服务器，服务器生成 SessionId 存储在 Session 服务器中，并返回客户端并设置 Cookie 存储 SessionId- 客户端拿 SessionId 发送请求，服务器校验 Session- 缺点：过于依赖 Cookie、移动端对 Cookie 支持不友好、用户量大服务器开销大</code></pre><h4 id="Token鉴权"><a href="#Token鉴权" class="headerlink" title="Token鉴权"></a>Token鉴权</h4><pre><code>- Token 组成：uid (用户唯一的身份标识) + time (当前时间的时间戳) + sign (签名，Token 的前几位以哈希算法压缩成的一定长度的十六进制字符串)- 客户端发送请求，请求通过服务端生成一个加密后的 Token 令牌- 客户端存储 Token 至缓存中，下次发送请求将 Token 放至请求头 Authorization 字段- 服务端拿到请求令牌后，进行解密和签名校验，如果验证不成功返回 401- 为了避免 Token 时效期短，采用 AccessToken 和 RefreshToken，先用 AccessToken 请求，如果过期再用 RefreshToken 请求- RefreshToken 过期就重新登录，如果没有过期，服务器返回新的 AccessToken，用于下次请求</code></pre><h4 id="JWT（JSON-WEB-TOKEN）鉴权"><a href="#JWT（JSON-WEB-TOKEN）鉴权" class="headerlink" title="JWT（JSON WEB TOKEN）鉴权"></a>JWT（JSON WEB TOKEN）鉴权</h4><pre><code>- JWT 组成： Header 头部、 Payload 负载 和 Signature 签名- 客户端发送请求至服务器，服务器校验通过后使用密钥创建 JWT，发送给客户端- 客户端存储到本地，请求时设置请求头 Authorization 为 JWT- 服务端拿到 JWT，检验是否过期，解析用户信息，处理相关数据- 想比于 Token，降低服务端查询数据库的次数，减少查询用户信息的次数</code></pre><h4 id="单点登录-SSO"><a href="#单点登录-SSO" class="headerlink" title="单点登录 SSO"></a>单点登录 SSO</h4><pre><code>- 1同域名下的 SSO，采用 Seesion-Cookie 的方式，附加在响应头的 Set-Cookie 字段中，设置 Cookie 的 Domain 为 .主域.com- 客户端发送请求，携带主域名 Domain 下的 Cookie 给服务器，通过 Cookie 来验证登录状态- 2不同域名下的 SSO，通过中间方式进行颁布令牌- 通过 CAS 认证服务中心，生成 TGC 放入自己的 Session 中，同时以 Set-Cookie 形式写入 Domain 为 sso.com 的域下 ；同时生成一个授权令牌 ST（类似Token）- 客户端再发送请求需要拿着 ST 向 CAS 认证服务发送请求，CAS 认证服务验证票据 (ST) 的有效性</code></pre><h4 id="OAuth-2-0"><a href="#OAuth-2-0" class="headerlink" title="OAuth 2.0"></a>OAuth 2.0</h4><pre><code>- 允许用户授权第三方网站 - 授权码模式（微信登录）：客户端跳转第三方网站授权登录换取授权码 - 客户端使用授权码调用服务端获取token - 客户端使用token访问资源- 授权码隐藏式：跳过授权码直接返回token - 前端将本地存储的 client_secret 与 token 进行校验- 用户名密码式模式：用户在客户端提交账号密码换token - 客户端使用token访问资源- 客户端模式：客户端使用自己的标识换token - 客户端使用token访问资源</code></pre><h4 id="联合登录和信任登录"><a href="#联合登录和信任登录" class="headerlink" title="联合登录和信任登录"></a>联合登录和信任登录</h4><pre><code>- 联合登录：APP内嵌H5，登录态Token附加在URL参数上或者采用通信协议</code></pre><h4 id="唯一登录"><a href="#唯一登录" class="headerlink" title="唯一登录"></a>唯一登录</h4><pre><code>- 客户端A与服务端产生对应的 Token，同时也保存登录状态- 客户端B在次登录，检测有登录状态，重新生成Token</code></pre><h4 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h4><pre><code>- PC端请求二维码 - 生成二维码UUID、关联UUID和设备信息、设置过期时间 - 前端展示二维码、定时轮询刷新- 手机扫码获取UUID - 将设备信息和UUID发送给服务端 - 服务端将ID和用户信息绑定生成临时token - 二维码更新为待确认- 手机携带临时token登录 - 服务端将临时token转成真实token - 二维码状态更新为已确认</code></pre><h4 id="一键登录"><a href="#一键登录" class="headerlink" title="一键登录"></a>一键登录</h4><pre><code>- SKD初始化，调用 SDK 方法，参数 AppKey 和 AppSecret- 唤起授权页，授权页会显示手机号掩码以及运营商协议给用户确认。- 同意授权并登录，客户端获取到token- 携带 token 调用服务一键登录</code></pre><br /><br /><br /><br />]]></content>
+        <content type="html"><![CDATA[<h2 id="10种鉴权方法"><a href="#10种鉴权方法" class="headerlink" title="10种鉴权方法"></a>10种鉴权方法</h2><h4 id="HTTP-基本鉴权"><a href="#HTTP-基本鉴权" class="headerlink" title="HTTP 基本鉴权"></a>HTTP 基本鉴权</h4><pre><code>- 账号密码通过加密的方式调取服务认证- 缺点：请求过于暴露会被重放攻击</code></pre><h4 id="Seesion-Cookie鉴权"><a href="#Seesion-Cookie鉴权" class="headerlink" title="Seesion-Cookie鉴权"></a>Seesion-Cookie鉴权</h4><pre><code>- 利用服务端的 Session（会话）和 浏览器的 Cookie 来实现的前后端通信认证模式- 客户端发送请求到服务器，服务器生成 SessionId 存储在 Session 服务器中，并返回客户端并设置 Cookie 存储 SessionId- 客户端拿 SessionId 发送请求，服务器校验 Session- 缺点：过于依赖 Cookie、移动端对 Cookie 支持不友好、用户量大服务器开销大</code></pre><h4 id="Token鉴权"><a href="#Token鉴权" class="headerlink" title="Token鉴权"></a>Token鉴权</h4><pre><code>- Token 组成：uid (用户唯一的身份标识) + time (当前时间的时间戳) + sign (签名，Token 的前几位以哈希算法压缩成的一定长度的十六进制字符串)- 客户端发送请求，请求通过服务端生成一个加密后的 Token 令牌- 客户端存储 Token 至缓存中，下次发送请求将 Token 放至请求头 Authorization 字段- 服务端拿到请求令牌后，进行解密和签名校验，如果验证不成功返回 401- 为了避免 Token 时效期短，采用 AccessToken 和 RefreshToken，先用 AccessToken 请求，如果过期再用 RefreshToken 请求- RefreshToken 过期就重新登录，如果没有过期，服务器返回新的 AccessToken，用于下次请求</code></pre><h4 id="JWT（JSON-WEB-TOKEN）鉴权"><a href="#JWT（JSON-WEB-TOKEN）鉴权" class="headerlink" title="JWT（JSON WEB TOKEN）鉴权"></a>JWT（JSON WEB TOKEN）鉴权</h4><pre><code>- JWT 组成： Header 头部、 Payload 负载 和 Signature 签名- 客户端发送请求至服务器，服务器校验通过后使用密钥创建 JWT，发送给客户端- 客户端存储到本地，请求时设置请求头 Authorization 为 JWT- 服务端拿到 JWT，检验是否过期，解析用户信息，处理相关数据- 想比于 Token，降低服务端查询数据库的次数，减少查询用户信息的次数</code></pre><h4 id="单点登录-SSO"><a href="#单点登录-SSO" class="headerlink" title="单点登录 SSO"></a>单点登录 SSO</h4><pre><code>- 1同域名下的 SSO，采用 Seesion-Cookie 的方式，附加在响应头的 Set-Cookie 字段中，设置 Cookie 的 Domain 为 .主域.com- 客户端发送请求，携带主域名 Domain 下的 Cookie 给服务器，通过 Cookie 来验证登录状态- 2不同域名下的 SSO，通过中间方式进行颁布令牌- 通过 CAS 认证服务中心，生成 TGC 放入自己的 Session 中，同时以 Set-Cookie 形式写入 Domain 为 sso.com 的域下 ；同时生成一个授权令牌 ST（类似Token）- 客户端再发送请求需要拿着 ST 向 CAS 认证服务发送请求，CAS 认证服务验证票据 (ST) 的有效性</code></pre><h4 id="OAuth-2-0"><a href="#OAuth-2-0" class="headerlink" title="OAuth 2.0"></a>OAuth 2.0</h4><pre><code>- 允许用户授权第三方网站 - 授权码模式（微信登录）：客户端跳转第三方网站授权登录换取授权码 - 客户端使用授权码调用服务端获取token - 客户端使用token访问资源- 授权码隐藏式：跳过授权码直接返回token - 前端将本地存储的 client_secret 与 token 进行校验- 用户名密码式模式：用户在客户端提交账号密码换token - 客户端使用token访问资源- 客户端模式：客户端使用自己的标识换token - 客户端使用token访问资源</code></pre><h4 id="联合登录和信任登录"><a href="#联合登录和信任登录" class="headerlink" title="联合登录和信任登录"></a>联合登录和信任登录</h4><pre><code>- 联合登录：APP内嵌H5，登录态Token附加在URL参数上或者采用通信协议</code></pre><h4 id="唯一登录"><a href="#唯一登录" class="headerlink" title="唯一登录"></a>唯一登录</h4><pre><code>- 客户端A与服务端产生对应的 Token，同时也保存登录状态- 客户端B在次登录，检测有登录状态，重新生成Token</code></pre><h4 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h4><pre><code>- PC端请求二维码 - 生成二维码UUID、关联UUID和设备信息、设置过期时间 - 前端展示二维码、定时轮询刷新- 手机扫码获取UUID - 将设备信息和UUID发送给服务端 - 服务端将ID和用户信息绑定生成临时token - 二维码更新为待确认- 手机携带临时token登录 - 服务端将临时token转成真实token - 二维码状态更新为已确认</code></pre><h4 id="一键登录"><a href="#一键登录" class="headerlink" title="一键登录"></a>一键登录</h4><pre><code>- SKD初始化，调用 SDK 方法，参数 AppKey 和 AppSecret- 唤起授权页，授权页会显示手机号掩码以及运营商协议给用户确认- 同意授权并登录，客户端获取到token- 携带 token 调用服务一键登录</code></pre><h2 id="机智应对后端一次性返回10万条数据"><a href="#机智应对后端一次性返回10万条数据" class="headerlink" title="机智应对后端一次性返回10万条数据"></a>机智应对后端一次性返回10万条数据</h2><p>1、数据进行分组、分批、分堆<br>2、使用 <code>requestAnimationFrame</code> 代替 定时器<br>2、使用 <strong>数据分页</strong> 或 <strong>滚动触底加载</strong> 的思维<br>3、采用虚拟列表<br>4、启用多线程 <code>Web Worker</code> 处理代码逻辑</p><br /><br /><br /><br />]]></content>
       
       
       <categories>
@@ -83,7 +108,7 @@
       <link href="/2021/10/01/interview/vue/"/>
       <url>/2021/10/01/interview/vue/</url>
       
-        <content type="html"><![CDATA[<br /><br /><br /><br />]]></content>
+        <content type="html"><![CDATA[<h2 id="Vue-组件通信"><a href="#Vue-组件通信" class="headerlink" title="Vue 组件通信"></a>Vue 组件通信</h2><p>1、组件通信方式有以下8种：</p><ul><li>props</li><li>$emit&#x2F;<del>$on</del></li><li><del>$children</del>&#x2F;$parent</li><li>$attrs&#x2F;<del>$listeners</del></li><li>ref</li><li>$root</li><li>eventbus</li><li>vuex</li></ul><p>2、根据组件之间的关系讨论通信：</p><ul><li>父子组件<ul><li><code>ref</code>&#x2F;<code>props</code>&#x2F;<code>$attrs</code>&#x2F;<code>$emit</code>&#x2F;<code>$parent</code></li></ul></li><li>兄弟组件<ul><li><code>$parent</code>&#x2F;<code>$root</code>&#x2F;<code>enentbus</code>&#x2F;<code>vuex</code></li></ul></li><li>跨层级关系<ul><li><code>eventbus</code>&#x2F;<code>vuex</code>&#x2F;<code>provide+inject</code></li></ul></li></ul><h2 id="v-if-和-v-for-哪个优先级更高？"><a href="#v-if-和-v-for-哪个优先级更高？" class="headerlink" title="v-if 和 v-for 哪个优先级更高？"></a>v-if 和 v-for 哪个优先级更高？</h2><p>1、实践中不应该把 v-for 和 v-if 放一起<br>2、<strong>在 Vue2 中，v-for 的优先级是高于 v-if</strong>，把它们放在一起，输出的渲染函数中可以看出会先执行循环再判断条件，哪怕我们只渲染列表的一小部分元素，也得在每次重渲染的时候遍历整个列表，这会比较浪费；另外需要注意的是<strong>在 Vue3 中则完全相反，v-if 的优先级高于 v-for</strong>，所以 v-if 执行时，它调用的变量还不存在，就会导致异常。<br>3、在过滤列表中的目标时可以定义一个计算属性，先过滤好需要的列表再渲染。</p><h2 id="简述生命周期及各阶段做的事"><a href="#简述生命周期及各阶段做的事" class="headerlink" title="简述生命周期及各阶段做的事"></a>简述生命周期及各阶段做的事</h2><p>1、</p><br /><br /><br /><br />]]></content>
       
       
       <categories>
