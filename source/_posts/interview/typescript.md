@@ -17,13 +17,11 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ## 实用技巧关键字
 
-
 **typeof** 获取一个变量的类型
 
 ```ts
 type Data = typeof xx
 ```
-
 
 **keyof** 用来取得一个对象接口的所有key值
 
@@ -36,7 +34,6 @@ interface Person {
 //type PersonKey = 'name'|'age'|'gender'
 type PersonKey = keyof Person
 ```
-
 
 **in** 去批量定义类型中的属性
 
@@ -51,7 +48,6 @@ type PartPerson = {
   [Key in keyof Person]?: Person[Key]
 }
 ```
-
 
 **abstract** 抽象类
 
@@ -82,7 +78,6 @@ new Aniaml('Mike') // error
 new Dog('Mike') // success
 ```
 
-
 **implements** 使类满足接口要求
 
 ```ts
@@ -98,7 +93,6 @@ class MyClass implements MyInter {
   }
 }
 ```
-
 
 **public protected private getter setter** 类的属性修饰符
 
@@ -130,9 +124,7 @@ class Person {
 
 
 
-
 ## 内置工具类型
-
 
 **Exclude<T,U>** 从T可分配给的类型中排除U
 
@@ -143,7 +135,6 @@ type E = Exclude<string | number, string>
 let e: E = 10 // 符合条件的只有number
 ```
 
-
 **Extract<T,U>** 从T可分配给的类型中提取U
 
 ```ts
@@ -152,7 +143,6 @@ type Extract<T, U> = T extends U ? T : never
 type E = Extract<string | number, string>
 let e: E = "1" // 符合条件的只有string
 ```
-
 
 **NonNullable<T>** 从T中排除null和undefined
 
@@ -163,13 +153,11 @@ type E = NonNullable<string | number | null | undefined>
 let e: E = 1 // 符合条件的只有 string | number
 ```
 
-
 **infer** 声明一个类型变量并且对它进行使用
 
 ```ts
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any
 ```
-
 
 **ReturnType** 表示在extends条件语句中待推断的类型变量
 
@@ -191,7 +179,6 @@ const userA: UserInfo = {
 }
 ```
 
-
 **Parameters** 获取函数类型的参数类型
 
 ```ts
@@ -201,7 +188,6 @@ type T0 = Parameters<() => string> // []
 type T1 = Parameters<(s: string) => void> // [string]
 type T2 = Parameters<<T>(arg: T) => T> // [unknown]
 ```
-
 
 **Partial** 将传入的属性由非可选变为可选
 
@@ -216,7 +202,6 @@ interface A {
 type aPartial = Partial<A>
 const a: aPartial = {} // 不会报错
 ```
-
 
 **Required** 将传入的属性中的可选项变为必选项
 
@@ -234,7 +219,6 @@ let p: Required<Person> = {
   gender: "male",
 }
 ```
-
 
 **Readonly** 为传入的属性每一项都加上readonly修饰符来实现
 
@@ -254,7 +238,6 @@ let p: Readonly<Person> = {
 p.age = 11 // error
 ```
 
-
 **Pick<T,K>** 能够帮助我们从传入的属性中摘取某些返回
 
 ```ts
@@ -273,7 +256,6 @@ type TodoBase = {
 };
 ```
 
-
 **Record<K,T>** K对应对象的key，T对应对象的value，返回的就是一个声明好的对象
 
 ```ts
@@ -289,7 +271,6 @@ const cars: PointList = {
 }
 ```
 
-
 **Omit<K,T>** 剔除k中T的属性
 
 ```ts
@@ -303,12 +284,3 @@ type User = {
 type UserWithoutEmail = Omit<User, "email"> // UserWithoutEmail ={id: string;name: string;}
 
 ```
-
-
-
-
-
-<br />
-<br />
-<br />
-<br />
