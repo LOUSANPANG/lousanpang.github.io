@@ -6,7 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "lint": "npx markdownlint --config .markdownlint.json --fix ."
   },
   "hexo": {
     "version": "6.3.0"
@@ -25,5 +26,9 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^0.0.3"
+  },
+  "devDependencies": {
+    "markdownlint": "^0.31.0",
+    "markdownlint-cli": "^0.36.0"
   }
 }
