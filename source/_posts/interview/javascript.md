@@ -15,84 +15,73 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 ---
 
 
-## 什么是面向对象
+## 数据类型 & 类型检测
 
-- 面向对象简而言之就是程序中所有的操作都是通过对象来完成。主要是对对象单词的理解，在计算机当中一种事物到了程序中就变成对象，一条狗就是一个事物。程序中所有的对象被分为两部分属性、方法，以一条狗为例，属性一只动物、性别公、毛色黑这是它的数据，它会叫这是它的功能，同样在程序中，数据是属性、功能是方法。
-- 如何创建对象就要先定义类，可以理解为对象模型，Dog类创建狗的模型，不同的类用来创建不同的对象。
+### 基本类型(值类型)、引用类型(复杂数据类型)
 
-## 类、构造函数
+- Number(数字)、String(字符串)、Boolean(布尔)、null(空)、undefined(未定义)、Symbol(符号)、BigInt(精度整数)
+- Object(对象)、Function(函数)、Array(数组)、Date(日期)、RegExp(正则表达式)、Global、Math(单体内置对象)
 
-- 类 class
 
-  ```ts
-    class Dog {
-      name;
-      age;
-      say() {}
-    }
-    const dog = new Dog()
-    const dog1 = new Dog()
-  ```
+### 类型检测
 
-- 构造函数 constructor
+- typeof
+  - 优点：可以区分基本类型
+  - 缺点：不能详细区分引用类型，`Null` 被认为 `Object` 类型
+- instanceof
+  - 用于判断一个引用类型是否属于某构造函数
+  - 还可以在继承关系中用来判断一个实例是否属于它的父类型
+  - 优点：能够区分Array、Object和Function，适合用于判断自定义的类实例对象
+  - 缺点：Number，Boolean，String基本数据类型不能判断
+- Object.prototype.toString.call()
+  - 优点：精准判断任何数据类型
 
-  ```ts
-    class Dog {
-      name: string;
-      age: number;
-      constructor(name: string, age: number) {
-        // this -> dog dog1
-        this.name = name
-        this.age = age
-      }
-      say() {}
-    }
-    const dog = new Dog('Mike', 1)
-    const dog1 = new Dog('Joi', 2)
-  ```
 
-## new操作符的实例化过程
 
-- 创建空对象
-- 空对象隐式原型__proto__指向构造函数的原型
-- 将空对象作为构造函数的上下文
-- 判断构造函数返回值是否为对象，如果为对象就使用构造函数返回的值，否则使用 obj
+## 执行上下文 & 闭包 & this指向
 
-  ```js
-  /**
-   * new Create() 的过程，可以通过该函数来模拟
-   * @params {Function} fn new操作符的目标函数
-   * @params {Array} args 参数
-   */
-  function create(fn, ...args) {
-      let obj = Object.create({})
+### 暂时性死区
 
-      // obj.__proto__ = fn.prototype
-      Object.setPrototypeOf(obj, fn.prototype)
+在块作用域内，let声明的变量只是**创建时被提升**，初始化并没有被提升，在初始化之前使用变量，就会形成一个暂时性死区。
 
-      // 改变构造函数指向 并 执行
-      let result = fn.apply(obj, args)
+```js
+{
+  console.log(a) // Cannot access 'a' before initialization
+  let a = 1
+}
+```
 
-      // 如果构造函数返回值为对象则返回对象，否则返回 obj
-      return result instanceof Object ? result : obj
-  }
-  ```
 
-  ```js
-  function Car(name) {
-      this.name = name
-      return 1
-  }
-  new Car('BMW').name // 'BMW'
+### 执行上下文
 
-  function Car(name) {
-      this.name = name
-      return { name: 'mercedes-benz' }
-  }
-  new Car('BMW').name // 'mercedes-benz'
-  ```
+- 执行环境：全局环境、函数环境、Eval环境
+- 创建阶段：作用域链、变量对象、this
+- 执行阶段：变量赋值、函数引用等
 
-## 作用域及作用域链
+
+### 闭包
+
+
+### this指向
+
+- 普通函数调用：通过函数名()直接调用：this指向全局对象window（注意let定义的变量不是window属性，只有window.xxx定义的才是。即let a =’aaa’; this.a是undefined）
+- 构造函数调用：函数作为构造函数，用new关键字调用时：this指向新new出的对象
+- 对象函数调用：通过对象.函数名()调用的：this指向这个对象
+- 箭头函数调用：箭头函数里面没有 this ，所以永远是上层作用域this（上下文）
+- apply和call调用：函数体内 this 的指向的是 call/apply 方法第一个参数，若为空默认是指向全局对象window。
+- 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
+- 函数作为window内置函数的回调函数调用：this指向window（如setInterval setTimeout 等）
+
+
+### call/apply/bind 的区别
+
+- fn.call(obj, 1, 2) 函数立即调用
+- fn.apply(obj, [1, 2]) 函数立即调用
+- fn.bind(obj, 1, 2) 返回对应函数
+
+
+
+## 原型 & 原型链 & 继承 & 作用域
 
 ### 作用域
 
@@ -105,9 +94,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 - 变量取值，如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，查找过程形成的链条就叫做作用域链
 
-
-
-## 原型及原型链
 
 ### 原型关系
 
@@ -126,89 +112,71 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 函数的原型链对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__,该指针是指向上一层的原型对象，而上一层的原型对象的结构依然类似。因此可以利用__proto__一直指向Object的原型对象上，而Object原型对象用Object.prototype.**proto** = null表示原型链顶端。如此形成了js的原型链继承。同时所有的js对象都有Object的基本防范
 
 
+### 面向对象
 
-## 继承
-
-
-
-## JS中的数据类型及区别
-
-### 基本类型(值类型)
-
-- Number(数字)、String(字符串)、Boolean(布尔)、null(空)、undefined(未定义)、Symbol(符号)、BigInt(精度整数)
+- 面向对象简而言之就是程序中所有的操作都是通过对象来完成。主要是对对象单词的理解，在计算机当中一种事物到了程序中就变成对象，一条狗就是一个事物。程序中所有的对象被分为两部分属性、方法，以一条狗为例，属性一只动物、性别公、毛色黑这是它的数据，它会叫这是它的功能，同样在程序中，数据是属性、功能是方法。
+- 如何创建对象就要先定义类，可以理解为对象模型，Dog类创建狗的模型，不同的类用来创建不同的对象。
 
 
-### 引用类型(复杂数据类型)
+### 类、构造函数
 
-- Object(对象)、Function(函数)、Array(数组)、Date(日期)、RegExp(正则表达式)、Global、Math(单体内置对象)
+- 类 class
 
-
-
-## JS中的数据类型检测方案
-
-### typeof
-
-- 优点：可以区分基本类型
-- 缺点：不能详细区分引用类型，`Null` 被认为 `Object` 类型
-
-
-### instanceof
-
-- 用于判断一个引用类型是否属于某构造函数
-- 还可以在继承关系中用来判断一个实例是否属于它的父类型
-- 优点：能够区分Array、Object和Function，适合用于判断自定义的类实例对象
-- 缺点：Number，Boolean，String基本数据类型不能判断
-
-
-### Object.prototype.toString.call()
-
-- 优点：精准判断任何数据类型
-
-
-
-## 暂时性死区
-
-在块作用域内，let声明的变量只是**创建时被提升**，初始化并没有被提升，在初始化之前使用变量，就会形成一个暂时性死区。
-
-```js
-{
-    console.log(a) // Cannot access 'a' before initialization
-    let a = 1
-}
+```ts
+  class Dog {
+    name;
+    age;
+    say() {}
+  }
+  const dog = new Dog()
+  const dog1 = new Dog()
 ```
 
+- 构造函数 constructor
+
+  ```ts
+  class Dog {
+    name: string;
+    age: number;
+    constructor(name: string, age: number) {
+      // this -> dog dog1
+      this.name = name
+      this.age = age
+    }
+    say() {}
+  }
+  const dog = new Dog('Mike', 1)
+  const dog1 = new Dog('Joi', 2)
+  ```
 
 
-## 闭包
+### new操作符的实例化过程
 
+- 创建空对象
+- 空对象隐式原型__proto__指向构造函数的原型
+- 将空对象作为构造函数的上下文(新对象和函数调用this相绑定)
+- 执行构造函数中的代码
+- 如何函数没有返回值，那么会自动返回这个新对象
 
+  ```js
+  /**
+   * new Create() 的过程，可以通过该函数来模拟
+   * @params {Function} fn new操作符的目标函数
+   * @params {Array} args 参数
+   */
+  function create(fn, ...args) {
+    let obj = Object.create({})
 
-## JS 中 this 的情况
+    // obj.__proto__ = fn.prototype
+    Object.setPrototypeOf(obj, fn.prototype)
 
-- 普通函数调用：通过函数名()直接调用：this指向全局对象window（注意let定义的变量不是window属性，只有window.xxx定义的才是。即let a =’aaa’; this.a是undefined）
-- 构造函数调用：函数作为构造函数，用new关键字调用时：this指向新new出的对象
-- 对象函数调用：通过对象.函数名()调用的：this指向这个对象
-- 箭头函数调用：箭头函数里面没有 this ，所以永远是上层作用域this（上下文）
-- apply和call调用：函数体内 this 的指向的是 call/apply 方法第一个参数，若为空默认是指向全局对象window。
-- 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
-- 函数作为window内置函数的回调函数调用：this指向window（如setInterval setTimeout 等）
+    // 改变构造函数指向 并 执行
+    let result = fn.apply(obj, args)
 
-
-
-## call/apply/bind 的区别
-
-- fn.call(obj, 1, 2) 函数立即调用
-- fn.apply(obj, [1, 2]) 函数立即调用
-- fn.bind(obj, 1, 2) 返回对应函数
-
-
-
-## 箭头函数的特性
-
-- 没有自己的this，会捕获其所在的上下文的this值，作为自己的this值
-- 没有constructor，是匿名函数，不能作为构造函数，不能通过new 调用
-- 没有原型属性 Fn.prototype 值为 undefined
-- 不能当做Generator函数,不能使用yield关键字
+    // 如果构造函数返回值为对象则返回对象，否则返回 obj
+    return result instanceof Object ? result : obj
+  }
+  ```
 
 
 
@@ -228,7 +196,6 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
   console.log(1) // 同步
   setTimeout(() => console.log(2), 0) // 异步
   console.log(3) // 同步
-
   // 输出： 1 3 2
   ```
 
@@ -264,7 +231,18 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 
 
-## 模块化的理解
+## ES2015+
+
+### 箭头函数的特性
+
+- 没有自己的this，会捕获其所在的上下文的this值，作为自己的this值
+- 没有constructor，是匿名函数，不能作为构造函数，不能通过new 调用
+- 没有原型属性 Fn.prototype 值为 undefined
+- 不能当做Generator函数,不能使用yield关键字
+
+
+
+## 模块化
 
 ### namespace
 
@@ -358,3 +336,4 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 装饰者模式 | 动态地给函数赋能 | 天冷了穿衣服，热了脱衣服
 发布-订阅模式 | 事件发布/订阅模式 | 微信小程序的 emit/on 监听事件
 观察者模式 | 当观察对象发生变化时自动调用相关函数 | vue 双向绑定 Proxy
+
