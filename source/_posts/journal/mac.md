@@ -20,7 +20,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 
 ### 网络安全
 
-- [ClashX Pro](https://github.com/WilliamStar007/ClashX-V2Ray-TopFreeProxy)：科学上网工具
+- [魔戒](https://mojie.app/dashboard)：科学上网工具
 - [西游](https://sunwk.fun/i/): 科学上网工具
 - [1Password](https://1password.com/)：密码管理工具
 
@@ -34,6 +34,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 - [Node.js](https://nodejs.org/)：Node.js
 - [nvm](https://github.com/nvm-sh/nvm)：Node.js 版本管理工具
 - [Navicat](https://www.navicat.com.cn/)：数据库管理工具
+- [Termius](https://termius.com/) SSH工具
 - [VSCode](https://code.visualstudio.com/)：前端代码编辑器
 - [IDEA](https://www.jetbrains.com/idea/)：Java IDE
 - [HBuilderX](https://www.dcloud.io/hbuilderx.html)：uni-app IDE
