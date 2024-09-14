@@ -33,6 +33,7 @@ copyright: # 是否显示版权 除非特定文章设置，可以不写
 - [Git](https://git-scm.com/)：版本控制工具
 - [Node.js](https://nodejs.org/)：Node.js
 - [nvm](https://github.com/nvm-sh/nvm)：Node.js 版本管理工具
+- [volta](https://github.com/volta-cli/volta)：代替 nvm 的node版本管理工具
 - [Navicat](https://www.navicat.com.cn/)：数据库管理工具
 - [Termius](https://termius.com/) SSH工具
 - [VSCode](https://code.visualstudio.com/)：前端代码编辑器
